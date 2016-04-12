@@ -1,0 +1,91 @@
+.b-paper-page {
+
+  .e-organization-logo {
+    max-width: 360px;
+
+    @include breakpoint($mobile-only) {
+      max-width: 250px;
+    }
+
+
+    margin: 0 auto 60px;
+    display: block;
+  }
+
+  .e-paper-title {
+    font-size: 30px;
+    margin-bottom: 20px;
+
+    @include breakpoint($mobile-only) {
+      font-size: 24px;
+
+    }
+  }
+
+  .e-paper-authors {
+    font-size: 20px;
+    margin-bottom: 10px;
+
+    @include breakpoint($mobile-only) {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+
+  .e-paper-date {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .e-meta-info {
+    .e-left-column {
+      font-weight: 600;
+    }  
+  }
+
+  .e-left-column {
+      text-align: right;
+  }
+
+  .e-download-container {
+    text-align: center;
+  }
+
+  .e-download {
+    margin: 0 auto;
+    position: relative;
+    bottom: -55px;
+    background-color: $purple;
+    box-shadow: 0 0 6px rgba($black, .2);
+  }
+
+  .e-description-title {
+    font-weight: 600;
+    color: rgba($black, .4);
+    margin-right: 30px;
+    @include breakpoint($tablet) {
+      text-align: right;
+    }
+  }
+
+  .e-description {
+
+  }
+
+  .e-paper-content {
+    margin-top: 40px;
+  }
+
+  .e-extras {
+    text-align: right;
+    margin-right: 30px;
+  }
+
+  .e-extra-item {
+    display: block;
+    padding: 8px 0;
+  }
+  
+}
+

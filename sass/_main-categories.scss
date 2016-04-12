@@ -1,0 +1,46 @@
+.b-main-categories {
+  padding: 0;
+
+  .e-category-item {
+    padding: 45% 0;
+    text-align: center;
+    font-size: 22px;
+    text-transform: uppercase;
+  }
+
+  // Colors for the main categories
+
+  .m-behavioral-research {
+    background-color: $behavioral-research;
+  }
+  .m-citizen-engagement {
+    background-color: $citizen-engagement;
+  }
+  .m-civic-technology {
+    background-color: $civic-technology;
+  }
+  .m-data-analysis {
+    background-color: $data-analysis;
+  }
+  .m-expert-networking {
+    background-color: $expert-networking;
+  }
+  .m-open-data {
+    background-color: $open-data;
+  }
+  .m-labs-and-experimentation {
+    background-color: $labs-and-experimentation;
+  }
+}
+
+.b-organizations {
+  .e-organization-logo {
+    padding: 60px 20px;
+
+    @include breakpoint($mobile-only) {
+      max-width: 260px;
+      margin: 0 auto;
+    }
+  }
+}
+

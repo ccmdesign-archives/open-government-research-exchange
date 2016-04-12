@@ -1,0 +1,100 @@
+{% extends '_base.html' %}
+{% block main %}
+<!-- main content starts here -->
+<div class="b-search-page">
+  <div class="b-top-section m-purple">
+      <div class="row">
+        <div class="large-12 column">
+          <h1>Open Data</h1>
+          <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
+        </div>
+        <div class="switch">
+            <label>
+              All Articles
+              <input type="checkbox">
+              <span class="lever"></span>
+              Free Articles Only
+            </label>
+        </div>
+      </div>
+  </div>
+  <div class="b-divider b-filter-panel m-black">
+    <button class="b-button">Filters</button>
+  </div>
+
+  <div class="b-page-section b-results-section">
+<!--     <div class="row">
+      <form class="e-controls">
+        <div class="small-6 medium-4 column medium-offset-6">
+          <select name="" id="">
+            <option value="">Sort by Date</option>
+            <option value="">Sort by Type</option>
+          </select>
+        </div>
+        <div class="small-6 medium-2 column">
+          <button class="b-button m-icon-only"><i class="material-icons">view_module</i></button>
+          <button class="b-button m-icon-only"><i class="material-icons">view_list</i></button>
+        </div>
+      </form>
+    </div> -->
+      {% for d in data %}
+      <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category}}">
+        <a href="{{d.url}}" title="{{d.title}}">
+          {# {% if d.cover_image %}
+            <div class="e-result-image" style="background-image: url('{{d.cover_image}}')"></div>
+          {% endif %} #}
+
+          <h3 class="e-result-name">{{d.title}}</h3>
+          
+          {% if d.authors %}
+            <p class="e-result-authors">{% for a in d.authors %} {{a}}, {% endfor %}</p>
+          {% endif %}
+
+          {% if d.taxonomy.category %}
+          <div class="e-result-taxonomy m-category">
+            <p>Category</p>
+            {% for cat in d.taxonomy.category %} <span>{{cat}}</span> {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if d.taxonomy.methodology %}
+          <div class="e-result-taxonomy m-methodology">
+            <p>Methodology</p>
+            {% for met in d.taxonomy.methodology %} <span>{{met}}</span> {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if d.taxonomy.objective %}
+          <div class="e-result-taxonomy m-objective">
+            <p>Objective</p>
+            {% for obj in d.taxonomy.objective %} <span>{{obj}}</span> {% endfor %}</div>
+          {% endif %}
+
+          <div class="e-result-extras">
+            {% if d.github %} <img src="img/github-logo.svg" alt=""> {% endif %}
+            {% if d.datasets %} <i class="material-icons" title="Datasets">file_download</i>{% endif %}
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+<!-- 
+"id":"cfcd208495d565ef66e7dff9f98764da",
+"related_content":[{"url":"","title":""}],
+"access":"",
+"title":"The Third Sector and Online Citizen Empowerment: the Case of mySociety",
+"organization":"mysociety",
+"authors":["Rachel Gibson","Marta Cantijoch","Silvia Galandini"],
+"paper_date":"11/1/2014",
+"url":"https://www.mysociety.org/files/2014/12/manchester.pdf",
+"taxonomy":{"category":["Citizen Engagement and Crowdsourcing","Civic Technology"],
+"objective":["Access","Effectiveness","Legitimacy","Participation"],
+"methodology":["Case Analysis","Quantitative Analysis","Survey"]},
+"sector":"",
+"region":"europe",
+"type":"research-report",
+"github":"",
+"abstract": -->

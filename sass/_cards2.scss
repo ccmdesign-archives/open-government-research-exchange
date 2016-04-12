@@ -1,0 +1,159 @@
+.b-results-section {
+  padding: 0;
+}
+
+.b-result-item {
+  font-weight: 300;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  background-color: $white;
+  box-shadow: 0 0 0 rgba($black, 0);
+  width: 100%;
+  
+  a { 
+    padding: 30px; 
+    width: 100%;
+    display: block;
+    text-decoration: none;
+  }
+
+  // &:nth-of-type(2n) a { background-color: rgba($black, .1); }
+
+  @include breakpoint($medium) {
+    width: 50%;    
+    margin: 0 -2px;
+    &:nth-of-type(2n + 1) a { background-color: rgba($black, .1); }
+
+    a {
+      height: 0;
+      padding-bottom: 70%;
+    }
+  }
+
+  @include breakpoint($large) {
+    transition: all .4s ease;
+    width: calc(100% / 3);
+    margin: 0 -2px;
+
+    &:nth-of-type(odd) a { background-color: rgba($black, .05); }
+
+    &:hover {
+      transition: all .4s ease;
+      box-shadow: 0 0 20px rgba($black, .2);
+      position: relative;
+      z-index: 10;
+
+      &:nth-of-type(3n + 1):hover  { transform: scale(1.3) translate(11%); }
+      &:nth-of-type(3n + 2):hover { transform: scale(1.3); }
+      &:nth-of-type(3n):hover { transform: scale(1.3) translate(-11%); }
+    }  
+  }
+
+  
+  // Sets the trisngle on the top left corner
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 12px solid rgba($black, .3);
+    border-left: 12px solid rgba($black, .3);
+    border-right: 12px solid rgba($black, 0);
+    border-bottom: 12px solid rgba($black, 0);
+  }
+
+  .e-result-name {
+    font-size: 1rem;
+    text-transform: none;
+  }
+
+  .e-result-taxonomy {
+    p {
+      font-size: .8rem;
+      margin: 10px 0 0;
+    }
+
+    span {
+      font-size: .6rem;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 3px 8px;
+      background-color: rgba($black, .1);
+      margin-bottom: 3px;
+    }
+  }
+
+  .e-result-authors {
+    font-size: .9rem;
+  }
+
+  .e-result-extras {
+    padding: 15px 30px;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+
+    img {
+      width: 24px;
+      opacity: .2;
+      margin: 0 5px;
+    }
+
+    i {
+      opacity: .2;
+      font-size: 1.7rem; 
+      line-height: 1;
+      vertical-align: bottom;
+      margin: 0 5px -2px;
+    }
+  }
+}
+
+// Sets the banner for the restricted access items
+.b-result-item {
+
+  &.m-access-false {
+    
+    
+    .e-result-extras {
+      background-color: $red;
+      padding-top: 15px;
+
+
+      &:before {
+        content: "restricted access";
+        float: left;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $white;
+      }
+    }
+  }
+
+  &.m-type-research-report {
+
+  }
+
+  &.m-type-white-paper { }
+  &.m-type-journal-article { }
+  &.m-type-book-chapter { }
+  &.m-type-working-paper { }
+  &.m-type-conference-paper { }
+  &.m-type-thesisdissertation { }
+  &.m-type-article-draft { }
+  &.m-type-article-draft { }
+
+
+
+
+}
+
+
+.b-filter-panel {
+  text-align: center;
+}

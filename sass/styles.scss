@@ -1,0 +1,33 @@
+// styles.scss
+// used to manage sass dependencies by only importing the sass files that will be used in the site build
+// add any site-specific sass you want to use here using an @import
+
+$small-only: (max-width 40em);
+$medium: 40.063em 64em;
+$large: 64.063em 90em;
+
+// Colors
+$behavioral-research: rgba(150, 200, 255, 1);
+$citizen-engagement: rgba(255, 200, 255, 1);
+$civic-technology: rgba(255, 255, 100, 1);
+$data-analysis: rgba(255, 100, 0, 1);
+$expert-networking: rgba(255, 0, 155, 1);
+$open-data: rgba(0, 195, 0, 1);
+$labs-and-experimentation: rgba(55, 155, 200, 1);
+
+
+// Importing Styleguide
+@import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass
+
+// New Components
+@import 'main-search';
+@import 'switch';
+@import 'news-box';
+@import 'main-categories';
+@import 'cards2';
+
+// Site specific styles
+@import 'paper-page';
+@import 'site';
+
+@import 'custom';
