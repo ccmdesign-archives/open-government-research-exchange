@@ -4,7 +4,7 @@
   <div class="b-top-section m-purple">
       <div class="row">
         <div class="large-12 column">
-          <h1>Open Data</h1>
+          <h1>{{ title }}</h1>
           <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
         </div>
         <div class="switch">
@@ -18,11 +18,30 @@
       </div>
   </div>
   <div class="b-divider b-filter-panel m-black">
-    <button class="b-button">Filters</button>
+    <div class="b-filter-ui js-and">
+      <div class="row">
+        <h2>filter ui</h2>
+          <h3>multi select container</h3>
+          <div class="b-filter-ui-container js-multi">
+            <a class="b-button b-filter js-default js-clear-all" data-filter="*">all</a>
+            <a class="b-button b-filter" data-filter="man">man</a>
+            <a class="b-button b-filter" data-filter="dog">dog</a>
+            <a class="b-button b-filter" data-filter="bear">bear</a>
+          </div>
+          <h3>single select container</h3>
+          <div class="b-filter-ui-container">
+            <a class="b-button b-filter" data-filter="thing">thing</a>
+            <a class="b-button b-filter" data-filter="potato">potato</a>
+            <a class="b-button b-filter" data-filter="car">car</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="b-page-section b-results-section">
       {% for d in $global.papers %}
+      {% if d.taxonomy.category == title %}
       <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category}}">
         <a href="{{d.url}}" title="{{d.title}}">
           {# {% if d.cover_image %}
@@ -61,6 +80,7 @@
           </div>
         </a>
       </div>
+      {% endif %}
       {% endfor %}
   </div>
 </div>
