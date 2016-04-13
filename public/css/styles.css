@@ -7384,3 +7384,17 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 
 .access-switch .switch {
   text-align: center; }
+
+.b-filter-ui .b-button.m-active, .b-filter-ui .b-form input.m-active[type="submit"], .b-form .b-filter-ui input.m-active[type="submit"] {
+  background-color: rgba(255, 255, 255, 0.3); }
+
+.b-filter-ui .e-select {
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.1); }
+  .b-filter-ui .e-select select, .b-filter-ui .e-select::before {
+    color: white; }
+  .b-filter-ui .e-select select {
+    z-index: 2; }
+  .b-filter-ui .e-select::before {
+    z-index: 1;
+    pointer-events: none; }
