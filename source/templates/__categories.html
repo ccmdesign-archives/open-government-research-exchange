@@ -17,95 +17,86 @@
       </div>
     </div>
   </div>
-  <div class="b-divider b-filter-panel m-blue">
+  <div class="b-divider b-filter-panel m-black">
     <div class="b-filter-ui js-and">
-      <div class="row">
-        <h2>Filter</h2>
-        <h3>multi select container</h3>
-        <div class="b-filter-ui-container js-multi">
-          <a class="b-button b-filter js-default js-clear-all" data-filter="*">all</a>
-          <a class="b-button b-filter" data-filter="man">man</a>
-          <a class="b-button b-filter" data-filter="dog">dog</a>
-          <a class="b-button b-filter" data-filter="bear">bear</a>
-        </div>
-        <h3>single select container</h3>
-        <div class="b-filter-ui-container">
-          <a class="b-button b-filter" data-filter="thing">thing</a>
-          <a class="b-button b-filter" data-filter="potato">potato</a>
-          <a class="b-button b-filter" data-filter="car">car</a>
-        </div>
-      </div>
+      <h2>Filter</h2>
 
       <div class="row">
         <form action="#" class="b-form">
 
-          <div class="large-2 columns">
-            <div class="e-select">
-              <select name="" id="">
-                <!-- Each organization in the DB -->
-                <option value="">Organization</option>
-                <option value="">mySociety</option>
-                <option value="">GovLab</option>
-                <option value="">Digital Engagement</option>
-              </select>
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="*">Organization</option>
+                  <option data-filter="f-mysociety">mySociety</option>
+                  <option data-filter="f-the-govlab">GovLab</option>
+                  <option data-filter="f-digital-engagement">Digital Engagement</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="large-2 columns">
-            <div class="e-select">
-              <!-- Each objective in the DB -->
-              <select name="" id="">
-                <option value="">Objective</option>
-                <option value="">Access</option>
-                <option value="">Effectiveness</option>
-                <option value="">Legitimacy</option>
-                <option value="">Participation</option>
-              </select>
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="**">Objective</option>
+                  <option data-filter="f-access">Access</option>
+                  <option data-filter="f-effectiveness">Effectiveness</option>
+                  <option data-filter="f-legitimacy">Legitimacy</option>
+                  <option data-filter="f-participation">Participation</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="large-2 columns">
-            <div class="e-select">
-              <!-- Each methodology in the DB -->
-              <select name="" id="">
-                <option value="">Methodology</option>
-                <option value="">Case Analysis</option>
-                <option value="">Quantitative Analysis</option>
-                <option value="">Survey</option>
-              </select>
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="***">Methodology</option>
+                  <option data-filter="f-case-analysis">Case Analysis</option>
+                  <option data-filter="f-quantitative-analysis">Quantitative Analysis</option>
+                  <option data-filter="f-survey">Survey</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="large-2 columns">
-            <div class="e-select">
-              <!-- Each sector in the DB -->
-              <select name="" id="">
-                <option value="">Sector</option>
-                <option value="">Sector 1</option>
-                <option value="">Sector 2</option>
-              </select>
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="****">Sector</option>
+                  <option data-filter="f-sector-1">Sector 1</option>
+                  <option data-filter="f-sector-2">Sector 2</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="large-2 columns">
-            <div class="e-select">
-              <!-- Each region in the DB -->
-              <select name="" id="">
-                <option value="">Region</option>
-                <option value="">Region 1</option>
-                <option value="">Region 2</option>
-              </select>
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="*****">Region</option>
+                  <option data-filter="f-region-1">Region 1</option>
+                  <option data-filter="f-region-2">Region 2</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="large-2 columns">
-            <div class="e-select">
-              <!-- Each Type in the DB -->
-              <select name="" id="">
-                <option value="">Type</option>
-                <option value="">Type 1</option>
-                <option value="">Type 2</option>
-              </select>
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change js-clear">
+                  <option data-filter="******">Type</option>
+                  <option data-filter="f-type-1">Type 1</option>
+                  <option data-filter="f-type-2">Type 2</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -114,10 +105,10 @@
     </div>
   </div>
 
-  <div class="b-page-section b-results-section">
+  <div class="b-page-section b-results-section b-isotope">
     {% for d in $global.papers %}
     {% if d.taxonomy.category == title %}
-    <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category}}">
+    <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category | slug}} f-{{d.organization | slug}} f-{{d.taxonomy.objective | slug}} f-{{d.taxonomy.methodology | slug}} f-{{d.sector | slug}} f-{{d.sector | slug}} f-{{d.region | slug}} f-{{d.sector | slug}} f-{{d.type | slug}}">
       <a href="{{d.url}}" title="{{d.title}}">
         {# {% if d.cover_image %}
         <div class="e-result-image" style="background-image: url('{{d.cover_image}}')"></div>
