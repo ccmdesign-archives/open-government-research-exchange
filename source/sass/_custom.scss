@@ -1,3 +1,23 @@
 // example custom sass file
 // place site specific sass into individual files like this one as needed for the design,
 // and @import in styles.scss
+
+.b-filter-ui {
+    .b-button.m-active {
+        background-color: $white-30;
+    }
+    .e-select {
+        padding: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+        select, &::before {
+            color: $white;
+        }
+        select {
+            z-index: 2;
+        }
+        &::before {
+            z-index: 1;
+            pointer-events: none;
+        }
+    }
+}
