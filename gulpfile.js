@@ -277,7 +277,7 @@ gulp.task('deploy', ['build'], shell.task([
 
 gulp.task('default', ['bs', 'build'], function (){
   gulp.watch('source/sass/**/*.scss', ['sass']);
-  gulp.watch('source/templates/**/*.html', ['nunjucks']);
+  gulp.watch('source/templates/**/!(__)*.html', ['nunjucks']);
   gulp.watch('source/img/**/*', ['img']);
   gulp.watch('source/js/**/*', ['js']);
 });
