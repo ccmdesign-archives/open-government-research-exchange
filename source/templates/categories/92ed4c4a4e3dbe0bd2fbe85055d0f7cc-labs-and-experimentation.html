@@ -2,57 +2,142 @@
 {% block main %}
 <div class="b-categories-page">
   <div class="b-top-section m-purple">
-      <div class="row">
-        <div class="large-12 column">
-          <h1>Open Data</h1>
-          <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
-        </div>
-        <div class="switch">
-            <label>
-              All Articles
-              <input type="checkbox">
-              <span class="lever"></span>
-              Free Articles Only
-            </label>
-        </div>
+    <div class="row">
+      <div class="large-12 column">
+        <h1>{{ title }}</h1>
+        <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
       </div>
+      <div class="switch">
+        <label>
+          All Articles
+          <input type="checkbox">
+          <span class="lever"></span>
+          Free Articles Only
+        </label>
+      </div>
+    </div>
   </div>
   <div class="b-divider b-filter-panel m-black">
-    <button class="b-button">Filters</button>
+    <div class="b-filter-ui js-and">
+      <h2>Filter</h2>
+
+      <div class="row">
+        <form action="#" class="b-form">
+
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="*">Organization</option>
+                  <option data-filter="f-mysociety">mySociety</option>
+                  <option data-filter="f-the-govlab">GovLab</option>
+                  <option data-filter="f-digital-engagement">Digital Engagement</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="**">Objective</option>
+                  <option data-filter="f-access">Access</option>
+                  <option data-filter="f-effectiveness">Effectiveness</option>
+                  <option data-filter="f-legitimacy">Legitimacy</option>
+                  <option data-filter="f-participation">Participation</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="***">Methodology</option>
+                  <option data-filter="f-case-analysis">Case Analysis</option>
+                  <option data-filter="f-quantitative-analysis">Quantitative Analysis</option>
+                  <option data-filter="f-survey">Survey</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="****">Sector</option>
+                  <option data-filter="f-sector-1">Sector 1</option>
+                  <option data-filter="f-sector-2">Sector 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change">
+                  <option data-filter="*****">Region</option>
+                  <option data-filter="f-region-1">Region 1</option>
+                  <option data-filter="f-region-2">Region 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-filter-ui-container">
+            <div class="large-2 columns">
+              <div class="e-select">
+                <select name="" id="" class="b-filter js-change js-clear">
+                  <option data-filter="******">Type</option>
+                  <option data-filter="f-type-1">Type 1</option>
+                  <option data-filter="f-type-2">Type 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
   </div>
 
-  <div class="b-page-section b-results-section">
-      {% for d in $global.papers %}
-      <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category}}">
-        <a href="{{d.url}}" title="{{d.title}}">
-          {# {% if d.cover_image %}
-            <div class="e-result-image" style="background-image: url('{{d.cover_image}}')"></div>
-          {% endif %} #}
+  <div class="b-page-section b-results-section b-isotope">
+    {% for d in $global.papers %}
+    {% if d.taxonomy.category == title %}
+    <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category | slug}} f-{{d.organization | slug}} f-{{d.taxonomy.objective | slug}} f-{{d.taxonomy.methodology | slug}} f-{{d.sector | slug}} f-{{d.sector | slug}} f-{{d.region | slug}} f-{{d.sector | slug}} f-{{d.type | slug}}">
+      <a href="{{d.url}}" title="{{d.title}}">
+        {# {% if d.cover_image %}
+        <div class="e-result-image" style="background-image: url('{{d.cover_image}}')"></div>
+        {% endif %} #}
 
-          <h3 class="e-result-name">{{d.title}}</h3>
+        <h3 class="e-result-name">{{d.title}}</h3>
 
-          {% if d.authors %}
-            <p class="e-result-authors">{% for a in d.authors %} {{a}}, {% endfor %}</p>
-          {% endif %}
+        {% if d.authors %}
+        <p class="e-result-authors">{% for a in d.authors %} {{a}}, {% endfor %}</p>
+        {% endif %}
 
-          {% if d.taxonomy.category %}
-          <div class="e-result-taxonomy m-category">
-            <p>Category</p>
-            {% for cat in d.taxonomy.category %} <span>{{cat}}</span> {% endfor %}
-          </div>
-          {% endif %}
+        {% if d.taxonomy.category %}
+        <div class="e-result-taxonomy m-category">
+          <p>Category</p>
+          {% for cat in d.taxonomy.category %} <span>{{cat}}</span> {% endfor %}
+        </div>
+        {% endif %}
 
-          {% if d.taxonomy.methodology %}
-          <div class="e-result-taxonomy m-methodology">
-            <p>Methodology</p>
-            {% for met in d.taxonomy.methodology %} <span>{{met}}</span> {% endfor %}
-          </div>
-          {% endif %}
+        {% if d.taxonomy.methodology %}
+        <div class="e-result-taxonomy m-methodology">
+          <p>Methodology</p>
+          {% for met in d.taxonomy.methodology %} <span>{{met}}</span> {% endfor %}
+        </div>
+        {% endif %}
 
-          {% if d.taxonomy.objective %}
-          <div class="e-result-taxonomy m-objective">
-            <p>Objective</p>
-            {% for obj in d.taxonomy.objective %} <span>{{obj}}</span> {% endfor %}</div>
+        {% if d.taxonomy.objective %}
+        <div class="e-result-taxonomy m-objective">
+          <p>Objective</p>
+          {% for obj in d.taxonomy.objective %} <span>{{obj}}</span> {% endfor %}</div>
           {% endif %}
 
           <div class="e-result-extras">
@@ -61,7 +146,8 @@
           </div>
         </a>
       </div>
+      {% endif %}
       {% endfor %}
+    </div>
   </div>
-</div>
-{% endblock %}
+  {% endblock %}
