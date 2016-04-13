@@ -1,0 +1,67 @@
+{% extends '_base.html' %}
+{% block main %}
+<div class="b-categories-page">
+  <div class="b-top-section m-purple">
+      <div class="row">
+        <div class="large-12 column">
+          <h1>Open Data</h1>
+          <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
+        </div>
+        <div class="switch">
+            <label>
+              All Articles
+              <input type="checkbox">
+              <span class="lever"></span>
+              Free Articles Only
+            </label>
+        </div>
+      </div>
+  </div>
+  <div class="b-divider b-filter-panel m-black">
+    <button class="b-button">Filters</button>
+  </div>
+
+  <div class="b-page-section b-results-section">
+      {% for d in $global.papers %}
+      <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category}}">
+        <a href="{{d.url}}" title="{{d.title}}">
+          {# {% if d.cover_image %}
+            <div class="e-result-image" style="background-image: url('{{d.cover_image}}')"></div>
+          {% endif %} #}
+
+          <h3 class="e-result-name">{{d.title}}</h3>
+
+          {% if d.authors %}
+            <p class="e-result-authors">{% for a in d.authors %} {{a}}, {% endfor %}</p>
+          {% endif %}
+
+          {% if d.taxonomy.category %}
+          <div class="e-result-taxonomy m-category">
+            <p>Category</p>
+            {% for cat in d.taxonomy.category %} <span>{{cat}}</span> {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if d.taxonomy.methodology %}
+          <div class="e-result-taxonomy m-methodology">
+            <p>Methodology</p>
+            {% for met in d.taxonomy.methodology %} <span>{{met}}</span> {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if d.taxonomy.objective %}
+          <div class="e-result-taxonomy m-objective">
+            <p>Objective</p>
+            {% for obj in d.taxonomy.objective %} <span>{{obj}}</span> {% endfor %}</div>
+          {% endif %}
+
+          <div class="e-result-extras">
+            {% if d.github %} <img src="img/github-logo.svg" alt=""> {% endif %}
+            {% if d.datasets %} <i class="material-icons" title="Datasets">file_download</i>{% endif %}
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends '_base.html' %}
+{% block main %}
+<!-- main content starts here -->
+<div class="b-paper-page">
+  <div class="b-top-section m-blue">
+    <div class="row">
+      <div class="large-10 column small-centered">
+        <img class="e-organization-logo" src="img/organizations/deet-logo-white.png" alt=""><!-- {{organization}} -->
+        <h1 class="e-paper-title">{{ title }}</h1><!-- {{title}} -->
+        <h3 class="e-paper-authors">{{ authors }}</h3><!-- {{authors}} -->
+        <h4 class="e-paper-date">2/26/2015</h4><!-- {{paper_date}} -->
+      </div>
+    </div>
+
+    <div class="e-meta-info">
+      <div class="row">
+        <div class="medium-6 columns">
+
+          {% if type %}
+          <div class="row">
+            <div class="column small-4 medium-6 e-left-column">Type</div>
+            <div class="column small-8 medium-6">Research Report</div> <!-- {{type}} -->
+          </div>
+          {% endif %}
+
+          {% if region %}
+          <div class="row">
+            <div class="column small-4 medium-6 e-left-column">Region</div>
+            <div class="column small-8 medium-6">Global</div> <!-- {{region}} -->
+          </div>
+          {% endif %}
+
+          {% if sector %}
+          <div class="row">
+            <div class="column small-4 medium-6 e-left-column">Sector</div>
+            <div class="column small-8 medium-6">Governance</div> <!-- {{sector}} -->
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="medium-6 columns">
+
+          {% if taxonomy.category %}
+          <div class="row">
+            <div class="column small-4 medium-4 e-left-column">Category</div>
+            <div class="column small-8 medium-8">Citizen Engagement and Crowdsourcing</div> <!-- {{taxonomy.category}} -->
+          </div>
+          {% endif %}
+
+          {% if taxonomy.methodology %}
+          <div class="row">
+            <div class="column small-4 medium-4 e-left-column">Methodology</div>
+            <div class="column small-8 medium-8">Statistical Modeling</div> <!-- {{taxonomy.methodology}} -->
+          </div>
+          {% endif %}
+
+          {% if taxonomy.objective %}
+          <div class="row">
+            <div class="column small-4 medium-4 e-left-column">Objective</div>
+            <div class="column small-8 medium-8">Effectiveness, Participation</div> <!-- {{taxonomy.objective}} -->
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    <div class="e-download-container">
+      <a href="#" class="b-button e-download">Download this Paper</a>
+    </div>
+  </div>
+
+  <div class="b-page-section e-paper-content">
+    <div class="row">
+      <div class="large-3 column">
+        <h3 class="e-description-title">Abstract</h3>
+        <div class="e-extras">
+          <a class="e-extra-item">Datasets</a>
+          <a class="e-extra-item">Github</a>
+          <a class="e-extra-item">Twitter</a>
+        </div>
+      </div>
+      <div class="large-7 column end">
+        {% if abstract %}
+        <p class="e-description">What effect does government responsiveness have on political participation? Since the 1940s political scientists have used attitudinal measures of perceived efficacy to explain participation. More recent work has focused on underlying genetic factors that condition citizen engagement. We develop a ‘Calculus of Participation’ that incorporates objective efficacy – the extent to which an individual’s participation actually has an impact – and test the model against behavioral data from FixMyStreet.com (n=399,364). We find that a successful first experience using FixMyStreet.com (e.g., reporting a pothole and having it fixed) is associated with a 54 percent increase in the probability of an individual submit-ting a second report. We also show that the experience of government responsiveness to the first report submitted has predictive power over all future report submissions. The findings highlight the importance of government responsiveness for fostering an active citizenry, while demonstrating the value of incidentally collected data to examine participatory behavior at the individual level.</p> <!-- {{abstract}} -->
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-7 large-offset-3 column">
+        <div class="e-extra-data">
+          {% if abstract %}<a href="#" class="b-button">Databases</a>{% endif %}
+          {% if abstract %}<a href="#" class="b-button">Github</a>{% endif %}
+          {% if abstract %}<a href="#" class="b-button">Twitter</a>{% endif %}
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+{% endblock %}
