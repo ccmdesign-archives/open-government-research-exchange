@@ -249,7 +249,10 @@ gulp.task('nunjucks', ['generateTemplates'], function() {
             util.log(util.colors.green('Found Generated Template ' + file.path), ': using', JSON.stringify(generatedData[datasetName][i]));
           }
           // return data matching id in dataset datasetName
-          return generatedData[datasetName][i];
+          var d = generatedData[datasetName][i];
+          // add all datasets as special prop $global
+          d.$global = generatedData;
+          return d;
         }
       }
     }
