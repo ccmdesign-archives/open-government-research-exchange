@@ -203,26 +203,28 @@ gulp.task('yaml', function () {
 gulp.task('json', ['yaml'], function () {
   return gulp.src('source/data/**/*.json')
   .pipe(intercept(function(file){
-    // wrap json in a top level property 'data'
     var o = JSON.parse(file.contents.toString()),
     b = {};
-    b.data = o;
-    // assign a unique id to each entry in data
-    for (var j in b.data) {
-      if (!b.data[j].hasOwnProperty('id')) {
-        if (b.data[j].hasOwnProperty('title')) {
-          // use title to create hash if exists,
-          b.data[j].id = md5(b.data[j].title);
-          // otherwise use first prop
-        } else {
-          b.data[j].id = md5(b.data[j][Object.keys(b.data[j])[0]]);
+    if (!o.hasOwnProperty('data')) {
+      // wrap json in a top level property 'data'
+      b.data = o;
+      // assign a unique id to each entry in data
+      for (var j in b.data) {
+        if (!b.data[j].hasOwnProperty('id')) {
+          if (b.data[j].hasOwnProperty('title')) {
+            // use title to create hash if exists,
+            b.data[j].id = md5(b.data[j].title);
+            // otherwise use first prop
+          } else {
+            b.data[j].id = md5(b.data[j][Object.keys(b.data[j])[0]]);
+          }
         }
       }
+      if (cliOptions.verbose) {
+        util.log(util.colors.magenta('Converting yaml ' + file.path), 'to json as', util.colors.blue(JSON.stringify(b)));
+      }
+      file.contents = new Buffer(JSON.stringify(b));
     }
-    if (cliOptions.verbose) {
-      util.log(util.colors.magenta('Converting yaml ' + file.path), 'to json as', util.colors.blue(JSON.stringify(b)));
-    }
-    file.contents = new Buffer ( JSON.stringify(b) );
     return file;
   }))
   .pipe(gulp.dest('source/data'));
