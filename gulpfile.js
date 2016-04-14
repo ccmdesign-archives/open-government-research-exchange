@@ -47,7 +47,7 @@ var COL_NAME_MAP = {
   'Sector'                : { value : 'sector', slugify : true },
   'Region'                : { value : 'region', slugify : true },
   'Publication Type'      : { value : 'type', slugify : true },
-  'Tool/Project'          : 'tool',
+  'Tool/Project'          : 'tools',
   'GitHub Repository'     : 'github',
   'Abstract'              : 'abstract',
   'Content URL'           : 'html_content',
