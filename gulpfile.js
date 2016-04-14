@@ -418,9 +418,11 @@ gulp.task('deploy', ['build'], shell.task([
   ])
 );
 
+gulp.task('html-watch', ['nunjucks'], function() { bs.reload(); });
+
 gulp.task('default', ['bs', 'build'], function (){
   gulp.watch('source/sass/**/*.scss', ['sass']);
-  gulp.watch('source/templates/**/!(__)*.html', ['nunjucks']);
+  gulp.watch('source/templates/*.html', ['html-watch']);
   gulp.watch('source/img/**/*', ['img']);
   gulp.watch('source/js/**/*', ['js']);
 });
