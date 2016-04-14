@@ -21,3 +21,31 @@
         }
     }
 }
+
+.b-search-page {
+  
+}
+
+.access-switch {
+  .switch { text-align: center; }
+}
+
+main {
+    margin-top: -66px;
+    .b-top-section { padding-top: 136px; }    
+}
+
+
+
+// Custom icon for twitter (maybe push this to styleguide)
+.b-top-nav {
+    background-color: rgba($black, .2);
+
+    .e-social-media img { width: 20px; }
+    .e-logo { 
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      padding: 8px;
+    }
+  }
