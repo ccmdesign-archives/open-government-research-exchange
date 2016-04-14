@@ -7,7 +7,6 @@
       max-width: 250px;
     }
 
-
     margin: 0 auto 60px;
     display: block;
   }
@@ -85,6 +84,19 @@
   .e-extra-item {
     display: block;
     padding: 8px 0;
+  }
+
+  &.m-the-govlab {
+    .b-top-section { background-color: $purple; }
+    .e-download {background-color: darken($purple, 8);}
+  }
+
+  &.m-mysociety {
+    .b-top-section { background-color: $black; }
+  }
+
+  &.m-world-bank-digital-engagement-evaluation-team {
+    .b-top-section { background-color: $blue; }
   }
   
 }
