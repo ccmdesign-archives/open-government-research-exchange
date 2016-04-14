@@ -47,6 +47,7 @@ var COL_NAME_MAP = {
   'Sector'                : { value : 'sector', slugify : true },
   'Region'                : { value : 'region', slugify : true },
   'Publication Type'      : { value : 'type', slugify : true },
+  'Tool/Project'          : 'tools',
   'GitHub Repository'     : 'github',
   'Abstract'              : 'abstract',
   'Content URL'           : 'html_content',
@@ -398,13 +399,13 @@ gulp.task('nunjucks', ['generateTemplates'], function() {
 
 gulp.task('csv2json', function() {
   var options = {};
-  return gulp.src('support/data/**.csv')
+  return gulp.src('source/support/**.csv')
   .pipe(csv2json(options))
   .pipe(gulpFn(processJSON))
   .pipe(rename(function (path) {
     path.extname = ".json"
   }))
-  .pipe(gulp.dest('data'))
+  .pipe(gulp.dest('source/data'))
 });
 
 var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
@@ -417,9 +418,11 @@ gulp.task('deploy', ['build'], shell.task([
   ])
 );
 
+gulp.task('html-watch', ['nunjucks'], function() { bs.reload(); });
+
 gulp.task('default', ['bs', 'build'], function (){
   gulp.watch('source/sass/**/*.scss', ['sass']);
-  gulp.watch('source/templates/**/!(__)*.html', ['nunjucks']);
+  gulp.watch('source/templates/*.html', ['html-watch']);
   gulp.watch('source/img/**/*', ['img']);
   gulp.watch('source/js/**/*', ['js']);
 });
