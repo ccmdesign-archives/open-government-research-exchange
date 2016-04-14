@@ -44,8 +44,11 @@ main {
     .e-social-media img { width: 20px; }
     .e-logo { 
       font-size: 1.2rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: .5px;
+      letter-spacing: 1px;
       padding: 8px;
+
+      &:hover { text-decoration: none; }
     }
   }

@@ -25,6 +25,20 @@
 </div>
 
 <div class="row">
+<div class="large-12 column">    
+    {% for d in papers %}
+    <p>{{d.taxonomy.category}}</p>    
+    {% endfor %}
+</div>
+
+    <!-- <div class="large-12">
+    {% for d in categories %}
+        <p><a href="{{d.id}}-{{d.title}}.html">{{d.title}}</a></p>
+    {% endfor %}
+    </div> -->
+</div>
+
+<div class="row">
   <div class="column large-12">
     <h2>DEET</h2>
     {% for d in papers %}

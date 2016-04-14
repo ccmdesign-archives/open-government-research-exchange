@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 {% block main %}
 <div class="b-categories-page">
-  <div class="b-top-section m-purple">
+  <div class="b-top-section m-{{title | slug}}">
     <div class="row">
       <div class="large-12 column">
         <h1>{{ title }}</h1>
@@ -19,7 +19,7 @@
   </div>
   <div class="b-divider b-filter-panel m-black">
     <div class="b-filter-ui js-and">
-      <h2>Filter</h2>
+      <h2>Filters</h2>
 
       <div class="row">
         <form action="#" class="b-form">
@@ -106,8 +106,8 @@
   </div>
 
   <div class="b-page-section b-results-section b-isotope">
-    {% for d in $global.papers %}
-    {% if d.taxonomy.category == title | slug %}
+    {% for d in papers %}
+    {% if d.taxonomy.category == title %}
     <div class="b-result-item m-access-{{d.access}} m-{{d.taxonomy.category | slug}} f-{{d.organization | slug}} f-{{d.taxonomy.objective | slug}} f-{{d.taxonomy.methodology | slug}} f-{{d.sector | slug}} f-{{d.sector | slug}} f-{{d.region | slug}} f-{{d.sector | slug}} f-{{d.type | slug}}">
       <a href="{{d.url}}" title="{{d.title}}">
         {# {% if d.cover_image %}
@@ -118,13 +118,6 @@
 
         {% if d.authors %}
         <p class="e-result-authors">{% for a in d.authors %} {{a}}, {% endfor %}</p>
-        {% endif %}
-
-        {% if d.taxonomy.category %}
-        <div class="e-result-taxonomy m-category">
-          <p>Category</p>
-          {% for cat in d.taxonomy.category %} <span>{{cat}}</span> {% endfor %}
-        </div>
         {% endif %}
 
         {% if d.taxonomy.methodology %}
