@@ -7382,6 +7382,9 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   display: block;
   padding: 8px 0; }
 
+.e-social-media img {
+  width: 20px; }
+
 .access-switch .switch {
   text-align: center; }
 
