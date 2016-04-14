@@ -31,16 +31,16 @@ authors: LIST of STRINGS
 paper_date: DATETIME.date()
 # date the paper was first published
 
-organization: STRING (keywords | slugyfied)
+organization: STRING (keywords | slug)
 # determines if the paper was created by one of the partner organizations
 
-region: STRING (keywords | slugyfied)
+region: STRING (keywords | slug)
 # keywords. Ideally use WB regions naming (MENA, LAC, etc) and/or 2 Char country code (US, CA, BR, etc.)
 
-sector: STRING (keywords | slugyfied)
+sector: STRING (keywords | slug)
 # list of keywords to categorize the paper according to sector
 
-type: STRING (keywords | slugyfied)
+type: STRING (keywords | slug)
 # Type of publication. Reseach Paper, Article, etc.
 
 abstract: LONG STRING (1200 chars) 
@@ -76,7 +76,7 @@ datasets: LIST of OBJECTS # link to datasets mentioned on the paper
     url: STRING (url) # url for the dataset
 
 
-entry_points: LIST of Strings (keywords | slugyfied)
+entry_points: LIST of Strings (keywords | slug)
 # Determines which of the special homepages (subsets) the item will be displayed. It works as a special product/site related sub-section of the data base
 
 related_content: LIST # a list of related links for the item

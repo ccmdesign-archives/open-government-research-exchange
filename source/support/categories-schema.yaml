@@ -1,16 +1,16 @@
-- title: Behavioral Research
-  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+- title: STRING
+  # Also add this as the OG title, for social media sharing
+
+  description: STRING (144 chars)
+  # Category short description
+  # Also add this as the OG description, for social media sharing
+
+  custom_filter: (string | slug)
+  # In case we need a specific string to match the data attribute. 
+  # Otherwise, this will be false, and the fallback will be (title | slug)
+
+  cover_image: STRING (url) # or false
+  # absolute link or relative path to an image file. This will enable of disable the header image for the specific category
 
 
 
-
-
-
-
-
-- title: Citizen Engagement
-- title: Civic Technology
-- title: Data Analysis
-- title: Expert Networking
-- title: Open Data
-- title: Labs and Experimentation

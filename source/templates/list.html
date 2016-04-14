@@ -2,6 +2,28 @@
 {% block main %}
 <!-- main content starts here -->
 
+<div class="b-top-section m-teal">
+  <div class="row">
+    <div class="large-12 column">
+      <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
+    </div>  
+  </div>
+</div>
+<div class="b-page-section">
+    
+<div class="row">
+<div class="large-12 column">    
+    <p><a href="{{categories[0].id}}-{{categories[0].title}}.html">{{categories[0].title}}</a></p>
+    <p><a href="{{categories[1].id}}-{{categories[1].title}}.html">{{categories[1].title}}</a></p>
+</div>
+
+    <!-- <div class="large-12">
+    {% for d in categories %}
+        <p><a href="{{d.id}}-{{d.title}}.html">{{d.title}}</a></p>
+    {% endfor %}
+    </div> -->
+</div>
+
 <div class="row">
   <div class="column large-12">
     <h2>DEET</h2>
@@ -35,3 +57,4 @@
 </div>
 
 {% endblock %}
+</div>
