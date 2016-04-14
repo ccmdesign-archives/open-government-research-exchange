@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+{% block main %}
+<!-- main content starts here -->
+
+{% for d in papers %}
+<div class="row">
+  <div class="column large-12">
+    <p><a href="{{d.id}}-{{d.title | slug}}.html">{{d.title}}</a></p>    
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
