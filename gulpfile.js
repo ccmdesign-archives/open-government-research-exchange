@@ -101,9 +101,14 @@ function slugify(t) {
   : false ;
 }
 
+function split(s, delim) {
+  return s ? s.toString().split(delim) : false;
+}
+
 // set up nunjucks environment
 function nunjucksEnv(env) {
   env.addFilter('slug', slugify);
+  env.addFilter('split', split);
 }
 
 // a subroutine to simplify processJson
