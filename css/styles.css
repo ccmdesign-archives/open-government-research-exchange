@@ -7382,11 +7382,17 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   display: block;
   padding: 8px 0; }
 
-.e-social-media img {
-  width: 20px; }
+.b-paper-page.m-the-govlab .b-top-section {
+  background-color: #523080; }
 
-.access-switch .switch {
-  text-align: center; }
+.b-paper-page.m-the-govlab .e-download {
+  background-color: #3f2562; }
+
+.b-paper-page.m-mysociety .b-top-section {
+  background-color: #333; }
+
+.b-paper-page.m-world-bank-digital-engagement-evaluation-team .b-top-section {
+  background-color: #008ab3; }
 
 .b-filter-ui .b-button.m-active, .b-filter-ui .b-form input.m-active[type="submit"], .b-form .b-filter-ui input.m-active[type="submit"] {
   background-color: rgba(255, 255, 255, 0.3); }
@@ -7401,3 +7407,24 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   .b-filter-ui .e-select::before {
     z-index: 1;
     pointer-events: none; }
+
+.access-switch .switch {
+  text-align: center; }
+
+main {
+  margin-top: -66px; }
+  main .b-top-section {
+    padding-top: 136px; }
+
+.b-top-nav {
+  background-color: rgba(51, 51, 51, 0.2); }
+  .b-top-nav .e-social-media img {
+    width: 20px; }
+  .b-top-nav .e-logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px; }
+    .b-top-nav .e-logo:hover {
+      text-decoration: none; }
