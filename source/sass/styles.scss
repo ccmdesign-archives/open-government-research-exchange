@@ -7,13 +7,30 @@ $medium: 40.063em 64em;
 $large: 64.063em 90em;
 
 // Colors
-$behavioral-research: rgba(150, 200, 255, 1);
-$citizen-engagement: rgba(255, 200, 255, 1);
-$civic-technology: rgba(255, 255, 100, 1);
-$data-analysis: rgba(255, 100, 0, 1);
-$expert-networking: rgba(255, 0, 155, 1);
-$open-data: rgba(0, 195, 0, 1);
-$labs-and-experimentation: rgba(55, 155, 200, 1);
+$main-color: rgba(59, 101, 109, 1);
+
+$gray:      rgba(113, 126, 129, 1);
+$green:     rgba( 86, 161, 115, 1);
+$orange:    rgba(214,  90,  67, 1);
+$green2:    rgba( 96, 122,  52, 1);
+$yellow:    rgba(217, 190,  91, 1);
+$brown:     rgba(106,  79,  59, 1);
+$blue:      rgba( 63, 112, 182, 1);
+$blue-gray: rgba(102, 139, 152, 1);
+$dark-blue: rgba( 49,  73,  86, 1);
+$teal:      rgba( 75, 140, 142, 1);
+$red:       rgba(179,  57,  69, 1);
+
+
+// Mapping the base colors to the category vars
+$all: $gray;
+$behavioral-research: $blue;
+$citizen-engagement: $green2;
+$civic-technology: $yellow;
+$data-analysis: $orange;
+$expert-networking: $brown;
+$open-data: $dark-blue;
+$labs-and-experimentation: $teal;
 
 
 // Importing Styleguide
@@ -24,10 +41,10 @@ $labs-and-experimentation: rgba(55, 155, 200, 1);
 @import 'switch';
 @import 'news-box';
 @import 'main-categories';
-@import 'cards2';
+@import 'results';
+@import 'filter-ui';
 
 // Site specific styles
 @import 'paper-page';
-@import 'site';
 
 @import 'custom';
