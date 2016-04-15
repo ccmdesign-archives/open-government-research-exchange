@@ -14,6 +14,7 @@ rename          = require('gulp-rename'),
 gulpFn          = require('gulp-fn'),
 colors          = require('colors'),
 bs              = require('browser-sync').create(),
+bs2              = require('browser-sync').create(),
 minimist        = require('minimist'),
 File            = require('vinyl'),
 es              = require('event-stream'),
@@ -87,6 +88,14 @@ gulp.task('bs', function() {
     });
   }
 });
+
+// Compile sass into CSS & auto-inject into browsers
+// gulp.task('sass', function() {
+//     return gulp.src("app/scss/*.scss")
+//         .pipe(sass())
+//         .pipe(gulp.dest("app/css"))
+//         .pipe(browserSync.stream());
+// });
 
 // define custom functions ///////////////////////////////////
 
@@ -295,7 +304,8 @@ gulp.task('sass', function() {
   return gulp.src('source/sass/styles.scss')
   .pipe(sass().on('error', sass.logError))
   .pipe(gulp.dest('public/css'))
-  .pipe(cliOptions.nosync ? bs.stream() : util.noop());
+  .pipe(bs2.stream());
+  // .pipe(cliOptions.nosync ? bs.stream() : util.noop());
 });
 
 gulp.task('libCss', function() {

@@ -1,0 +1,19 @@
+.b-filter-ui {
+    .b-button.m-active {
+        background-color: $white-30;
+    }
+    .e-select {
+        padding: 0;
+        background-color: rgba($black, .1);
+        select, &::before {
+            color: $white;
+        }
+        select {
+            z-index: 2;
+        }
+        &::before {
+            z-index: 1;
+            pointer-events: none;
+        }
+    }
+}

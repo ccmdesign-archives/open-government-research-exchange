@@ -22,9 +22,12 @@
 }
 
 .b-main-search-section {
+  background-color: rgba($black, .2);
+
   .e-tagline {
     text-align: center;
     padding: 0 0 40px;
+    color: $white;
 
     @include breakpoint($mobile-only) {
       font-size: 16px;
@@ -32,3 +35,10 @@
   }
 }
 
+.b-organizations {
+  background-color: $white;
+
+  .m-deet.m-deet {
+    max-width: 360px;
+  }
+}
