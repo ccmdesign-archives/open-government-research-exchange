@@ -2,4 +2,3 @@ node_modules/
 .DS_Store
 source/templates/categories/
 source/templates/papers/
-public/
