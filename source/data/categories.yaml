@@ -15,7 +15,7 @@
 
 - title: Civic Technology
   description: Civic Technology Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
-  custom_filter: false
+  custom_filter: Civic Technology
   cover_image: false
 
 - title: Data Analysis
@@ -25,7 +25,7 @@
 
 - title: Expert Networking
   description: Expert Networking Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
-  custom_filter: false
+  custom_filter: Expert Networking
   cover_image: false
 
 - title: Open Data
@@ -35,5 +35,5 @@
 
 - title: Labs and Experimentation
   description: Labs and Experimentation Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
-  custom_filter: false
+  custom_filter: Labs and Experimentation
   cover_image: false
