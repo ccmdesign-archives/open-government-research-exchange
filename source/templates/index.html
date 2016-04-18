@@ -13,9 +13,9 @@
     <div class="row">
       <div class="large-12 column">
         <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
-      </div>  
+      </div>
     </div>
-    
+
     <div class="row">
         <div class="small-10 large-8 small-centered columns">
             <div class="row">
@@ -45,23 +45,13 @@
 
 <div class="b-page-section b-organizations">
   <div class="row expanded">
-    <div class="medium-4 column">
-      <div class="e-organization-logo m-deet">
-        <img src="img/organizations/deet-logo.png" alt="">
+    {% for organization in organizations %}
+      <div class="medium-4 column">
+        <div class="e-organization-logo m-deet">
+          <a href="{{ organization.id }}-{{ organization.title | slug }}.html"><img src="img/organizations/{{ organization.image }}" alt=""></a>
+        </div>
       </div>
-    </div>
-
-    <div class="medium-4 column">
-      <div class="e-organization-logo">
-        <img src="img/organizations/govlab-logo.png" alt="">
-      </div>
-    </div>
-
-    <div class="medium-4 column">
-      <div class="e-organization-logo">
-        <img src="img/organizations/mysociety-logo.png" alt="">
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
 
@@ -72,7 +62,7 @@
 </div>
 
 <div class="b-page-section b-main-categories">
-    
+
     <div class="row expanded">
       <div class="medium-3 show-for-medium column m-all">
         <a class="e-category-item" href="base-results.html">All</a>
@@ -100,7 +90,7 @@
       <div class="medium-3 column m-{{categories[7].title | slug}}">
         <a class="e-category-item" href="{{categories[7].id}}-{{categories[7].title | slug}}.html">{{categories[7].title}}</a>
       </div>
-      
+
     </div>
   </div>
 
