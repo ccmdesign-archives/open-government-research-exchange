@@ -4,20 +4,21 @@
   {# main content starts here #}
   <div class="b-organization-page">
     {# Organization Header #}
-    <div class="b-top-section m-deet m-blue">
+    <div class="b-top-section" style="background-color: #{{ color }};">
       <div class="row">
         <div class="large-6 column e-image-column">
-          <img class="e-org-logo" src="img/organizations/{{ image_white }}" alt="">
+          <img class="e-org-logo" src="img/organizations/{{ image_white }}" alt="{{title}}" title="{{title}}">
+          <span class="b-button">More Information</span>
         </div>
         <div class="large-6 column">
           <p class="e-description">{{ short_description }}</p>
           {% if social_media %}
             <div class="e-extras">
               {% if social_media.twitter %}
-                <a href="{{ social_media.twitter }}" class="b-social-media-icon m-twitter" target="_blank"><img src="./img/twitter-logo.png" alt=""></a>
+                <a href="{{ social_media.twitter }}" class="b-social-media-icon m-twitter" target="_blank"><img src="./img/twitter-logo.png" alt="{{title}} Twitter" title="{{title}} Twitter"></a>
               {% endif %}
               {% if social_media.github %}
-                <a href="{{ social_media.github }}" class="b-social-media-icon m-github" target="_blank"><img src="./img/github-logo.svg" alt=""></a>
+                <a href="{{ social_media.github }}" class="b-social-media-icon m-github" target="_blank"><img src="./img/github-logo.svg" alt="{{title}} Github" title="{{title}} Github"></a>
               {% endif %}
             </div>
           {% endif %}
@@ -50,6 +51,14 @@
     <div class="b-page-section b-results-section b-isotope">
       {% for paper in $global.papers %}
         {% if paper.organization == title|slug %}
+        {# A gente precisa levar em consideração o custom_filter #}
+        {#  
+          IF custom_filter
+            filter by custom_filter
+          ELSE
+            filter by title|slug
+        #}
+
           <div class="b-result-item m-access-{{ paper.access | slug }} {% for category in paper.taxonomy.category %} m-{{ category | slug }}{% endfor %} f-{{ paper.access | slug }}">
             <a href="{{ paper.id }}-{{ paper.title | slug }}.html" title="{{ paper.title }}">
               <h3 class="e-result-name">{{ paper.title }}</h3>
@@ -89,7 +98,7 @@
                 </div>
               {% endif %}
 
-              {% if paper.organization == "the-govlab" %}
+              {# {% if paper.organization == "the-govlab" %}
                 <div class="e-result-extras m-{{ paper.organization | slug }}">
                   <img class="e-organization-logo" src="img/organizations/govlab-logo-white.png" alt="The GovLab">
                 </div>
@@ -101,7 +110,7 @@
                 <div class="e-result-extras m-{{ paper.organization | slug }}">
                   <img class="e-organization-logo" src="img/organizations/deet-logo-white.png" alt="Digital Engagement Evaluation Team">
                 </div>
-              {% endif %}
+              {% endif %} #}
             </a>
           </div>
         {% endif %}
