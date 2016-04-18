@@ -47,8 +47,8 @@
   <div class="row expanded">
     {% for organization in organizations %}
       <div class="medium-4 column">
-        <div class="e-organization-logo m-deet">
-          <a href="{{ organization.id }}-{{ organization.title | slug }}.html"><img src="img/organizations/{{ organization.image }}" alt=""></a>
+        <div class="e-organization-logo m-{{ organization.title | slug }}">
+          <a href="{{ organization.id }}-{{ organization.title | slug }}.html"><img src="img/organizations/{{ organization.image }}" alt="{{ organization.title }}"></a>
         </div>
       </div>
     {% endfor %}
@@ -70,11 +70,11 @@
       <div class="medium-3 column m-{{categories[1].title | slug}}">
         <a class="e-category-item" href="{{categories[1].id}}-{{categories[1].title | slug}}.html">{{categories[1].title}}</a>
       </div>
-      <div class="medium-3 column m-{{categories[2].title | slug}}">
-        <a class="e-category-item" href="{{categories[2].id}}-{{categories[2].title | slug}}.html">{{categories[2].title}}</a>
-      </div>
       <div class="medium-3 column m-{{categories[3].title | slug}}">
         <a class="e-category-item" href="{{categories[3].id}}-{{categories[3].title | slug}}.html">{{categories[3].title}}</a>
+      </div>
+      <div class="medium-3 column m-{{categories[2].title | slug}}">
+        <a class="e-category-item" href="{{categories[2].id}}-{{categories[2].title | slug}}.html">{{categories[2].title}}</a>
       </div>
     </div>
     <div class="row expanded">
