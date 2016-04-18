@@ -9,7 +9,7 @@
 }
 
 .b-organization-page {
-  
+
 
   .b-top-section {
     padding-bottom: 0;
@@ -18,19 +18,19 @@
       text-align: center;
     }
 
-    .e-org-logo { 
+    .e-org-logo {
       max-width: 80%;
       padding: 10%;
     }
 
     .e-description { text-align: left; }
 
-    .e-name { 
-      text-align: left; 
+    .e-name {
+      text-align: left;
       font-size: 1.2rem;
       font-weight: 400;
     }
-  
+
   .e-extras {
     padding-top: 30px;
     text-align: center;
@@ -42,7 +42,16 @@
 .b-extra-info-panel {
   padding: 50px 0;
   margin-top: 30px;
+  padding: 0;
+  max-height: 0;
+  overflow: auto;
   background-color: rgba($black, .2);
+  transition: max-height 0.5s ease, padding 0.5s ease;
+
+  &.visible {
+    max-height: 350px;
+    padding: 50px 0;
+  }
 
   h2 {
     text-align: left;
