@@ -1,0 +1,32 @@
+- name: Digital Engagement Evaluation Team # Organization
+  image: deet-logo-white.png# Logo image
+  short_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  long_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  custom_filter: false # To be used as a custom filter
+  color: 008ab3 # Hash value to be applied to the top section
+  social_media: # Links
+    github: false
+    facebook: false
+    twitter: false
+
+- name: mySociety # Organization
+  image: mysociety-logo-white.png # Logo image
+  short_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  long_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  custom_filter: false # To be used as a custom filter
+  color: 333333 # Hash value to be applied to the top section
+  social_media: # Links
+    github: false
+    facebook: false
+    twitter: false
+
+- name: The Govlab # Organization
+  image: govlab-logo-white.png # Logo image
+  short_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  long_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  custom_filter: false # To be used as a custom filter
+  color: 523080 # Hash value to be applied to the top section
+  social_media: # Links
+    github: false
+    facebook: false
+    twitter: false
