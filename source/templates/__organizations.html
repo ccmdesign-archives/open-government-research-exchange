@@ -1,3 +1,4 @@
+{% import 'macros/result_item_macro.html' as resultItem %}
 {% extends '_base.html' %}
 
 {% block main %}
@@ -48,46 +49,7 @@
     <div class="b-page-section b-results-section b-isotope">
       {% for paper in $global.papers %}
         {% if paper.organization == title|slug or paper.organization == custom_filter %}
-          <div class="b-result-item m-access-{{ paper.access | slug }} {% for category in paper.taxonomy.category %} m-{{ category | slug }}{% endfor %} f-{{ paper.access | slug }}">
-            <a href="{{ paper.id }}-{{ paper.title | slug }}.html" title="{{ paper.title }}">
-              <h3 class="e-result-name">{{ paper.title }}</h3>
-
-              {% if paper.authors %}
-                <p class="e-result-authors">
-                  {% for author in paper.authors %}
-                    {{ author }}{% if not loop.last %},{% endif %}
-                  {% endfor %}
-                </p>
-              {% endif %}
-
-              {% if paper.taxonomy.category %}
-                <div class="e-result-taxonomy m-category">
-                  <p>Category</p>
-                  {% for category in paper.taxonomy.category %}
-                    <span class="m-{{ category }}">{{ category }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-
-              {% if paper.taxonomy.methodology %}
-                <div class="e-result-taxonomy m-methodology">
-                  <p>Methodology</p>
-                  {% for methodology in paper.taxonomy.methodology %}
-                    <span>{{ methodology }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-
-              {% if paper.taxonomy.objective %}
-                <div class="e-result-taxonomy m-objective">
-                  <p>Objective</p>
-                  {% for objective in paper.taxonomy.objective %}
-                    <span>{{ objective }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </a>
-          </div>
+          {{resultItem.createResult(paper)}}
         {% endif %}
       {% endfor %}
     </div>
