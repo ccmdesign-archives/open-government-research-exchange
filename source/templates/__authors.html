@@ -1,22 +1,24 @@
 {% extends '_base.html' %}
 
 {% block main %}
-  <div class="b-organization-page">
-    {# Organization Header #}
-    <div class="b-top-section" style="background-color: #{{ color }};">
+  <div class="b-author-page">
+    {# Author's Info #}
+    <div class="b-top-section">
       <div class="row">
         <div class="large-6 column e-image-column">
-          <img class="e-org-logo" src="img/organizations/{{ image_white }}" alt="{{title}}" title="{{title}}">
-          <span class="b-button" onclick="$('.b-extra-info-panel').toggleClass('visible');">More Information</span>
+          <div class="e-author-picture" style="background-image: url(./img/authors/{{ image }})"></div>
+          <span class="b-button e-more-info-panel-trigger" onclick="$('.b-extra-info-panel').toggleClass('visible');">More Information</span>
         </div>
         <div class="large-6 column">
+          <h1 class="e-name">{{ title }}</h1>
+          <h2 class="e-job">{{ job }}</h2>
           <p class="e-description">{{ short_description }}</p>
           <div class="e-extras">
             {% if social_media.twitter %}
-              <a href="{{ social_media.twitter }}" class="b-social-media-icon m-twitter" target="_blank"><img src="./img/twitter-logo.png" alt="{{title}} Twitter" title="{{title}} Twitter"></a>
+              <a href="{{ social_media.twitter }}" class="b-social-media-icon m-twitter" target="_blank"><img src="./img/twitter-logo.png" alt=""></a>
             {% endif %}
             {% if social_media.github %}
-              <a href="{{ social_media.github }}" class="b-social-media-icon m-github" target="_blank"><img src="./img/github-logo.svg" alt="{{title}} Github" title="{{title}} Github"></a>
+              <a href="{{ social_media.github }}" class="b-social-media-icon m-github" target="_blank"><img src="./img/github-logo.svg" alt=""></a>
             {% endif %}
           </div>
         </div>
@@ -47,7 +49,7 @@
     {# List of Articles #}
     <div class="b-page-section b-results-section b-isotope">
       {% for paper in $global.papers %}
-        {% if paper.organization == title|slug or paper.organization == custom_filter %}
+        {% if title in paper.authors %}
           <div class="b-result-item m-access-{{ paper.access | slug }} {% for category in paper.taxonomy.category %} m-{{ category | slug }}{% endfor %} f-{{ paper.access | slug }}">
             <a href="{{ paper.id }}-{{ paper.title | slug }}.html" title="{{ paper.title }}">
               <h3 class="e-result-name">{{ paper.title }}</h3>
