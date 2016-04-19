@@ -20,18 +20,6 @@
     .e-org-logo {
       max-width: 80%;
       padding: 10%;
-
-
-    }
-
-    .e-author-picture {
-      width: 300px;
-      height: 300px;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      border-radius: 150px;
-      margin: 0 auto 30px;
     }
 
     .e-description { text-align: left; }
@@ -47,6 +35,31 @@
     text-align: center;
   }
 
+  }
+}
+
+.b-author-page {
+  .e-author-picture {
+    width: 300px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 150px;
+    margin: 0 auto 30px;
+  }
+
+  .e-name.e-name.e-name {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 0;
+  }
+
+  .e-job {
+    text-align: left;
+    text-transform: none;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
   }
 }
 

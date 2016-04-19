@@ -1,0 +1,11 @@
+- name: Beth Noveck # Organization
+  job: Director of The Govlab # job
+  image: deet-logo.png # Logo image
+  short_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  long_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
+  custom_filter: false # To be used as a custom filter
+  social_media: # Links
+    github: false
+    facebook: false
+    twitter: false
+    medium: false
