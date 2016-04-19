@@ -8,7 +8,7 @@ $large: 64.063em 90em;
 
 
 // Colors
-$main-color: rgba(59, 101, 109, 1);
+$main-color: rgba( 0,  79, 111, 1);
 
 $gray:      rgba(113, 126, 129, 1);
 $green:     rgba( 86, 161, 115, 1);
@@ -24,15 +24,17 @@ $red:       rgba(179,  57,  69, 1);
 
 
 // Mapping the base colors to the category vars
-$all: $gray;
-$behavioral-research: $blue;
-$citizen-engagement: $green2;
-$civic-technology: $yellow;
-$data-analysis: $orange;
-$expert-networking: $brown;
-$open-data: $dark-blue;
-$labs-and-experimentation: $teal;
+$all: rgba(59,79,101,1);
+$behavioral-research: rgba(222,96,108,1);
+$citizen-engagement: rgba(95, 169,212,1);
+$civic-technology: rgba(166,127,185,1);
+$data-analysis: rgba(243,180,75,1);
+$expert-networking: rgba(110,123,151,1);
+$open-data: rgba(0,173,152,1);
+$labs-and-experimentation: rgba(219,192,72,1);
 
+
+#overlay { background-color: transparent !important; }
 
 // Importing Styleguide
 @import '../../node_modules/govlab-styleguide/sass/styles'; // govlab-styleguide sass

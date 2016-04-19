@@ -1,7 +1,6 @@
 {% extends '_base.html' %}
 
 {% block main %}
-  {# main content starts here #}
   <div class="b-organization-page">
     {# Organization Header #}
     <div class="b-top-section" style="background-color: #{{ color }};">
@@ -12,16 +11,14 @@
         </div>
         <div class="large-6 column">
           <p class="e-description">{{ short_description }}</p>
-          {% if social_media %}
-            <div class="e-extras">
-              {% if social_media.twitter %}
-                <a href="{{ social_media.twitter }}" class="b-social-media-icon m-twitter" target="_blank"><img src="./img/twitter-logo.png" alt="{{title}} Twitter" title="{{title}} Twitter"></a>
-              {% endif %}
-              {% if social_media.github %}
-                <a href="{{ social_media.github }}" class="b-social-media-icon m-github" target="_blank"><img src="./img/github-logo.svg" alt="{{title}} Github" title="{{title}} Github"></a>
-              {% endif %}
-            </div>
-          {% endif %}
+          <div class="e-extras">
+            {% if social_media.twitter %}
+              <a href="{{ social_media.twitter }}" class="b-social-media-icon m-twitter" target="_blank"><img src="./img/twitter-logo.png" alt="{{title}} Twitter" title="{{title}} Twitter"></a>
+            {% endif %}
+            {% if social_media.github %}
+              <a href="{{ social_media.github }}" class="b-social-media-icon m-github" target="_blank"><img src="./img/github-logo.svg" alt="{{title}} Github" title="{{title}} Github"></a>
+            {% endif %}
+          </div>
         </div>
       </div>
 
@@ -89,20 +86,6 @@
                   {% endfor %}
                 </div>
               {% endif %}
-
-              {# {% if paper.organization == "the-govlab" %}
-                <div class="e-result-extras m-{{ paper.organization | slug }}">
-                  <img class="e-organization-logo" src="img/organizations/govlab-logo-white.png" alt="The GovLab">
-                </div>
-              {% elif paper.organization == "mysociety" %}
-                <div class="e-result-extras m-{{ paper.organization | slug }}">
-                  <img class="e-organization-logo" src="img/organizations/mysociety-logo-white.png" alt="mySociety">
-                </div>
-              {% elif paper.organization == "world-bank-digital-engagement-evaluation-team" %}
-                <div class="e-result-extras m-{{ paper.organization | slug }}">
-                  <img class="e-organization-logo" src="img/organizations/deet-logo-white.png" alt="Digital Engagement Evaluation Team">
-                </div>
-              {% endif %} #}
             </a>
           </div>
         {% endif %}
