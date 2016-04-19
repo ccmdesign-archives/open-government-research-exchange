@@ -76,7 +76,13 @@ var options = {
   dataExt: '.json', // extension to use for data
   manageEnv: nunjucksEnv, // function to manage nunjucks environment
   libraryPath: 'node_modules/govlab-styleguide/dist/', // path to installed sass/js library distro folder
-  defaultData: './source/data/default.json' // default dataset to use if no automatically generated template is found
+  defaultData: './source/data/default.json', // default dataset to use if no automatically generated template is found
+  hashLength: 7, // length to truncate hash for page urls
+  slugLength: 128, // length to truncate title slug for page urls
+  useId: // whitelist for data files to use an id hash in the url, all others will just be title slug
+  [
+  'papers.json'
+  ]
 };
 
 // initialize browsersync
@@ -240,12 +246,11 @@ function compileData(dataPath, ext) {
 // generate a stream of one or more vinyl files from a json data source
 // containing the parent template specified by templatePath
 // which can then be piped into nunjucks to create output with data scoped to the datum
-function generateVinyl(basePath, dataPath, fPrefix, fSuffix, dSuffix) {
+function generateVinyl(basePath, dataPath, fSuffix, dSuffix) {
   var files = [], r, r2, f, baseTemplate, baseName, _data, fname,
   base = fs.readdirSync(basePath);
 
   // stupid code courtesy of node doesnt support default parameters as of v5
-  fPrefix = fPrefix === undefined ? '' : fPrefix;
   fSuffix = fSuffix === undefined ? options.ext : fSuffix;
   dSuffix = dSuffix === undefined ? options.dataExt : dSuffix;
 
@@ -265,12 +270,6 @@ function generateVinyl(basePath, dataPath, fPrefix, fSuffix, dSuffix) {
       .replace(new RegExp('\\' + fSuffix + '$'), '')
       ;
 
-      // create a new dir for the output if it doesn't already exist
-      // based on naming convention
-      if (!fs.existsSync(basePath + baseName)){
-        fs.mkdirSync(basePath + baseName);
-      }
-
       // look for a dataset matching the naming convention
       for (var dataset in generatedData) {
         if (dataset === baseName) {
@@ -280,18 +279,11 @@ function generateVinyl(basePath, dataPath, fPrefix, fSuffix, dSuffix) {
           // create a new vinyl file for each datum in _data and push to files
           // using directory based on naming convention and base template as content
           for (var d in _data) {
-            if (_data[d].hasOwnProperty('title')) {
-              // name file if title exists
-              fname = '-' + slugify(_data[d].title);
-            } else {
-              // otherwise just use id
-              fname = '';
-            }
             f = new File({
-              base: basePath,
-              path: basePath + baseName + '/' + fPrefix + _data[d].id + fname + fSuffix,
+              path: _data[d].path,
               contents: baseTemplate
             });
+            f.data = _data[d];
             files.push(f);
           }
         }
@@ -302,6 +294,7 @@ function generateVinyl(basePath, dataPath, fPrefix, fSuffix, dSuffix) {
   // convert files array to stream and return
   return require('stream').Readable({ objectMode: true }).wrap(es.readArray(files));
 }
+
 
 // define gulp tasks ///////////////////////////////////
 
@@ -346,64 +339,75 @@ gulp.task('yaml', function () {
   .pipe(gulp.dest('source/data'));
 });
 
-gulp.task('json', ['yaml'], function () {
+gulp.task('json', ['yaml'], function() {
   return gulp.src('source/data/**/*.json')
-  .pipe(intercept(function(file){
-    var o = JSON.parse(file.contents.toString()),
-    b = {};
-    if (!o.hasOwnProperty('data')) {
+    .pipe(intercept(function(file) {
+      var o = JSON.parse(file.contents.toString()),
+        b = {},
+        p;
       // wrap json in a top level property 'data'
-      b.data = o;
-      // assign a unique id to each entry in data
+      if (!o.hasOwnProperty('data')) {
+        b.data = o;
+      } else {
+        b = o;
+      }
+      // do some processing on the json
       for (var j in b.data) {
-        if (!b.data[j].hasOwnProperty('id')) {
-          if (b.data[j].hasOwnProperty('title')) {
-            // use title to create hash if exists,
-            b.data[j].id = md5(b.data[j].title);
-            // otherwise use first prop
+        if (!b.data[j].hasOwnProperty('id')) { // assign a unique id to each entry in data
+          if (b.data[j].hasOwnProperty('title')) { // use title to create hash if exists,
+            b.data[j].id = md5(b.data[j].title); // otherwise use first prop
           } else {
             b.data[j].id = md5(b.data[j][Object.keys(b.data[j])[0]]);
           }
         }
-      }
-      if (cliOptions.verbose) {
-        util.log(util.colors.magenta('Converting yaml ' + file.path), 'to json as', util.colors.blue(JSON.stringify(b)));
-      }
-      file.contents = new Buffer(JSON.stringify(b));
-    }
-    return file;
-  }))
-  .pipe(gulp.dest('source/data'));
-});
-
-gulp.task('generateTemplates', ['json'], function() {
-  return generateVinyl(options.path, options.dataPath)
-  .pipe(gulp.dest(options.path))
-});
-
-gulp.task('nunjucks', ['generateTemplates'], function() {
-  return gulp.src( options.path + '**/*' + options.ext )
-  .pipe(plumber())
-  .pipe(data(function(file) {
-    // check if the file is an auto generated file
-    // filename must contain a unique id which must also be present in the data as 'id'
-    for (var datasetName in generatedData) {
-      for (var i in generatedData[datasetName]) {
-        var r = new RegExp(datasetName + '\\/' + generatedData[datasetName][i].id)
-        if (r.test(file.path)) {
-          if (cliOptions.verbose) {
-            util.log(util.colors.green('Found Generated Template ' + file.path), ': using', JSON.stringify(generatedData[datasetName][i]));
+        if (!b.data[j].hasOwnProperty('path')) {
+          p = '';
+          if (options.useId.indexOf(file.path.replace(/^.*\//g, '')) > -1) {
+            if (b.data[j].hasOwnProperty('id')) {
+              p += slugify(b.data[j].id).substring(0, options.hashLength) + '-';
+            }
           }
-          // return data matching id in dataset datasetName
-          var d = generatedData[datasetName][i];
-          // add all datasets as special prop $global
-          d.$global = generatedData;
-          return d;
+          if (b.data[j].hasOwnProperty('title')) { // name file if title exists
+            p += slugify(b.data[j].title).substring(0, options.slugLength) + options.ext;
+          }
+          b.data[j].path = p;
         }
       }
+      if (cliOptions.verbose) {
+        util.log(util.colors.magenta('Proccessing json, ' + file.path));
+      }
+      file.contents = new Buffer(JSON.stringify(b));
+      return file;
+    }))
+    .pipe(gulp.dest('source/data'));
+});
+
+// gulp.task('generateTemplates', ['json'], function() {
+//   return generateVinyl(options.path, options.dataPath)
+//   .pipe(gulp.dest(options.path))
+// });
+
+gulp.task('nunjucksGenerated', ['json'], function() {
+  return generateVinyl(options.path, options.dataPath)
+  .pipe(plumber())
+  .pipe(data(function(file) {
+    if (cliOptions.verbose) {
+      util.log(util.colors.green(' Generated Template ' + file.path), ': using', JSON.stringify(file.data));
     }
-    // if no id is found, return the whole data cache
-    // this will then be available in nunjucks as [jsonfilename].[key].[etc]
+    var d = file.data;
+    // add all datasets as special prop $global
+    d.$global = generatedData;
+    return d;
+  }))
+  .pipe(nunjucksRender(options))
+  .pipe(flatten())
+  .pipe(gulp.dest('public'));
+});
+
+gulp.task('nunjucks', ['json'], function() {
+  return gulp.src('source/templates/**/*.html')
+  .pipe(plumber())
+  .pipe(data(function(file) {
     return generatedData;
   }))
   .pipe(nunjucksRender(options))
@@ -423,9 +427,9 @@ gulp.task('csv2json', function() {
   .pipe(gulp.dest('source/data'))
 });
 
-var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
+var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'nunjucksGenerated', 'libCss'];
 gulp.task('build', buildTasks, function () {
-  util.log(util.colors.magenta('****'), 'Running build tasks:', buildTasks, util.colors.magenta('****'));
+  util.log(util.colors.magenta('****'), 'finished build tasks:', buildTasks, util.colors.magenta('****'));
 })
 
 gulp.task('deploy', ['build'], shell.task([
