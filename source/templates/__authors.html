@@ -7,7 +7,7 @@
       <div class="row">
         <div class="large-6 column e-image-column">
           <div class="e-author-picture" style="background-image: url(./img/authors/{{ image }})"></div>
-          <span class="b-button e-more-info-panel-trigger" onclick="$('.b-extra-info-panel').toggleClass('visible');">More Information</span>
+          {% if long_description %}<span class="b-button e-more-info-panel-trigger" onclick="$('.b-extra-info-panel').toggleClass('visible');">More Information</span>{% endif %}
         </div>
         <div class="large-6 column">
           <h1 class="e-name">{{ title }}</h1>
