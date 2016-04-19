@@ -48,7 +48,7 @@
         <a href="base-results.html">Results Page</a>
         <a href="list.html">List Page</a>
         {% for a in authors %}
-            <a href="{{a.id}}-{{a.title}}.html">{{a.name}}</a>
+            <a href="{{ a.id }}-{{ a.title | slug }}.html">{{ a.title }}</a>
         {% endfor %}
     </nav>
 
