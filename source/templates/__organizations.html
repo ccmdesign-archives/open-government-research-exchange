@@ -8,7 +8,7 @@
       <div class="row">
         <div class="large-6 column e-image-column">
           <img class="e-org-logo" src="img/organizations/{{ image_white }}" alt="{{title}}" title="{{title}}">
-          <span class="b-button">More Information</span>
+          <span class="b-button" onclick="$('.b-extra-info-panel').toggleClass('visible');">More Information</span>
         </div>
         <div class="large-6 column">
           <p class="e-description">{{ short_description }}</p>
@@ -50,15 +50,7 @@
     {# List of Articles #}
     <div class="b-page-section b-results-section b-isotope">
       {% for paper in $global.papers %}
-        {% if paper.organization == title|slug %}
-        {# A gente precisa levar em consideração o custom_filter #}
-        {#  
-          IF custom_filter
-            filter by custom_filter
-          ELSE
-            filter by title|slug
-        #}
-
+        {% if paper.organization == title|slug or paper.organization == custom_filter %}
           <div class="b-result-item m-access-{{ paper.access | slug }} {% for category in paper.taxonomy.category %} m-{{ category | slug }}{% endfor %} f-{{ paper.access | slug }}">
             <a href="{{ paper.id }}-{{ paper.title | slug }}.html" title="{{ paper.title }}">
               <h3 class="e-result-name">{{ paper.title }}</h3>
