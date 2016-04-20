@@ -20,6 +20,7 @@ File            = require('vinyl'),
 es              = require('event-stream'),
 fs              = require('fs'),
 md5             = require('md5'),
+lunr             = require('lunr'),
 packagejson     = require('./package.json')
 ;
 
@@ -218,6 +219,7 @@ function processJSON ( file ) {
 var generatedData = {};
 
 function compileData(dataPath, ext) {
+  dataPath = dataPath === undefined ? options.dataPath : dataPath;
   ext = ext === undefined ? options.dataExt : ext;
   var dataDir = fs.readdirSync(dataPath),
   baseName, r, _data;
@@ -421,6 +423,22 @@ gulp.task('csv2json', function() {
     path.extname = ".json"
   }))
   .pipe(gulp.dest('source/data'))
+});
+
+gulp.task('lunr', function() {
+  compileData();
+
+  var index = lunr(function () {
+      this.field('title', { boost: 10 })
+      this.field('body')
+  });
+
+  var papers = generatedData.papers;
+  papers.forEach(function(p) {
+    index.add(p);
+  });
+
+  console.log (index.search('data'));
 });
 
 var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
