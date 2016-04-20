@@ -426,6 +426,7 @@ gulp.task('csv2json', function() {
   .pipe(gulp.dest('source/data'))
 });
 
+
 gulp.task('lunr', function() {
   compileData();
 
@@ -443,7 +444,10 @@ gulp.task('lunr', function() {
     index.add(p);
   });
 
-  return gulpFile('searchindex.json', JSON.stringify(index.toJSON()), { src: true })
+  return gulpFile('searchindex.json', JSON.stringify({
+    index: index.toJSON(),
+    store: papers
+  }), { src: true })
   .pipe(gulp.dest('source/js'));
 });
 
