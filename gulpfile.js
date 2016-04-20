@@ -12,15 +12,16 @@ intercept       = require('gulp-intercept'),
 csv2json        = require('gulp-csv2json'),
 rename          = require('gulp-rename'),
 gulpFn          = require('gulp-fn'),
+gulpFile        = require('gulp-file'),
 colors          = require('colors'),
 bs              = require('browser-sync').create(),
-bs2              = require('browser-sync').create(),
+bs2             = require('browser-sync').create(), // why is this needed?
 minimist        = require('minimist'),
 File            = require('vinyl'),
 es              = require('event-stream'),
 fs              = require('fs'),
 md5             = require('md5'),
-lunr             = require('lunr'),
+lunr            = require('lunr'),
 packagejson     = require('./package.json')
 ;
 
@@ -429,16 +430,21 @@ gulp.task('lunr', function() {
   compileData();
 
   var index = lunr(function () {
-      this.field('title', { boost: 10 })
-      this.field('body')
+    this.field('title', { boost: 10 });
+    this.field('abstract');
   });
 
   var papers = generatedData.papers;
   papers.forEach(function(p) {
+    var path = slugify(p.id) + '-' + slugify(p.title) + options.ext;
+    if (!p.hasOwnProperty('path')) {
+      p.path = path
+    }
     index.add(p);
   });
 
-  console.log (index.search('data'));
+  return gulpFile('searchindex.json', JSON.stringify(index.toJSON()), { src: true })
+  .pipe(gulp.dest('source/js'));
 });
 
 var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
