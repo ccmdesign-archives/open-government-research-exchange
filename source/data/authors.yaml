@@ -3,7 +3,9 @@
   image: beth-noveck.jpg
   short_description: Beth Simone Noveck is Co-Founder and Director of The GovLab and its MacArthur Research Network on Opening Governance. Funded by the John D. and Catherine T. MacArthur Foundation, the John S. and James L. Knight Foundation and Google.org, the GovLab strives to improve people’s lives by changing how we govern. The GovLab designs and tests technology, policy and strategies for fostering more open and collaborative approaches to strengthen the ability of people and institutions to work together to solve problems, make decisions, resolve conflict and govern themselves more effectively and legitimately.
   long_description: false
-  custom_filter: Beth Simone Noveck # To be used as a custom filter
+  custom_filter: 
+    - Beth Simone Noveck # To be used as a custom filter
+    - Beth S. Noveck
   social_media: # Links
     github: false
     facebook: false

@@ -49,7 +49,7 @@
     {# List of Articles #}
     <div class="b-page-section b-results-section b-isotope">
       {% for paper in $global.papers %}
-        {% if title in paper.authors or custom_filter in paper.authors %}
+        {% if title in paper.authors or paper.authors | containsAny(custom_filter) %}
           <div class="b-result-item m-access-{{ paper.access | slug }} {% for category in paper.taxonomy.category %} m-{{ category | slug }}{% endfor %} f-{{ paper.access | slug }}">
             <a href="{{ paper.id }}-{{ paper.title | slug }}.html" title="{{ paper.title }}">
               <h3 class="e-result-name">{{ paper.title }}</h3>
