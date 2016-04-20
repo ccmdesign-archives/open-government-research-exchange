@@ -8,6 +8,9 @@
        {%- set _match = true -%}
       {%- endif -%}
     {%- endfor -%}
+    {%- if category == false -%}
+       {%- set _match = true -%}
+    {%- endif -%}
     {%- if _match -%}
       {%- if prefix -%}
         {%- set v = d[prefix][field | slug] -%}
