@@ -1,7 +1,7 @@
 {%- macro filterDropdown(data, field, category, num=1, prefix=false) -%}
   {%- set results = [] -%}
   {%- for d in data -%}
-     {% set results = results | pushallnew(d, field, category, prefix) %}
+     {%- set results = results | pushallnew(d, field, category, prefix) -%}
   {%- endfor -%}
   <div class="b-filter-ui-container">
     <div class="large-2 columns">
