@@ -14,7 +14,6 @@ rename          = require('gulp-rename'),
 gulpFn          = require('gulp-fn'),
 colors          = require('colors'),
 bs              = require('browser-sync').create(),
-bs2              = require('browser-sync').create(),
 minimist        = require('minimist'),
 File            = require('vinyl'),
 es              = require('event-stream'),
@@ -114,10 +113,44 @@ function split(s, delim) {
   return s ? s.toString().split(delim) : false;
 }
 
+function contains(arr, v) {
+  return arr.indexOf(v) > -1;
+}
+
+function pushIfNew(arr, v) {
+  if (arr.indexOf(v) === -1) {
+    arr.push(v);
+  }
+  return arr;
+}
+
+function pushPossibleValues(arr, obj, prop, category, prefix) {
+  prefix = prefix === undefined ? false : prefix;
+
+  if (obj.taxonomy.category && obj.taxonomy.category.indexOf(category) > -1) {
+    var v = prefix ? obj[prefix][slugify(prop)] : obj[slugify(prop)] ;
+
+    if (v) {
+      if (Array.isArray(v)) {
+        for (i in v) {
+          pushIfNew(arr, v[i]);
+        }
+      } else {
+        pushIfNew(arr, v);
+      }
+    }
+  }
+
+  return arr;
+}
+
 // set up nunjucks environment
 function nunjucksEnv(env) {
   env.addFilter('slug', slugify);
   env.addFilter('split', split);
+  env.addFilter('contains', contains);
+  env.addFilter('pushnew', pushIfNew);
+  env.addFilter('pushallnew', pushPossibleValues);
 }
 
 // a subroutine to simplify processJson
@@ -309,7 +342,7 @@ gulp.task('sass', function() {
   return gulp.src('source/sass/styles.scss')
   .pipe(sass().on('error', sass.logError))
   .pipe(gulp.dest('public/css'))
-  .pipe(bs2.stream());
+  .pipe(bs.stream());
   // .pipe(cliOptions.nosync ? bs.stream() : util.noop());
 });
 

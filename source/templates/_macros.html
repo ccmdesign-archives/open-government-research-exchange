@@ -1,7 +1,64 @@
-{%- macro getFilterOptions(field, category, isArray=false, num=1, prefix=false) -%}
+{%- macro filterDropdown(data, field, category, num=1, prefix=false) -%}
+  {%- set results = [] -%}
+  {%- for d in data -%}
+     {% set results = results | pushallnew(d, field, category, prefix) %}
+  {%- endfor -%}
+  <div class="b-filter-ui-container">
+    <div class="large-2 columns">
+      <div class="e-select">
+        <select name="" id="" class="b-filter js-change" {% if results | length == 0 %}disabled{% endif %}>
+          <option data-filter="{% for n in range(num) %}*{% endfor %}">{{field}}</option>
+          {% for r in results -%}
+            <option data-filter="f-{{r | slug}}">{{r}}</option>
+          {%- endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+{%- endmacro -%}
+
+{# alternative version #}
+{%- macro filterDropdownAlt(data, field, category, isArray=false, num=1, prefix=false) -%}
+  {%- set results = [] -%}
+  {%- for d in data -%}
+    {%- if  d.taxonomy.category | contains(category) -%}
+      {%- if prefix -%}
+        {%- set fieldValue = d[prefix][field | slug] -%}
+      {% else %}
+        {%- set fieldValue = d[field | slug] -%}
+      {%- endif -%}
+      {%- if fieldValue -%}
+        {%- if isArray -%}
+          {%- for member in fieldValue -%}
+            {%- set results = results | pushnew(member) -%}
+          {%- endfor -%}
+        {%- else -%}
+            {%- set results = results | pushnew(fieldValue) -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  <div class="b-filter-ui-container">
+    <div class="large-2 columns">
+      <div class="e-select">
+        <select name="" id="" class="b-filter js-change" {% if results | length == 0 %}disabled{% endif %}>
+          <option data-filter="{% for n in range(num) %}*{% endfor %}">{{field}}</option>
+          {% for r in results -%}
+            <option data-filter="f-{{r | slug}}">{{r}}</option>
+          {%- endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+{%- endmacro -%}
+
+
+{# old macro versions, will remove at some point #}
+
+{%- macro getFilterOptions(data, field, category, isArray=false, num=1, prefix=false) -%}
   {%- set results = "" -%}
   {%- set delimiter = "!@#$%^*()" -%}
-  {%- for d in papers -%}
+  {%- for d in data -%}
     {%- set _match = false -%}
     {%- for i in d.taxonomy.category -%}
       {%- if i == category -%}
