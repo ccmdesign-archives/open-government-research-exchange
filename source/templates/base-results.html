@@ -1,3 +1,4 @@
+{% import 'macros/result_item_macro.html' as resultItem %}
 {% extends '_base.html' %}
 {% block main %}
 <!-- main content starts here -->
@@ -110,65 +111,8 @@
 
   <div class="b-page-section b-results-section b-isotope">
     {% for d in papers %}
-    <div class="b-result-item m-access-{{d.access | slug}} f-{{d.organization | slug}} f-{{d.taxonomy.objective | slug}} f-{{d.taxonomy.methodology | slug}} f-{{d.sector | slug}} f-{{d.sector | slug}} f-{{d.region | slug}} f-{{d.sector | slug}} f-{{d.type | slug}} {% for c in d.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
-
-    
-      <a href="{{d.id}}-{{d.title | slug}}.html" title="{{d.title}}">
-        {# {% if d.cover_image %}
-        <div class="e-result-image" style="background-image: url('{{d.cover_image}}')"></div>
-        {% endif %} #}
-
-        
-
-        <h3 class="e-result-name">{{d.title}}</h3>
-
-        {% if d.authors %}
-        <p class="e-result-authors">
-          {% for author in d.authors %}
-            {{ author }}{% if not loop.last %},{% endif %}
-          {% endfor %}
-        </p>
-        {% endif %}
-
-        
-        <!-- These IF statements are not really working.  -->
-
-        {% if d.taxonomy.category %}
-        <div class="e-result-taxonomy m-category">
-          <p>Category</p>
-          {% for cat in d.taxonomy.category %} <span class="m-{{cat}}">{{cat}}</span> {% endfor %}
-        </div>
-        {% endif %}
-
-        {% if d.taxonomy.methodology %}
-        <div class="e-result-taxonomy m-methodology">
-          <p>Methodology</p>
-          {% for met in d.taxonomy.methodology %} <span>{{met}}</span> {% endfor %}
-        </div>
-        {% endif %}
-
-        {% if d.taxonomy.objective %}
-        <div class="e-result-taxonomy m-objective">
-          <p>Objective</p>
-          {% for obj in d.taxonomy.objective %} <span>{{obj}}</span> {% endfor %}</div>
-        {% endif %}
-
-          <div class="e-result-extras m-{{d.organization | slug }}">
-            {% if d.organization == "the-govlab" %}
-              <img class="e-organization-logo" src="img/organizations/govlab-logo-white.png" alt="The GovLab">
-            {% elif d.organization == "mysociety" %}
-              <img class="e-organization-logo" src="img/organizations/mysociety-logo-white.png" alt="mySociety">
-            {% elif d.organization == "world-bank-digital-engagement-evaluation-team" %}
-              <img class="e-organization-logo" src="img/organizations/deet-logo-white.png" alt="Digital Engagement Evaluation Team">
-            {% endif %}
-
-            {% if d.github %} <img class="e-github-logo" src="img/github-logo.svg" alt=""> {% endif %}
-            {% if d.datasets %} <i class="material-icons" title="Datasets">file_download</i>{% endif %}
-            {% if d.access == "Closed" %} <i class="material-icons m-closed-access" title="Closed Access">lock_outline</i>{% endif %}
-          </div>
-        </a>
-      </div>
-      {% endfor %}
+     {{resultItem.createResult(d)}}
+    {% endfor %}
     </div>
   </div>
   {% endblock %}
