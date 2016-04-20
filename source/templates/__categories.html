@@ -1,70 +1,6 @@
 {% extends '_base.html' %}
 
-{%- macro getFilterOptions(field, category, isArray=false, num=1, prefix=false) -%}
-  {%- set results = "" -%}
-  {%- set delimiter = "!@#$%^*()" -%}
-  {%- for d in $global.papers -%}
-    {%- set _match = false -%}
-    {%- for i in d.taxonomy.category -%}
-      {%- if i == category -%}
-       {%- set _match = true -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- if _match -%}
-      {%- if prefix -%}
-        {%- set v = d[prefix][field | slug] -%}
-      {% else %}
-        {%- set v = d[field | slug] -%}
-      {%- endif -%}
-      {%- if v -%}
-        {%- if isArray -%}
-          {%- for j in v -%}
-            {%- set x_match = false -%}
-            {%- for x in results | split(delimiter) -%}
-              {%- if x == j -%}
-               {%- set x_match = true -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- if x_match == false -%}
-              {%- if results == "" -%}
-                {%- set results = j -%}
-              {%- else -%}
-                {%- set results = results + delimiter + j -%}
-              {%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          {%- set y_match = false -%}
-          {%- for y in results | split(delimiter) -%}
-            {%- if y == v -%}
-             {%- set y_match = true -%}
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if y_match == false -%}
-            {%- if results == "" -%}
-              {%- set results = v -%}
-            {%- else -%}
-              {%- set results = results + delimiter + v -%}
-            {%- endif -%}
-          {%- endif -%}
-        {%- endif -%}
-      {%- endif -%}
-    {%- endif -%}
-  {%- endfor -%}
-  {%- set results = results | split(delimiter) %}
-  <div class="b-filter-ui-container">
-    <div class="large-2 columns">
-      <div class="e-select">
-        <select name="" id="" class="b-filter js-change" {% if results | length == 0 %}disabled{% endif %}>
-          <option data-filter="{% for n in range(num) %}*{% endfor %}">{{field}}</option>
-          {% for r in results -%}
-            <option data-filter="f-{{r | slug}}">{{r}}</option>
-          {%- endfor %}
-        </select>
-      </div>
-    </div>
-  </div>
-{%- endmacro -%}
+{% import '_macros.html' as $macros %}
 
 {% block main %}
 <div class="b-categories-page">
@@ -93,12 +29,12 @@
       <div class="row">
         <form action="#" class="b-form">
 
-          {{ getFilterOptions("Organization", custom_filter, false, 1) }}
-          {{ getFilterOptions("Objective", custom_filter, true, 2, "taxonomy") }}
-          {{ getFilterOptions("Methodology", custom_filter, true, 3, "taxonomy") }}
-          {{ getFilterOptions("Sector", custom_filter, false, 4) }}
-          {{ getFilterOptions("Region", custom_filter, false, 5) }}
-          {{ getFilterOptions("Type", custom_filter, false, 6) }}
+          {{ $macros.getFilterOptions($global.papers, "Organization", custom_filter, false, 1) }}
+          {{ $macros.getFilterOptions($global.papers, "Objective", custom_filter, true, 2, "taxonomy") }}
+          {{ $macros.getFilterOptions($global.papers, "Methodology", custom_filter, true, 3, "taxonomy") }}
+          {{ $macros.getFilterOptions($global.papers, "Sector", custom_filter, false, 4) }}
+          {{ $macros.getFilterOptions($global.papers, "Region", custom_filter, false, 5) }}
+          {{ $macros.getFilterOptions($global.papers, "Type", custom_filter, false, 6) }}
 
         </form>
       </div>

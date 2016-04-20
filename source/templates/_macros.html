@@ -1,7 +1,7 @@
-{%- macro getFilterOptions(field, category, isArray=false, num=1, prefix=false) -%}
+{%- macro getFilterOptions(data, field, category, isArray=false, num=1, prefix=false) -%}
   {%- set results = "" -%}
   {%- set delimiter = "!@#$%^*()" -%}
-  {%- for d in papers -%}
+  {%- for d in data -%}
     {%- set _match = false -%}
     {%- for i in d.taxonomy.category -%}
       {%- if i == category -%}
