@@ -3,7 +3,7 @@ $(function() {
 
     var getx = function (arr, prop, needle) {
         console.log (prop, needle);
-        for (i in arr) {
+        for (var i in arr) {
             if (arr[i][prop] === needle) {
                 console.log(arr[i]);
                 return arr[i];
@@ -13,7 +13,7 @@ $(function() {
 
     var mapResults = function (fromHaystack, toHaystack, mapFrom, mapTo) {
         var results = [];
-        for (i in fromHaystack) {
+        for (var i in fromHaystack) {
             console.log (fromHaystack, mapFrom, fromHaystack[i][mapFrom]);
             results.push(getx(toHaystack, mapTo, fromHaystack[i][mapFrom]));
         }
@@ -36,11 +36,14 @@ $(function() {
 
     var search = function (e) {
         // $( '.b-lunr-results' ).text( JSON.stringify(index.search($('#lunr-search').val())) );
-        $( '.b-lunr-results' ).text( JSON.stringify(
 
-            mapResults(index.search($('#lunr-search').val()), papers, 'ref', 'id')
+        var mapping = mapResults(index.search($('#lunr-search').val()), papers, 'ref', 'id'), resultsHTML = '';
 
-            ));
+        for (var m in mapping) {
+            resultsHTML += '\n<h3>' + mapping[m].title + '</h3>\n<p>' + mapping[m].abstract.substring(0, 250) + '... </p>';
+        }
+
+        $( '.b-lunr-results' ).html(resultsHTML);
     };
 
     var debouncedSearch = _.debounce(search, 100, false)
