@@ -418,6 +418,102 @@ gulp.task('generateTemplates', ['json'], function() {
 });
 
 gulp.task('nunjucks', ['generateTemplates'], function() {
+  var filters = {
+    all: {
+      organizations: [],
+      objectives: [],
+      methodologies: [],
+      sectors: [],
+      regions: [],
+      types: []
+    }
+  };
+
+  for (var i in generatedData.categories) {
+    var category = slugify(generatedData.categories[i].custom_filter)
+
+    if (category) {
+      filters[category] = {
+        organizations: [],
+        objectives: [],
+        methodologies: [],
+        sectors: [],
+        regions: [],
+        types: []
+      }
+    }
+  }
+
+  for (var i in generatedData.papers) {
+    var paper = generatedData.papers[i];
+
+    for (var j in paper.taxonomy.category) {
+      var category = slugify(paper.taxonomy.category[j]);
+
+      if (paper.organization) {
+        if (filters[category] && filters[category].organizations.indexOf(paper.organization) < 0) {
+          filters[category].organizations.push(paper.organization);
+        }
+        if (filters.all.organizations.indexOf(paper.organization) < 0) {
+          filters.all.organizations.push(paper.organization);
+        }
+      }
+
+      for (var k in paper.taxonomy.objective) {
+        var objective = paper.taxonomy.objective[k];
+
+        if (objective) {
+          if (filters[category] && filters[category].objectives.indexOf(objective) < 0) {
+            filters[category].objectives.push(objective);
+          }
+          if (filters.all.objectives.indexOf(objective) < 0) {
+            filters.all.objectives.push(objective);
+          }
+        }
+      }
+
+      for (var k in paper.taxonomy.methodology) {
+        var methodology = paper.taxonomy.methodology[k];
+
+        if (methodology) {
+          if (filters[category] && filters[category].methodologies.indexOf(methodology) < 0) {
+            filters[category].methodologies.push(methodology);
+          }
+          if (filters.all.methodologies.indexOf(methodology) < 0) {
+            filters.all.methodologies.push(methodology);
+          }
+        }
+      }
+
+      if (paper.sector) {
+        if (filters[category] && filters[category].sectors.indexOf(paper.sector) < 0) {
+          filters[category].sectors.push(paper.sector);
+        }
+        if (filters.all.sectors.indexOf(paper.sector) < 0) {
+          filters.all.sectors.push(paper.sector);
+        }
+      }
+
+      if (paper.region) {
+        if (filters[category] && filters[category].regions.indexOf(paper.region) < 0) {
+          filters[category].regions.push(paper.region);
+        }
+        if (filters.all.regions.indexOf(paper.region) < 0) {
+          filters.all.regions.push(paper.region);
+        }
+      }
+
+      if (paper.type) {
+        if (filters[category] && filters[category].types.indexOf(paper.type) < 0) {
+          filters[category].types.push(paper.type);
+        }
+        if (filters.all.types.indexOf(paper.type) < 0) {
+          filters.all.types.push(paper.type);
+        }
+      }
+    }
+  }
+
   return gulp.src( options.path + '**/*' + options.ext )
   .pipe(plumber())
   .pipe(data(function(file) {
@@ -434,6 +530,7 @@ gulp.task('nunjucks', ['generateTemplates'], function() {
           var d = generatedData[datasetName][i];
           // add all datasets as special prop $global
           d.$global = generatedData;
+          d.$global.filters = filters;
           return d;
         }
       }
