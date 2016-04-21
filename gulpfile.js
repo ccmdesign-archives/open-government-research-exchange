@@ -463,6 +463,8 @@ gulp.task('csv2json', function() {
 gulp.task('lunr', function() {
   compileData();
 
+  util.log(util.colors.magenta('****'), 'Generating search indices...', util.colors.magenta('****'));
+
   var index = lunr(function () {
     this.field('title', { boost: 10 });
     this.field('abstract');
@@ -471,30 +473,41 @@ gulp.task('lunr', function() {
   var papers = generatedData.papers;
   papers.forEach(function(p) { index.add(p); });
 
-
-
   var _stream = gulpFile('searchindex.json', JSON.stringify({
     index: index.toJSON(),
     papers: papers
   }), { src: true });
 
+  util.log(util.colors.blue(':):)'),
+    util.colors.gray('Main Index'),
+    '(', papers.length, 'items', ')',
+    util.colors.blue('):):'));
+
   // create a subset of papers, and corresponding search index for each category in the generated data
   for (var c in generatedData.categories) {
-    var _data = matchObjects(generatedData.papers, ['taxonomy', 'category'], generatedData.categories[c].title);
-    var _idx = lunr(function () {
-      this.field('title', { boost: 10 });
-      this.field('abstract');
-    });
-    _data.forEach(function(p) { _idx.add(p); });
+    if (generatedData.categories[c].custom_filter) {
+      var _data = matchObjects(generatedData.papers, ['taxonomy', 'category'], generatedData.categories[c].custom_filter);
 
-    _stream = _stream.pipe(
-      gulpFile(
-        'searchindex-' + slugify(generatedData.categories[c].title) + '.json',
-        JSON.stringify({
-          index: _idx.toJSON(),
-          papers: _data
-        })
-        ));
+      util.log(util.colors.green('>>>>'),
+        generatedData.categories[c].custom_filter,
+        '(', _data.length, 'items', ')',
+        util.colors.green('>>>>'));
+
+      var _idx = lunr(function () {
+        this.field('title', { boost: 10 });
+        this.field('abstract');
+      });
+      _data.forEach(function(p) { _idx.add(p); });
+
+      _stream = _stream.pipe(
+        gulpFile(
+          'searchindex-' + slugify(generatedData.categories[c].custom_filter) + '.json',
+          JSON.stringify({
+            index: _idx.toJSON(),
+            papers: _data
+          })
+          ));
+    }
   }
 
   return _stream.pipe(gulp.dest('source/js'));
@@ -502,7 +515,7 @@ gulp.task('lunr', function() {
 
 var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
 gulp.task('build', buildTasks, function () {
-  util.log(util.colors.magenta('****'), 'Running build tasks:', buildTasks, util.colors.magenta('****'));
+  util.log(util.colors.magenta('****'), 'Finished running build tasks:', buildTasks, util.colors.magenta('****'));
 })
 
 gulp.task('deploy', ['build'], shell.task([
