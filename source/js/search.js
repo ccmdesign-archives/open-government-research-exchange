@@ -1,5 +1,5 @@
 $(function() {
-    var index, papers;
+    var index, papers, scopedIndices = {};
 
     var getx = function (arr, prop, needle) {
         console.log (prop, needle);
@@ -27,6 +27,33 @@ $(function() {
         $( '.b-lunr-results' ).text( 'Could not get searchindex.json' );
     });
 
+    // get scoped indicies
+    // NOTE: this is hardcoded for now, even though the json files are generated dynamically.
+    // not sure of the best way to grab a file listing from client side here.
+    // answer may be to expose categories.json, or turn this into a service
+    var getIndex = function (name) {
+        $.get( 'js/searchindex-' + name + '.json', function( d ) {
+            console.log (name, d);
+            scopedIndices[name] = lunr.Index.load(d.index);
+        })
+        .fail(function() {
+            console.log('couldnt $.get scoped index : ' + name);
+        });
+    }
+    var categories = [
+    'all',
+    'behavioral-research',
+    'citizen-engagement',
+    'civic-technology',
+    'data-analysis',
+    'expert-networking',
+    'labs-and-experimentation',
+    'open-data'
+    ];
+    for (var c in categories) {
+        getIndex(categories[c]);
+    }
+
     $.get( 'js/searchindex.json', function( d ) {
         papers = d.papers;
     })
@@ -49,10 +76,13 @@ $(function() {
     };
 
     var filter = function (e) {
-        $( '.b-lunr-results' ).text( JSON.stringify(index.search($('#lunr-search').val())) );
+        // $( '.b-lunr-results' ).text( JSON.stringify(index.search($('#lunr-search').val())) );
 
-        var results = index.search($(this).val()),
+
+        var results = scopedIndices[$(this).attr('data-category')].search($(this).val()),
         limit = 50;
+
+        console.log ($(this).attr('data-category'), $(this).val(), results, scopedIndices[$(this).attr('data-category')]);
 
         if (results.length > limit) {
             results = results.slice(0, limit);
