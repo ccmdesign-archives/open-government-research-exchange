@@ -1,0 +1,37 @@
+{% extends '_base.html' %}
+
+{% block main %}
+  <div class="b-author-page">
+    {# Author's Info #}
+    <div class="b-top-section">
+      <div class="row">
+        <h2>{{title}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {# Article Section #}
+    <div class="b-divider b-filter-panel">
+        <h2>Articles</h2>
+      <div class="row">
+       <div class="b-page-section">
+        {% for paper in $global.papers %}
+          {% if title in paper.authors %}
+              <a href="{{ paper.id }}-{{ paper.title | slug }}.html" title="{{ paper.title }}">
+              <h3>{{ paper.title }}</h3>
+              <p>
+                  {% for author in paper.authors %}
+                    {{ author }}{% if not loop.last %},{% endif %}
+                  {% endfor %}
+                </p>
+              </a>
+          {% endif %}
+        {%endfor%}
+        </ul>
+      </div>
+      </div>
+    </div>
+
+
+{% endblock %}
