@@ -116,6 +116,19 @@ function split(s, delim) {
   return s ? s.toString().split(delim) : false;
 }
 
+//check if an item an arr2 exists in arr1
+function containsAny(arr1, arr2) {
+
+  if (typeof arr2 === "string") {
+    arr2 = arr2.split();
+  } else if (arr2 === false ) {
+    return false;
+  }
+  return arr2.some(function(value) {
+    return arr1.indexOf(value) > -1;
+  });
+}
+
 // return a matched set of objects containing property (prop) with value (value)
 // if prop is an array, treat it as dot syntax
 function matchObjects(arr, prop, value) {
