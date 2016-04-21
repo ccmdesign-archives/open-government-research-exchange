@@ -7565,3 +7565,6 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 
 .ogr-paragraph:hover {
   color: #197d32; }
+
+#footer-text {
+  padding: 1% 0; }
