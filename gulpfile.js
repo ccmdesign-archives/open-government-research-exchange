@@ -116,6 +116,42 @@ function split(s, delim) {
   return s ? s.toString().split(delim) : false;
 }
 
+// return a matched set of objects containing property (prop) with value (value)
+// if prop is an array, treat it as dot syntax
+function matchObjects(arr, prop, value) {
+  var matches = [], o;
+
+  for (var obj in arr) {
+    // default to assuming prop is not an array
+    o = arr[obj];
+    p = prop;
+
+    // if prop is an array, scope o[p] to be equivalent to the dot syntax of each element in the array
+    // e.g. o[p] == obj.prop[0].prop[1] ...
+    if (Array.isArray(prop)) {
+      var i;
+      for (i = 0; i < prop.length-1; i++) {
+        o = o[prop[i]];
+      }
+      p = prop[i];
+    }
+
+    // console.log (p, o[p]);
+
+    // push anything that either is an array that contains value, or equals value to matches
+    if (o.hasOwnProperty(p)) {
+      if (Array.isArray(o[p])) {
+        o[p].indexOf(value) > -1 && matches.push(arr[obj]);
+      } else {
+        o[p] === value && matches.push(arr[obj]);
+      }
+    }
+  }
+  console.log (JSON.stringify(matches));
+
+  return matches;
+}
+
 // set up nunjucks environment
 function nunjucksEnv(env) {
   env.addFilter('slug', slugify);
@@ -444,9 +480,11 @@ gulp.task('lunr', function() {
     index.add(p);
   });
 
+  matchObjects(generatedData.papers, ['taxonomy', 'category'], 'Behavioral Science and Nudges');
+
   return gulpFile('searchindex.json', JSON.stringify({
     index: index.toJSON(),
-    store: papers
+    papers: papers
   }), { src: true })
   .pipe(gulp.dest('source/js'));
 });

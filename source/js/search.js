@@ -28,7 +28,7 @@ $(function() {
     });
 
     $.get( 'js/searchindex.json', function( d ) {
-        papers = d.store;
+        papers = d.papers;
     })
     .fail(function() {
         $( '.b-lunr-results' ).text( 'Could not get papers.json' );
@@ -38,7 +38,11 @@ $(function() {
         var mapping = mapResults(index.search($(this).val()), papers, 'ref', 'id'), resultsHTML = '';
 
         for (var m in mapping) {
-            resultsHTML += '<div class="b-search-result">\n<h3>' + mapping[m].title + '</h3>\n<p></div>' + mapping[m].abstract.substring(0, 250) + '... </p>';
+            resultsHTML += '<div class="b-search-result">\n<h3>'
+            + mapping[m].title
+            + '</h3>\n<p></div>'
+            + mapping[m].abstract.substring(0, 250)
+            + '... </p>';
         }
 
         $( '.b-lunr-results' ).html(resultsHTML);

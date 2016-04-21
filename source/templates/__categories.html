@@ -59,7 +59,7 @@
     {%- endif -%}
 
     {% if _match %}
-    <div class="b-result-item m-access-{{d.access | slug}} f-{{d.organization | slug}} f-{{d.taxonomy.objective | slug}} f-{{d.access | slug}} f-{{d.taxonomy.methodology | slug}} f-{{d.sector | slug}} f-{{d.sector | slug}} f-{{d.region | slug}} f-{{d.sector | slug}} f-{{d.type | slug}} {% for c in d.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
+    <div class="b-result-item m-access-{{d.access | slug}} f-{{d.organization | slug}} f-{{d.taxonomy.objective | slug}} f-{{d.access | slug}} f-{{d.taxonomy.methodology | slug}} f-{{d.sector | slug}} f-{{d.sector | slug}} f-{{d.region | slug}} f-{{d.sector | slug}} f-{{d.type | slug}} f-search-{{d.id}}{% for c in d.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
 
 
       <a href="{{d.id}}-{{d.title | slug}}.html" title="{{d.title}}">
