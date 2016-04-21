@@ -1,58 +1,67 @@
 $(function() {
-    var index, papers, scopedIndices = {};
+    var index, papers, scopes, scopedIndices = {};
 
-    var getx = function (arr, prop, needle) {
-        console.log (prop, needle);
-        for (var i in arr) {
-            if (arr[i][prop] === needle) {
-                console.log(arr[i]);
-                return arr[i];
-            }
-        }
-    };
+    var slug = function (t) {
+      return t ? t.toString().toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '')
+      : false ;
+  }
 
-    var mapResults = function (fromHaystack, toHaystack, mapFrom, mapTo) {
-        var results = [];
-        for (var i in fromHaystack) {
-            console.log (fromHaystack, mapFrom, fromHaystack[i][mapFrom]);
-            results.push(getx(toHaystack, mapTo, fromHaystack[i][mapFrom]));
+  var getx = function (arr, prop, needle) {
+    console.log (prop, needle);
+    for (var i in arr) {
+        if (arr[i][prop] === needle) {
+            console.log(arr[i]);
+            return arr[i];
         }
-        return results;
     }
+};
 
-    $.get( 'js/searchindex.json', function( d ) {
-        index = lunr.Index.load(d.index);
+var mapResults = function (fromHaystack, toHaystack, mapFrom, mapTo) {
+    var results = [];
+    for (var i in fromHaystack) {
+        console.log (fromHaystack, mapFrom, fromHaystack[i][mapFrom]);
+        results.push(getx(toHaystack, mapTo, fromHaystack[i][mapFrom]));
+    }
+    return results;
+}
+
+$.get( 'js/searchindex.json', function( d ) {
+    index = lunr.Index.load(d.index);
+})
+.fail(function() {
+    $( '.b-lunr-results' ).text( 'Could not get searchindex.json' );
+});
+
+    // get scoped indicies ///////////////////
+
+    $.get( 'js/scopes.json', function( d ) {
+        scopes = d;
+
+        for (var s in scopes) {
+            scopes[s].custom_filter &&
+            getIndex(slug(scopes[s].custom_filter));
+        }
     })
     .fail(function() {
-        $( '.b-lunr-results' ).text( 'Could not get searchindex.json' );
+        console.log ('couldnt get available scopes!');
     });
 
-    // get scoped indicies
-    // NOTE: this is hardcoded for now, even though the json files are generated dynamically.
-    // not sure of the best way to grab a file listing from client side here.
-    // answer may be to expose categories.json, or turn this into a service
     var getIndex = function (name) {
         $.get( 'js/searchindex-' + name + '.json', function( d ) {
-            console.log (name, d);
             scopedIndices[name] = lunr.Index.load(d.index);
         })
         .fail(function() {
             console.log('couldnt $.get scoped index : ' + name);
         });
     }
-    var categories = [
-    'all',
-    'behavioral-research',
-    'citizen-engagement',
-    'civic-technology',
-    'data-analysis',
-    'expert-networking',
-    'labs-and-experimentation',
-    'open-data'
-    ];
-    for (var c in categories) {
-        getIndex(categories[c]);
-    }
+
+
+    //////////////////////////////////////////
 
     $.get( 'js/searchindex.json', function( d ) {
         papers = d.papers;
@@ -82,7 +91,7 @@ $(function() {
         var results = scopedIndices[$(this).attr('data-category')].search($(this).val()),
         limit = 50;
 
-        console.log ($(this).attr('data-category'), $(this).val(), results, scopedIndices[$(this).attr('data-category')]);
+        // console.log ($(this).attr('data-category'), $(this).val(), results, scopedIndices[$(this).attr('data-category')]);
 
         if (results.length > limit) {
             results = results.slice(0, limit);
@@ -91,7 +100,11 @@ $(function() {
         $( document ).trigger( 'filter:removeClassesContaining', [ 'f-search-' ] );
 
         for (var r in results) {
-            $( document ).trigger( 'filter:add', [ '.f-search-' + results[r].ref ] );
+            if (r == 0) {
+                $( document ).trigger( 'filter:add', [ '.f-search-' + results[r].ref ] );
+            } else {
+                $( document ).trigger( 'filter:addOR', [ '.f-search-' + results[r].ref ] );
+            }
         }
 
         $( document ).trigger( 'filter:update' );

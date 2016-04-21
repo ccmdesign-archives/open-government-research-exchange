@@ -510,6 +510,14 @@ gulp.task('lunr', function() {
     }
   }
 
+  // add a file enumerating all of the available scopes
+  // right now this is just generatedData.categories
+  _stream = _stream.pipe(
+    gulpFile(
+      'scopes.json',
+      JSON.stringify(generatedData.categories)
+      ));
+
   return _stream.pipe(gulp.dest('source/js'));
 });
 
