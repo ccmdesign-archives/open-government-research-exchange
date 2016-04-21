@@ -12,14 +12,16 @@ intercept       = require('gulp-intercept'),
 csv2json        = require('gulp-csv2json'),
 rename          = require('gulp-rename'),
 gulpFn          = require('gulp-fn'),
+gulpFile        = require('gulp-file'),
 colors          = require('colors'),
 bs              = require('browser-sync').create(),
-bs2              = require('browser-sync').create(),
+bs2             = require('browser-sync').create(), // why is this needed?
 minimist        = require('minimist'),
 File            = require('vinyl'),
 es              = require('event-stream'),
 fs              = require('fs'),
 md5             = require('md5'),
+lunr            = require('lunr'),
 packagejson     = require('./package.json')
 ;
 
@@ -114,19 +116,38 @@ function split(s, delim) {
   return s ? s.toString().split(delim) : false;
 }
 
-//check if an item an arr2 exists in arr1
-function containsAny(arr1, arr2) {
+// return a matched set of objects containing property (prop) with value (value)
+// if prop is an array, treat it as dot syntax
+function matchObjects(arr, prop, value) {
+  var matches = [], o;
 
-  if (typeof arr2 === "string") {
-    arr2 = arr2.split();
-  } else if (arr2 === false ) {
-    return false;
+  for (var obj in arr) {
+    // default to assuming prop is not an array
+    o = arr[obj];
+    p = prop;
+
+    // if prop is an array, scope o[p] to be equivalent to the dot syntax of each element in the array
+    // e.g. o[p] == obj.prop[0].prop[1] ...
+    if (Array.isArray(prop)) {
+      var i;
+      for (i = 0; i < prop.length-1; i++) {
+        o = o[prop[i]];
+      }
+      p = prop[i];
+    }
+
+    // push anything that either is an array that contains value, or equals value to matches
+    if (o.hasOwnProperty(p)) {
+      if (Array.isArray(o[p])) {
+        o[p].indexOf(value) > -1 && matches.push(arr[obj]);
+      } else {
+        o[p] === value && matches.push(arr[obj]);
+      }
+    }
   }
-  return arr2.some(function(value) {
-    return arr1.indexOf(value) > -1;
-  });
-}
 
+  return matches;
+}
 
 // set up nunjucks environment
 function nunjucksEnv(env) {
@@ -233,6 +254,7 @@ function processJSON ( file ) {
 var generatedData = {};
 
 function compileData(dataPath, ext) {
+  dataPath = dataPath === undefined ? options.dataPath : dataPath;
   ext = ext === undefined ? options.dataExt : ext;
   var dataDir = fs.readdirSync(dataPath),
   baseName, r, _data;
@@ -535,9 +557,71 @@ gulp.task('csv2json', function() {
   .pipe(gulp.dest('source/data'))
 });
 
+
+gulp.task('lunr', function() {
+  compileData();
+
+  util.log(util.colors.magenta('****'), 'Generating search indices...', util.colors.magenta('****'));
+
+  var index = lunr(function () {
+    this.field('title', { boost: 10 });
+    this.field('abstract');
+  });
+
+  var papers = generatedData.papers;
+  papers.forEach(function(p) { index.add(p); });
+
+  var _stream = gulpFile('searchindex.json', JSON.stringify({
+    index: index.toJSON(),
+    papers: papers
+  }), { src: true });
+
+  util.log(util.colors.blue(':):)'),
+    util.colors.gray('Main Index'),
+    '(', papers.length, 'items', ')',
+    util.colors.blue('):):'));
+
+  // create a subset of papers, and corresponding search index for each category in the generated data
+  for (var c in generatedData.categories) {
+    if (generatedData.categories[c].custom_filter) {
+      var _data = matchObjects(generatedData.papers, ['taxonomy', 'category'], generatedData.categories[c].custom_filter);
+
+      util.log(util.colors.green('>>>>'),
+        generatedData.categories[c].custom_filter,
+        '(', _data.length, 'items', ')',
+        util.colors.green('>>>>'));
+
+      var _idx = lunr(function () {
+        this.field('title', { boost: 10 });
+        this.field('abstract');
+      });
+      _data.forEach(function(p) { _idx.add(p); });
+
+      _stream = _stream.pipe(
+        gulpFile(
+          'searchindex-' + slugify(generatedData.categories[c].custom_filter) + '.json',
+          JSON.stringify({
+            index: _idx.toJSON(),
+            papers: _data
+          })
+          ));
+    }
+  }
+
+  // add a file enumerating all of the available scopes
+  // right now this is just generatedData.categories
+  _stream = _stream.pipe(
+    gulpFile(
+      'scopes.json',
+      JSON.stringify(generatedData.categories)
+      ));
+
+  return _stream.pipe(gulp.dest('source/js'));
+});
+
 var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
 gulp.task('build', buildTasks, function () {
-  util.log(util.colors.magenta('****'), 'Running build tasks:', buildTasks, util.colors.magenta('****'));
+  util.log(util.colors.magenta('****'), 'Finished running build tasks:', buildTasks, util.colors.magenta('****'));
 })
 
 gulp.task('deploy', ['build'], shell.task([

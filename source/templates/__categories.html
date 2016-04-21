@@ -123,6 +123,9 @@
         {%- set _match = true -%}
       {%- endif -%}
     {%- endfor -%}
+    {%- if custom_filter == false -%}
+       {%- set _match = true -%}
+    {%- endif -%}
 
     {% if _match %}
         {{resultItem.createResult(d)}}

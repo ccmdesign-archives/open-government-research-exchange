@@ -17,6 +17,7 @@
     "gulp": "^3.9.1",
     "gulp-csv2json": "^0.2.5",
     "gulp-data": "^1.2.1",
+    "gulp-file": "^0.2.0",
     "gulp-flatten": "^0.2.0",
     "gulp-fn": "0.0.0",
     "gulp-intercept": "^0.1.0",
@@ -27,6 +28,7 @@
     "gulp-shell": "^0.5.2",
     "gulp-util": "^3.0.7",
     "gulp-yaml": "^1.0.1",
+    "lunr": "^0.7.0",
     "md5": "^2.1.0",
     "minimist": "^1.2.0",
     "vinyl": "^1.1.1"
