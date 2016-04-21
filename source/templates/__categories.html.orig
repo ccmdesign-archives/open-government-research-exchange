@@ -1,6 +1,6 @@
+{% import 'macros/result_item_macro.html' as resultItem %}
 {% extends '_base.html' %}
 
-<<<<<<< HEAD
 {%- macro getFilterOptions(field, category, isArray=false, num=1, prefix=false) -%}
   {%- set results = "" -%}
   {%- set delimiter = "!@#$%^*()" -%}
@@ -67,8 +67,6 @@
   </div>
 {%- endmacro -%}
 
-=======
->>>>>>> 8f4b09ad57083a2a9c6ccf54a0860ac0104e7985
 {% block main %}
 <div class="b-categories-page">
   <div class="b-filter-ui js-and">
@@ -94,103 +92,25 @@
 
       <h2>Filters</h2>
 
-<<<<<<< HEAD
+      <div class="row">
+        <form action="#" class="b-form">
+
+          {{ getFilterOptions("Organization", custom_filter, false, 1) }}
+          {{ getFilterOptions("Objective", custom_filter, true, 2, "taxonomy") }}
+          {{ getFilterOptions("Methodology", custom_filter, true, 3, "taxonomy") }}
+          {{ getFilterOptions("Sector", custom_filter, false, 4) }}
+          {{ getFilterOptions("Region", custom_filter, false, 5) }}
+          {{ getFilterOptions("Type", custom_filter, false, 6) }}
+
         </form>
       </div>
-=======
-      {% for name, filters in $global.filters %}
-        {% if name == custom_filter|slug %}
-          <div class="row">
-            <form action="#" class="b-form">
-              <div class="b-filter-ui-container">
-                <div class="large-2 columns">
-                  <div class="e-select">
-                    <select name="" id="" class="b-filter js-change"{% if filters.organizations | length == 0 %} disabled{% endif %}>
-                      <option data-filter="*">Organizations</option>
-                      {% for item in filters.organizations %}
-                        <option data-filter="f-{{ item | slug }}">{{ item }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="b-filter-ui-container">
-                <div class="large-2 columns">
-                  <div class="e-select">
-                    <select name="" id="" class="b-filter js-change"{% if filters.objectives | length == 0 %} disabled{% endif %}>
-                      <option data-filter="**">Objective</option>
-                      {% for item in filters.objectives %}
-                        <option data-filter="f-{{ item | slug }}">{{ item }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="b-filter-ui-container">
-                <div class="large-2 columns">
-                  <div class="e-select">
-                    <select name="" id="" class="b-filter js-change"{% if filters.methodologies | length == 0 %} disabled{% endif %}>
-                      <option data-filter="***">Methodology</option>
-                      {% for item in filters.methodologies %}
-                        <option data-filter="f-{{ item | slug }}">{{ item }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="b-filter-ui-container">
-                <div class="large-2 columns">
-                  <div class="e-select">
-                    <select name="" id="" class="b-filter js-change"{% if filters.sectors | length == 0 %} disabled{% endif %}>
-                      <option data-filter="*****">Sector</option>
-                      {% for item in filters.sectors %}
-                        <option data-filter="f-{{ item | slug }}">{{ item }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="b-filter-ui-container">
-                <div class="large-2 columns">
-                  <div class="e-select">
-                    <select name="" id="" class="b-filter js-change"{% if filters.regions | length == 0 %} disabled{% endif %}>
-                      <option data-filter="*****">Region</option>
-                      {% for item in filters.regions %}
-                        <option data-filter="f-{{ item | slug }}">{{ item }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="b-filter-ui-container">
-                <div class="large-2 columns">
-                  <div class="e-select">
-                    <select name="" id="" class="b-filter js-change"{% if filters.types | length == 0 %} disabled{% endif %}>
-                      <option data-filter="******">Type</option>
-                      {% for item in filters.types %}
-                        <option data-filter="f-{{ item | slug }}">{{ item }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        {% endif %}
-      {% endfor %}
->>>>>>> 8f4b09ad57083a2a9c6ccf54a0860ac0104e7985
     </div>
   </div>
 
   <div class="b-page-section b-results-section b-isotope">
     {% for d in $global.papers %}
-
 <<<<<<< HEAD
+
     {%- set _match = false -%}
     {%- for i in d.taxonomy.category -%}
       {%- if i == custom_filter -%}
@@ -207,67 +127,10 @@
     {% endif %}
 
     {% endfor %}
->>>>>>> 8f4b09ad57083a2a9c6ccf54a0860ac0104e7985
+>>>>>>> ada24ac797ea4c091921dc322501739754496032
 
     {% if _match %}
-    <div class="b-result-item m-access-{{d.access | slug}} f-{{d.organization | slug}} f-{{d.taxonomy.objective | slug}} f-{{d.access | slug}} f-{{d.taxonomy.methodology | slug}} f-{{d.sector | slug}} f-{{d.sector | slug}} f-{{d.region | slug}} f-{{d.sector | slug}} f-{{d.type | slug}} {% for c in d.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
-
-
-      <a href="{{d.id}}-{{d.title | slug}}.html" title="{{d.title}}">
-        {# {% if d.cover_image %}
-        <div class="e-result-image" style="background-image: url('{{d.cover_image}}')"></div>
-        {% endif %} #}
-
-
-
-        <h3 class="e-result-name">{{d.title}}</h3>
-
-        {% if d.authors %}
-        <p class="e-result-authors">
-          {% for author in d.authors %}
-            {{ author }}{% if not loop.last %},{% endif %}
-          {% endfor %}
-        </p>
-        {% endif %}
-
-
-        <!-- These IF statements are not really working.  -->
-
-        {% if d.taxonomy.category %}
-        <div class="e-result-taxonomy m-category">
-          <p>Category</p>
-          {% for cat in d.taxonomy.category %} <span class="m-{{cat}}">{{cat}}</span> {% endfor %}
-        </div>
-        {% endif %}
-
-        {% if d.taxonomy.methodology %}
-        <div class="e-result-taxonomy m-methodology">
-          <p>Methodology</p>
-          {% for met in d.taxonomy.methodology %} <span>{{met}}</span> {% endfor %}
-        </div>
-        {% endif %}
-
-        {% if d.taxonomy.objective %}
-        <div class="e-result-taxonomy m-objective">
-          <p>Objective</p>
-          {% for obj in d.taxonomy.objective %} <span>{{obj}}</span> {% endfor %}</div>
-        {% endif %}
-
-          <div class="e-result-extras m-{{d.organization | slug }}">
-            {% if d.organization == "the-govlab" %}
-              <img class="e-organization-logo" src="img/organizations/govlab-logo-white.png" alt="The GovLab">
-            {% elif d.organization == "mysociety" %}
-              <img class="e-organization-logo" src="img/organizations/mysociety-logo-white.png" alt="mySociety">
-            {% elif d.organization == "world-bank-digital-engagement-evaluation-team" %}
-              <img class="e-organization-logo" src="img/organizations/deet-logo-white.png" alt="Digital Engagement Evaluation Team">
-            {% endif %}
-
-            {% if d.github %} <img class="e-github-logo" src="img/github-logo.svg" alt=""> {% endif %}
-            {% if d.datasets %} <i class="material-icons" title="Datasets">file_download</i>{% endif %}
-            {% if d.access == "Closed" %} <i class="material-icons m-closed-access" title="Closed Access">lock_outline</i>{% endif %}
-          </div>
-        </a>
-      </div>
+        {{resultItem.createResult(d)}}
       {% endif %}
       {% endfor %}
     </div>
