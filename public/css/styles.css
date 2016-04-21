@@ -7562,3 +7562,6 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 
 .b-main-search-section {
   background-color: #00405b; }
+
+.ogr-paragraph:hover {
+  color: #197d32; }
