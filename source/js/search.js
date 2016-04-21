@@ -35,19 +35,39 @@ $(function() {
     });
 
     var search = function (e) {
-        // $( '.b-lunr-results' ).text( JSON.stringify(index.search($('#lunr-search').val())) );
-
-        var mapping = mapResults(index.search($('#lunr-search').val()), papers, 'ref', 'id'), resultsHTML = '';
+        var mapping = mapResults(index.search($(this).val()), papers, 'ref', 'id'), resultsHTML = '';
 
         for (var m in mapping) {
-            resultsHTML += '\n<h3>' + mapping[m].title + '</h3>\n<p>' + mapping[m].abstract.substring(0, 250) + '... </p>';
+            resultsHTML += '<div class="b-search-result">\n<h3>' + mapping[m].title + '</h3>\n<p></div>' + mapping[m].abstract.substring(0, 250) + '... </p>';
         }
 
         $( '.b-lunr-results' ).html(resultsHTML);
     };
 
-    var debouncedSearch = _.debounce(search, 100, false)
+    var filter = function (e) {
+        $( '.b-lunr-results' ).text( JSON.stringify(index.search($('#lunr-search').val())) );
+
+        var results = index.search($(this).val()),
+        limit = 50;
+
+        if (results.length > limit) {
+            results = results.slice(0, limit);
+        }
+
+        $( document ).trigger( 'filter:removeClassesContaining', [ 'f-search-' ] );
+
+        for (var r in results) {
+            $( document ).trigger( 'filter:add', [ '.f-search-' + results[r].ref ] );
+        }
+
+        $( document ).trigger( 'filter:update' );
+
+    }
+
+    var debouncedSearch = _.debounce(search, 100, false);
+    var debouncedFilter = _.debounce(filter, 1000, false);
 
     $('#lunr-search').keyup(debouncedSearch);
+    $('#lunr-filter').keyup(debouncedFilter);
 
 });

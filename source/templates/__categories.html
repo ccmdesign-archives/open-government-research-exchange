@@ -26,8 +26,12 @@
     <div class="b-divider b-filter-panel m-black">
       <h2>Filters</h2>
 
-      <div class="row">
-        <form action="#" class="b-form">
+      <form action="#" class="b-form">
+        <div class="row">
+
+          <input id="lunr-filter" type="text" placeholder="Search" />
+
+        <div class="row">
 
           {{ $macros.getFilterOptions($global.papers, "Organization", custom_filter, false, 1) }}
           {{ $macros.getFilterOptions($global.papers, "Objective", custom_filter, true, 2, "taxonomy") }}
@@ -36,8 +40,8 @@
           {{ $macros.getFilterOptions($global.papers, "Region", custom_filter, false, 5) }}
           {{ $macros.getFilterOptions($global.papers, "Type", custom_filter, false, 6) }}
 
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 
