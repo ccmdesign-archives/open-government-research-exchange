@@ -136,8 +136,6 @@ function matchObjects(arr, prop, value) {
       p = prop[i];
     }
 
-    // console.log (p, o[p]);
-
     // push anything that either is an array that contains value, or equals value to matches
     if (o.hasOwnProperty(p)) {
       if (Array.isArray(o[p])) {
@@ -147,7 +145,6 @@ function matchObjects(arr, prop, value) {
       }
     }
   }
-  console.log (JSON.stringify(matches));
 
   return matches;
 }
@@ -472,21 +469,35 @@ gulp.task('lunr', function() {
   });
 
   var papers = generatedData.papers;
-  papers.forEach(function(p) {
-    var path = slugify(p.id) + '-' + slugify(p.title) + options.ext;
-    if (!p.hasOwnProperty('path')) {
-      p.path = path
-    }
-    index.add(p);
-  });
+  papers.forEach(function(p) { index.add(p); });
 
-  matchObjects(generatedData.papers, ['taxonomy', 'category'], 'Behavioral Science and Nudges');
 
-  return gulpFile('searchindex.json', JSON.stringify({
+
+  var _stream = gulpFile('searchindex.json', JSON.stringify({
     index: index.toJSON(),
     papers: papers
-  }), { src: true })
-  .pipe(gulp.dest('source/js'));
+  }), { src: true });
+
+  // create a subset of papers, and corresponding search index for each category in the generated data
+  for (var c in generatedData.categories) {
+    var _data = matchObjects(generatedData.papers, ['taxonomy', 'category'], generatedData.categories[c].title);
+    var _idx = lunr(function () {
+      this.field('title', { boost: 10 });
+      this.field('abstract');
+    });
+    _data.forEach(function(p) { _idx.add(p); });
+
+    _stream = _stream.pipe(
+      gulpFile(
+        'searchindex-' + slugify(generatedData.categories[c].title) + '.json',
+        JSON.stringify({
+          index: _idx.toJSON(),
+          papers: _data
+        })
+        ));
+  }
+
+  return _stream.pipe(gulp.dest('source/js'));
 });
 
 var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
