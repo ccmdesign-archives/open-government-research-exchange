@@ -3,5 +3,5 @@ node_modules/
 source/templates/categories/
 source/templates/organizations/
 source/templates/papers/
-source/templates/authors/
+source/templates/custom-authors/
 public/
