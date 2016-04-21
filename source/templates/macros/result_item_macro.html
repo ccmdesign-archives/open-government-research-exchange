@@ -1,14 +1,14 @@
 {% macro createResult(paper) %}
 
-<div class="b-result-item m-access-{{paper.access | slug}} f-{{paper.organization | slug}} f-{{paper.taxonomy.objective | slug}} f-{{paper.access | slug}} f-{{paper.taxonomy.methodology | slug}} f-{{paper.sector | slug}} f-{{paper.sector | slug}} f-{{paper.region | slug}} f-{{paper.sector | slug}} f-{{paper.type | slug}} {% for c in paper.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
+<div class="b-result-item m-access-{{paper.access | slug}} f-{{paper.organization | slug}} f-{{paper.taxonomy.objective | slug}} f-{{paper.access | slug}} f-{{paper.taxonomy.methodology | slug}} f-{{paper.sector | slug}} f-{{paper.sector | slug}} f-{{paper.region | slug}} f-{{paper.sector | slug}} f-{{paper.type | slug}} f-search-{{paper.id}}{% for c in paper.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
 
-    
+
       <a href="{{paper.id}}-{{paper.title | slug}}.html" title="{{paper.title}}">
         {# {% if paper.cover_image %}
         <div class="e-result-image" style="background-image: url('{{paper.cover_image}}')"></div>
         {% endif %} #}
 
-        
+
 
         <h3 class="e-result-name">{{paper.title}}</h3>
 
@@ -20,7 +20,7 @@
         </p>
         {% endif %}
 
-        
+
         <!-- These IF statements are not really working.  -->
 
         {% if paper.taxonomy.category %}

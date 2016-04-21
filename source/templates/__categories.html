@@ -24,6 +24,8 @@
     </div>
     <div class="b-divider b-filter-panel m-black">
 
+      <input id="lunr-filter" type="text" placeholder="Search" data-category="{{custom_filter | slug }}" />
+
       <h2>Filters</h2>
 
       {% for name, filters in $global.filters %}
