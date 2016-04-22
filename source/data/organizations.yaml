@@ -15,7 +15,7 @@
   image_white: mysociety-logo-white.png # Logo image (white version)
   short_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
   long_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
-  custom_filter: false # To be used as a custom filter
+  #custom_filter: # To be used as a custom filter
   color: 333333 # Hash value to be applied to the top section
   social_media: # Links
     github: false
@@ -27,7 +27,7 @@
   image_white: govlab-logo-white.png # Logo image (white version)
   short_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
   long_description: All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.
-  custom_filter: false # To be used as a custom filter
+  #custom_filter: # To be used as a custom filter
   color: 523080 # Hash value to be applied to the top section
   social_media: # Links
     github: false
