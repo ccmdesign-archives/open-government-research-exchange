@@ -255,7 +255,10 @@ function nunjucksEnv(env) {
 // a subroutine to simplify processJson
 function populateChildren(out, content, val, index) {
   if ('children' in val) {
-    var _s = content.split(val.delimiter);
+    // convert boolean false to '' and anything else to a string
+    content === false && (content = '');
+    typeof content !== 'string' && (content = String(content));
+      var _s = content.split(val.delimiter);
     if ('parent' in val) {
       out[index][val.parent][val.value] = val.children[0] === '*' ? [] : {};
     } else {
