@@ -1,5 +1,5 @@
 $(function() {
-    var index, papers, scopes, scopedIndices = {};
+    var index, papers, scopes, scopedIndices = {}, resultSnippet;
 
     var slug = function (t) {
         return t ? t.toString().toLowerCase()
@@ -31,10 +31,8 @@ $(function() {
     };
 
     var getx = function (arr, prop, needle) {
-        console.log (prop, needle);
         for (var i in arr) {
             if (arr[i][prop] === needle) {
-                console.log(arr[i]);
                 return arr[i];
             }
         }
@@ -43,7 +41,6 @@ $(function() {
     var mapResults = function (fromHaystack, toHaystack, mapFrom, mapTo) {
         var results = [];
         for (var i in fromHaystack) {
-            console.log (fromHaystack, mapFrom, fromHaystack[i][mapFrom]);
             results.push(getx(toHaystack, mapTo, fromHaystack[i][mapFrom]));
         }
         return results;
@@ -55,16 +52,24 @@ $(function() {
         index = lunr.Index.load(d.index);
         papers = d.papers;
 
-        // after loading the index, grab the search string, if present
-        // and inject into the search field and run the search
-        var s = getSearch('s').replace('+', ' ');
-        if (s) {
-            $('#lunr-search').val(s);
-            $('#lunr-search').trigger('search:execute');
-        }
+        $.get( '_rendered_result_item.html', function( d ) {
+            resultSnippet = d;
+
+            // after loading the index, grab the search string, if present
+            // and inject into the search field and run the search
+            var s = getSearch('s').replace('+', ' ');
+            if (s) {
+                $('#lunr-search').val(s);
+                $('#lunr-search').trigger('search:execute');
+            }
+        })
+        .fail(function() {
+            console.log ( 'Could not get _rendered_result_item.html!' );
+        });
+
     })
     .fail(function() {
-        $( '.b-lunr-results' ).text( 'Could not get searchindex.json' );
+        console.log ( 'Could not get searchindex.json!' );
     });
 
     $.get( 'js/scopes.json', function( d ) {
@@ -76,7 +81,7 @@ $(function() {
         }
     })
     .fail(function() {
-        console.log ('couldnt get available scopes!');
+        console.log ('Could not get available scopes!');
     });
 
     var getIndex = function (name) {
@@ -84,7 +89,7 @@ $(function() {
             scopedIndices[name] = lunr.Index.load(d.index);
         })
         .fail(function() {
-            console.log('couldnt $.get scoped index : ' + name);
+            console.log('Could not $.get scoped index : ' + name);
         });
     }
 
@@ -93,13 +98,24 @@ $(function() {
     var search = function (e) {
         var mapping = mapResults(index.search($(this).val()), papers, 'ref', 'id'), resultsHTML = '';
 
+
+
         for (var m in mapping) {
-            resultsHTML +=
-            '<div class="b-search-result">\n<h3>'
-            + mapping[m].title
-            + '</h3>\n<p></div>'
-            + mapping[m].abstract.substring(0, 250)
-            + '... </p>';
+            // inject the result snippet with the mapped data
+            var $snippet = $(resultSnippet);
+            $snippet.find('.e-result-name').text(mapping[m].title);
+            $snippet.find('.e-result-authors').text(mapping[m].authors);
+
+            console.log ($snippet.prop('outerHTML'));
+
+            resultsHTML += $snippet.prop('outerHTML');
+
+            // '<div class="b-search-result">\n<h3>'
+            // + mapping[m].title
+            // + '</h3>\n<p></div>'
+            // + mapping[m].abstract.substring(0, 250)
+            // + '... </p>'
+
         }
 
         $( '.b-lunr-results' ).html(resultsHTML);
