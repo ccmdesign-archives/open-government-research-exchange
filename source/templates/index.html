@@ -46,7 +46,7 @@
     {% for organization in organizations %}
       <div class="medium-4 column">
         <div class="e-organization-logo m-{{ organization.title | slug }}">
-          <a href="{{ organization.id }}-{{ organization.title | slug }}.html"><img src="img/organizations/{{ organization.image }}" alt="{{ organization.title }}"></a>
+          <a href="{{ organization.id }}-{{ organization.title | slug }}.html"><img src="./img/organizations/{{ organization.image }}" alt="{{ organization.title }}"></a>
         </div>
       </div>
     {% endfor %}
