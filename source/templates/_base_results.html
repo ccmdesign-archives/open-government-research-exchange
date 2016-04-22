@@ -16,11 +16,11 @@
       <div class="row">
         <div class="column large-12">
         {% for paper in $global.papers %}
-          {% if paper.type == value %}
-      
+          {% if paper[propertyName] == value %}
+
           {{resultItem.createResult(paper)}}
-            
-          
+
+
         {% endif %}
 
         {# {% if title in paper.authors %}
