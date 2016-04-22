@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gulp Static Boilerplate</title>
+    <title>Open Government Research Exchange</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
     <!-- Pulls our Typekit Fonts -->
@@ -33,11 +33,10 @@
 
     <div class="e-nav-group m-right e-social-media">
         <!-- Still questioning the relevance of this -->
-        <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank">Twitter</a>
-        <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item">Youtube</i></a>
+        <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><img src="./img/twitter-logo.png" alt=""></a>
     </div>
 
-    <a class="e-logo" href="./"><img src="./img/govlab-logo-white.png" alt=""></a>
+    <a class="e-logo" href="./">Open Government Research Exchange</a>
 
 </header>
 
@@ -46,10 +45,14 @@
         <a href="./">Home</a>
         <a href="paper-template.html">Paper Template</a>
         <a href="search.html">Search Page</a>
-        <a href="base-results.html">Results Page</a>
+        <a href="b1c94ca2fbc3e78fc30069c8d0f01680-all">Results Page</a>
+        <a href="list.html">List Page</a>
+        {% for a in authors %}
+            <a href="{{ a.id }}-{{ a.title | slug }}.html">{{ a.title }}</a>
+        {% endfor %}
     </nav>
 
-    <main role="main">
+    <main role="main" class="b-main">
         {% block main %}{% endblock %}
     </main>
 
@@ -86,6 +89,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
 <script src="js/lib/scripts.js"></script>
 <script src="js/filters.js"></script>
+<script src="js/lunr.js"></script>
+<script src="js/search.js"></script>
+<script src="js/underscore.js"></script>
 
 </body>
 </html>

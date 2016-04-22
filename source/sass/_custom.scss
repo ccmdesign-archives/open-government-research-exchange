@@ -2,22 +2,70 @@
 // place site specific sass into individual files like this one as needed for the design,
 // and @import in styles.scss
 
-.b-filter-ui {
-    .b-button.m-active {
-        background-color: $white-30;
-    }
-    .e-select {
-        padding: 0;
-        background-color: rgba(0, 0, 0, 0.1);
-        select, &::before {
-            color: $white;
-        }
-        select {
-            z-index: 2;
-        }
-        &::before {
-            z-index: 1;
-            pointer-events: none;
-        }
-    }
+
+body {
+  
+  
 }
+
+.b-search-page {
+  
+}
+
+.access-switch .switch { text-align: center; }
+
+
+
+.b-top-section {
+  background-color: $main-color;
+  margin-top: -66px;
+  padding-top: 136px;
+
+  &.m-standalone {
+    padding-bottom: 80px;
+  }
+}
+
+.b-top-nav {
+  background-color: rgba($black, .2);
+
+  .e-social-media img { width: 20px; } // Custom icon for twitter (maybe push this to styleguide)
+  
+  .e-logo { 
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px;
+
+    &:hover { text-decoration: none; }
+  }
+}
+
+.b-browsing-ways {
+  text-align: center;
+  padding-top: 30px;
+
+  .e-way {
+    color: $white;
+  }
+}
+
+.b-main-search-section {
+  background-color: darken($main-color, 4);
+}
+
+.b-all-categories-list {
+  padding: 0;
+
+  .e-list-item {
+    padding: 40px 0;
+    text-align: center;
+    &:nth-child(even) { background-color: rgba($black, .03); }
+  }
+}
+
+
+
+
+

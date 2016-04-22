@@ -1,73 +1,48 @@
 {% extends '_base.html' %}
 {% block main %}
 <!-- main content starts here -->
-<div class="b-top-section m-purple">
+<div class="b-top-section">
   <div class="row expanded">
     <div class="small-10 column small-centered">
-      <h1>Open Governance Research Exchange</h1>
+      <h1>Open Governance <br>Research Exchange</h1>
       <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis odio commodi nostrum! Fuga nulla obcaecati, cum ut optio iste possimus! Illo pariatur tempora quis esse sunt assumenda quo, doloribus nam?</h3>
     </div>
   </div>
 </div>
-<div class="b-page-section m-teal b-main-search-section">
+<div class="b-page-section b-main-search-section">
     <div class="row">
       <div class="large-12 column">
         <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
-      </div>  
+      </div>
     </div>
-    
+
     <div class="row">
         <div class="small-10 large-8 small-centered columns">
             <div class="row">
-                <form class="b-search m-main-search m-negative" action="">
+                {# <form class="b-search m-main-search m-negative" action="">
                     <input class="" type="text"><!--
                  --><input class="e-search-trigger material-icons" type="submit" value="search">
+                </form> #}
+                <form class="b-form">
+                    <input id="lunr-search" type="text" placeholder="Search" />
                 </form>
+
+    <h2>Results</h2>
+    <div class="b-lunr-results"></div>
+            </div>
+            <div class="row b-browsing-ways">
+              <div class="large-12 column">
+                <a href="#categories" class="b-button e-way">Browse by Category</a>
+                <a href="#organizations" class="b-button e-way">Browse by Organization</a>
+                <a href="all-categories.html" class="b-button e-way">All Categories</a>
+              </div>
             </div>
         </div>
     </div>
 
 </div>
 
-<div class="b-divider">
-  <div class="row expanded m-black">
-    <h1>Browse by Category</h1>
-  </div>
-</div>
-
-<div class="b-page-section b-main-categories">
-  
-  <div class="row expanded">
-    <div class="medium-3 column m-behavioral-research">
-      <div class="e-category-item">Behavioral Research</div>
-    </div>
-    <div class="medium-3 column m-citizen-engagement">
-      <div class="e-category-item">Citizen Engagement</div>
-    </div>
-    <div class="medium-3 column m-civic-technology">
-      <div class="e-category-item">Civic Technology</div>
-    </div>
-    <div class="medium-3 column m-data-analysis">
-      <div class="e-category-item">Data Analysis</div>
-    </div>
-  </div>
-  <div class="row expanded">
-    <div class="medium-3 column m-expert-networking">
-      <div class="e-category-item">Expert Networking</div>
-    </div>
-    <div class="medium-3 column m-open-data">
-      <div class="e-category-item">Open Data</div>
-    </div>
-    <div class="medium-3 column m-labs-and-experimentation">
-      <div class="e-category-item">Labs and Experimentation</div>
-    </div>
-    <div class="medium-3 show-for-medium column">
-      <div class="e-category-item m-disabled"></div>
-    </div>
-  </div>
-</div>
-
-<div class="b-divider">
+<div id="organizations" class="b-divider">
   <div class="row expanded m-black">
     <h1>Browse by Organization</h1>
   </div>
@@ -75,25 +50,56 @@
 
 <div class="b-page-section b-organizations">
   <div class="row expanded">
-    <div class="medium-4 column">
-      <div class="e-organization-logo">
-        <img src="img/organizations/deet-logo.png" alt="">
+    {% for organization in organizations %}
+      <div class="medium-4 column">
+        <div class="e-organization-logo m-{{ organization.title | slug }}">
+          <a href="{{ organization.id }}-{{ organization.title | slug }}.html"><img src="img/organizations/{{ organization.image }}" alt="{{ organization.title }}"></a>
+        </div>
       </div>
-    </div>
-
-    <div class="medium-4 column">
-      <div class="e-organization-logo">
-        <img src="img/organizations/govlab-logo.png" alt="">
-      </div>
-    </div>
-
-    <div class="medium-4 column">
-      <div class="e-organization-logo">
-        <img src="img/organizations/mysociety-logo.png" alt="">
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
+
+<div id="categories" class="b-divider">
+  <div class="row expanded">
+    <h1>Browse by Category</h1>
+  </div>
+</div>
+
+<div class="b-page-section b-main-categories">
+
+    <div class="row expanded">
+      <div class="medium-3 show-for-medium column m-all">
+        <a class="e-category-item" href="{{categories[0].id}}-{{categories[0].title | slug}}.html">All</a>
+      </div>
+      <div class="medium-3 column m-{{categories[1].title | slug}}">
+        <a class="e-category-item" href="{{categories[1].id}}-{{categories[1].title | slug}}.html">{{categories[1].title}}</a>
+      </div>
+      <div class="medium-3 column m-{{categories[3].title | slug}}">
+        <a class="e-category-item" href="{{categories[3].id}}-{{categories[3].title | slug}}.html">{{categories[3].title}}</a>
+      </div>
+      <div class="medium-3 column m-{{categories[2].title | slug}}">
+        <a class="e-category-item" href="{{categories[2].id}}-{{categories[2].title | slug}}.html">{{categories[2].title}}</a>
+      </div>
+    </div>
+    <div class="row expanded">
+      <div class="medium-3 column m-{{categories[4].title | slug}}">
+        <a class="e-category-item" href="{{categories[4].id}}-{{categories[4].title | slug}}.html">{{categories[4].title}}</a>
+      </div>
+      <div class="medium-3 column m-{{categories[5].title | slug}}">
+        <a class="e-category-item" href="{{categories[5].id}}-{{categories[5].title | slug}}.html">{{categories[5].title}}</a>
+      </div>
+      <div class="medium-3 column m-{{categories[6].title | slug}}">
+        <a class="e-category-item" href="{{categories[6].id}}-{{categories[6].title | slug}}.html">{{categories[6].title}}</a>
+      </div>
+      <div class="medium-3 column m-{{categories[7].title | slug}}">
+        <a class="e-category-item" href="{{categories[7].id}}-{{categories[7].title | slug}}.html">{{categories[7].title}}</a>
+      </div>
+
+    </div>
+  </div>
+
+
 
 <!-- <div class="b-page-section">
   <div class="row">

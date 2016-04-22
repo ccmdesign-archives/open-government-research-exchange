@@ -1,4 +1,7 @@
 @charset "UTF-8";
+#overlay {
+  background-color: transparent !important; }
+
 /* Importing Foundation Stuff */
 /* Breakpoint */
 /* Importing our custom foundation imports list */
@@ -7131,10 +7134,18 @@ code.m-negative {
 .b-search.m-main-search input[type="text"]:focus ~ input[type="submit"] {
   background-color: rgba(51, 51, 51, 0.4); }
 
-.b-main-search-section .e-tagline {
-  text-align: center;
-  padding: 0 0 40px;
-  font-size: 16px; }
+.b-main-search-section {
+  background-color: rgba(51, 51, 51, 0.2); }
+  .b-main-search-section .e-tagline {
+    text-align: center;
+    padding: 0 0 40px;
+    color: white;
+    font-size: 16px; }
+
+.b-organizations {
+  background-color: white; }
+  .b-organizations .m-digital-engagement-evaluation-team {
+    max-width: 330px !important; }
 
 /***************
      Switch
@@ -7203,29 +7214,60 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 .b-main-categories {
   padding: 0; }
   .b-main-categories .e-category-item {
-    padding: 45% 0;
+    padding: 25% 0;
     text-align: center;
     font-size: 22px;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    color: white;
+    display: block;
+    cursor: pointer; }
+    .b-main-categories .e-category-item:hover {
+      text-decoration: none; }
+  .b-main-categories .m-all {
+    background-color: #3b4f65; }
   .b-main-categories .m-behavioral-research {
-    background-color: #96c8ff; }
+    background-color: #de606c; }
   .b-main-categories .m-citizen-engagement {
-    background-color: #ffc8ff; }
+    background-color: #5fa9d4; }
   .b-main-categories .m-civic-technology {
-    background-color: #ffff64; }
+    background-color: #a67fb9; }
   .b-main-categories .m-data-analysis {
-    background-color: #ff6400; }
+    background-color: #f3b44b; }
   .b-main-categories .m-expert-networking {
-    background-color: #ff009b; }
+    background-color: #6e7b97; }
   .b-main-categories .m-open-data {
-    background-color: #00c300; }
+    background-color: #00ad98; }
   .b-main-categories .m-labs-and-experimentation {
-    background-color: #379bc8; }
+    background-color: #dbc048; }
 
 .b-organizations .e-organization-logo {
   padding: 60px 20px;
   max-width: 260px;
   margin: 0 auto; }
+
+.b-top-section.m-all {
+  background-color: #3b4f65; }
+
+.b-top-section.m-behavioral-research {
+  background-color: #de606c; }
+
+.b-top-section.m-citizen-engagement {
+  background-color: #5fa9d4; }
+
+.b-top-section.m-civic-technology {
+  background-color: #a67fb9; }
+
+.b-top-section.m-data-analysis {
+  background-color: #f3b44b; }
+
+.b-top-section.m-expert-networking {
+  background-color: #6e7b97; }
+
+.b-top-section.m-open-data {
+  background-color: #00ad98; }
+
+.b-top-section.m-labs-and-experimentation {
+  background-color: #dbc048; }
 
 .b-results-section {
   padding: 0; }
@@ -7265,11 +7307,11 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
         position: relative;
         z-index: 10; }
         .b-result-item:hover:nth-of-type(3n + 1):hover {
-          transform: scale(1.3) translate(11%); }
+          transform: scale(1.1) translate(4.5%); }
         .b-result-item:hover:nth-of-type(3n + 2):hover {
-          transform: scale(1.3); }
+          transform: scale(1.1); }
         .b-result-item:hover:nth-of-type(3n):hover {
-          transform: scale(1.3) translate(-11%); } }
+          transform: scale(1.1) translate(-4.5%); } }
   .b-result-item:after {
     content: "";
     width: 0;
@@ -7294,6 +7336,8 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     padding: 3px 8px;
     background-color: rgba(51, 51, 51, 0.1);
     margin-bottom: 3px; }
+    .b-result-item .e-result-taxonomy span:empty {
+      display: none; }
   .b-result-item .e-result-authors {
     font-size: .9rem; }
   .b-result-item .e-result-extras {
@@ -7303,7 +7347,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     bottom: 0;
     width: 100%;
     right: 0; }
-    .b-result-item .e-result-extras img {
+    .b-result-item .e-result-extras .e-github-logo {
       width: 24px;
       opacity: .2;
       margin: 0 5px; }
@@ -7314,18 +7358,48 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
       vertical-align: bottom;
       margin: 0 5px -2px; }
 
-.b-result-item.m-access-false .e-result-extras {
-  background-color: #c30014;
-  padding-top: 15px; }
-  .b-result-item.m-access-false .e-result-extras:before {
-    content: "restricted access";
-    float: left;
-    text-transform: uppercase;
-    font-weight: bold;
+.b-result-item .e-result-extras.m-the-govlab {
+  background-color: #523080; }
+  .b-result-item .e-result-extras.m-the-govlab i {
     color: white; }
+
+.b-result-item .e-result-extras.m-mysociety {
+  background-color: rgba(51, 51, 51, 0.8); }
+  .b-result-item .e-result-extras.m-mysociety i {
+    color: white; }
+
+.b-result-item .e-result-extras.m-world-bank-digital-engagement-evaluation-team {
+  background-color: #008ab3; }
+  .b-result-item .e-result-extras.m-world-bank-digital-engagement-evaluation-team i {
+    color: white; }
+  .b-result-item .e-result-extras.m-world-bank-digital-engagement-evaluation-team .e-organization-logo {
+    float: left;
+    max-height: 34px; }
+
+.b-result-item .e-result-extras .m-closed-access {
+  color: #c30014;
+  opacity: 1; }
+
+.b-result-item .e-result-extras .e-organization-logo {
+  float: left;
+  max-height: 26px; }
 
 .b-filter-panel {
   text-align: center; }
+
+.b-filter-ui .b-button.m-active, .b-filter-ui .b-form input.m-active[type="submit"], .b-form .b-filter-ui input.m-active[type="submit"] {
+  background-color: rgba(255, 255, 255, 0.3); }
+
+.b-filter-ui .e-select {
+  padding: 0;
+  background-color: rgba(51, 51, 51, 0.1); }
+  .b-filter-ui .e-select select, .b-filter-ui .e-select::before {
+    color: white; }
+  .b-filter-ui .e-select select {
+    z-index: 2; }
+  .b-filter-ui .e-select::before {
+    z-index: 1;
+    pointer-events: none; }
 
 .b-paper-page .e-organization-logo {
   max-width: 360px;
@@ -7362,7 +7436,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   margin: 0 auto;
   position: relative;
   bottom: -55px;
-  background-color: #523080;
+  background-color: #ee5b43;
   box-shadow: 0 0 6px rgba(51, 51, 51, 0.2); }
 
 .b-paper-page .e-description-title {
@@ -7382,19 +7456,120 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   display: block;
   padding: 8px 0; }
 
+.b-paper-page.m-the-govlab .b-top-section {
+  background-color: #523080; }
+
+.b-paper-page.m-the-govlab .e-download {
+  background-color: #3f2562; }
+
+.b-paper-page.m-mysociety .b-top-section {
+  background-color: #333; }
+
+.b-paper-page.m-world-bank-digital-engagement-evaluation-team .b-top-section {
+  background-color: #008ab3; }
+
+.b-social-media-icon {
+  width: 28px;
+  display: inline-block;
+  margin: 10px; }
+  .b-social-media-icon.m-github {
+    fill: white; }
+
+.b-author-page .b-top-section,
+.b-organization-page .b-top-section {
+  padding-bottom: 0; }
+  .b-author-page .b-top-section .e-image-column,
+  .b-organization-page .b-top-section .e-image-column {
+    text-align: center; }
+  .b-author-page .b-top-section .e-org-logo,
+  .b-organization-page .b-top-section .e-org-logo {
+    max-width: 80%;
+    padding: 10%; }
+  .b-author-page .b-top-section .e-description,
+  .b-organization-page .b-top-section .e-description {
+    text-align: left; }
+  .b-author-page .b-top-section .e-name,
+  .b-organization-page .b-top-section .e-name {
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 400; }
+  .b-author-page .b-top-section .e-extras,
+  .b-organization-page .b-top-section .e-extras {
+    padding-top: 30px;
+    text-align: center; }
+
+.b-author-page .e-author-picture {
+  width: 300px;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 150px;
+  margin: 0 auto 30px; }
+
+.b-author-page .e-name.e-name.e-name {
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 0; }
+
+.b-author-page .e-job {
+  text-align: left;
+  text-transform: none;
+  font-size: 1.5rem;
+  margin-bottom: 30px; }
+
+.b-extra-info-panel {
+  padding: 50px 0;
+  margin-top: 30px;
+  padding: 0;
+  max-height: 0;
+  overflow: auto;
+  background-color: rgba(51, 51, 51, 0.2);
+  transition: max-height 0.5s ease, padding 0.5s ease; }
+  .b-extra-info-panel.visible {
+    max-height: 350px;
+    padding: 50px 0; }
+  .b-extra-info-panel h2 {
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.3rem; }
+
 .access-switch .switch {
   text-align: center; }
 
-.b-filter-ui .b-button.m-active, .b-filter-ui .b-form input.m-active[type="submit"], .b-form .b-filter-ui input.m-active[type="submit"] {
-  background-color: rgba(255, 255, 255, 0.3); }
+.b-top-section {
+  background-color: #004f6f;
+  margin-top: -66px;
+  padding-top: 136px; }
+  .b-top-section.m-standalone {
+    padding-bottom: 80px; }
 
-.b-filter-ui .e-select {
-  padding: 0;
-  background-color: rgba(0, 0, 0, 0.1); }
-  .b-filter-ui .e-select select, .b-filter-ui .e-select::before {
+.b-top-nav {
+  background-color: rgba(51, 51, 51, 0.2); }
+  .b-top-nav .e-social-media img {
+    width: 20px; }
+  .b-top-nav .e-logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px; }
+    .b-top-nav .e-logo:hover {
+      text-decoration: none; }
+
+.b-browsing-ways {
+  text-align: center;
+  padding-top: 30px; }
+  .b-browsing-ways .e-way {
     color: white; }
-  .b-filter-ui .e-select select {
-    z-index: 2; }
-  .b-filter-ui .e-select::before {
-    z-index: 1;
-    pointer-events: none; }
+
+.b-main-search-section {
+  background-color: #00405b; }
+
+.b-all-categories-list {
+  padding: 0; }
+  .b-all-categories-list .e-list-item {
+    padding: 40px 0;
+    text-align: center; }
+    .b-all-categories-list .e-list-item:nth-child(even) {
+      background-color: rgba(51, 51, 51, 0.03); }

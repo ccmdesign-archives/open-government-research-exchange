@@ -300,6 +300,51 @@ $(function() {
         });
     };
 
+
+    // event listeners for manipulating the filter string via custom events
+    $( document ).on( "filter:add", {
+        foo: "bar"
+    }, function( e, filter ) {
+        var filterString = getSearch(searchKey);
+        filterString = filterString ? filterString : '';
+        filterString += filter;
+        setSearch(searchKey, filterString);
+    });
+
+    $( document ).on( "filter:addOR", {
+        foo: "bar"
+    }, function( e, filter ) {
+        var filterString = getSearch(searchKey);
+        filterString = filterString ? filterString : '';
+        filterString += ',' + filter;
+        setSearch(searchKey, filterString);
+    });
+
+    $( document ).on( "filter:remove", {
+        foo: "bar"
+    }, function( e, filter ) {
+        var filterString = getSearch(searchKey);
+        filterString = filterString ? filterString : '';
+        filterString.replace(filter, '');
+        setSearch(searchKey, filterString);
+    });
+
+    $( document ).on( "filter:removeClassesContaining", {
+        foo: "bar"
+    }, function( e, needle ) {
+        var filterString = getSearch(searchKey);
+        filterString = filterString ? filterString : '';
+        filterString = filterString.replace(new RegExp(',?\..*' + needle + '[^.]*', 'g'), '');
+        setSearch(searchKey, filterString);
+    });
+
+    $( document ).on( "filter:update", {
+        foo: "bar"
+    }, function( e ) {
+        filter(getSearch(searchKey));
+    });
+
+
     // initialize isotope
     $grid.isotope(isotopeDefaults);
 

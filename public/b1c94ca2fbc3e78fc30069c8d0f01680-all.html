@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open Government Research Exchange</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+    <!-- Pulls our Typekit Fonts -->
+    <script src="//use.typekit.net/zez3buj.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <!-- Pulls the material design icon font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Pulls Slick CSS for sliders -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+
+    <!-- library/styleguide dist css -->
+    <!-- <link rel="stylesheet" href="css/lib/govlab-styleguide.css"> -->
+
+    <!-- Pulls the site-specific styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="">
+
+<header class="b-top-nav">
+
+    <div class="e-nav-group m-left">
+        <span class="e-nav-item js-nav-trigger e-nav-trigger">
+            <i class="material-icons">menu</i>
+        </span>
+    </div>
+
+    <div class="e-nav-group m-right e-social-media">
+        <!-- Still questioning the relevance of this -->
+        <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><img src="./img/twitter-logo.png" alt=""></a>
+    </div>
+
+    <a class="e-logo" href="./">Open Government Research Exchange</a>
+
+</header>
+
+    <!-- Main Menu (Off Canvas) -->
+    <nav class="b-main-menu">
+        <a href="./">Home</a>
+        <a href="paper-template.html">Paper Template</a>
+        <a href="search.html">Search Page</a>
+        <a href="b1c94ca2fbc3e78fc30069c8d0f01680-all">Results Page</a>
+        <a href="list.html">List Page</a>
+        
+    </nav>
+
+    <main role="main" class="b-main">
+        
+<div class="b-categories-page">
+  <div class="b-filter-ui js-and">
+    <div class="b-top-section m-all">
+      <div class="row">
+        <div class="large-12 column">
+          <h1>All</h1>
+          <h3 class="e-tagline">Across the world, science and technology are creating innovative ways for people to tackle society’s problems together.</h3>
+        </div>
+        <span class="b-filter-ui-container js-multi">
+          <div class="switch">
+            <label>
+              All Articles
+              <input type="checkbox" class="b-filter" data-filter="f-open">
+              <span class="lever"></span>
+              Free Articles Only
+            </label>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="b-divider b-filter-panel m-black">
+
+      <input id="lunr-filter" type="text" placeholder="Search" data-category="all" />
+
+      <h2>Filters</h2>
+
+      
+        
+          <div class="row">
+            <form action="#" class="b-form">
+              <div class="b-filter-ui-container">
+                <div class="large-2 columns">
+                  <div class="e-select">
+                    <select name="" id="" class="b-filter js-change">
+                      <option data-filter="*">Organizations</option>
+                      
+                        <option data-filter="f-the-govlab">the-govlab</option>
+                      
+                        <option data-filter="f-world-bank-digital-engagement-evaluation-team">world-bank-digital-engagement-evaluation-team</option>
+                      
+                        <option data-filter="f-mysociety">mysociety</option>
+                      
+                        <option data-filter="f-macarthur-foundation-research-network-on-opening-governance">macarthur-foundation-research-network-on-opening-governance</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-filter-ui-container">
+                <div class="large-2 columns">
+                  <div class="e-select">
+                    <select name="" id="" class="b-filter js-change">
+                      <option data-filter="**">Objective</option>
+                      
+                        <option data-filter="f-effectiveness">Effectiveness</option>
+                      
+                        <option data-filter="f-participation">Participation</option>
+                      
+                        <option data-filter="f-legitimacy">Legitimacy</option>
+                      
+                        <option data-filter="f-outside-innovation">Outside Innovation</option>
+                      
+                        <option data-filter="f-access">Access</option>
+                      
+                        <option data-filter="f-privacy">Privacy</option>
+                      
+                        <option data-filter="f-transparency">Transparency</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-filter-ui-container">
+                <div class="large-2 columns">
+                  <div class="e-select">
+                    <select name="" id="" class="b-filter js-change">
+                      <option data-filter="***">Methodology</option>
+                      
+                        <option data-filter="f-case-studies">Case Studies</option>
+                      
+                        <option data-filter="f-conceptual-framework">Conceptual Framework</option>
+                      
+                        <option data-filter="f-quantitative-analysis">Quantitative Analysis</option>
+                      
+                        <option data-filter="f-design-science">Design Science</option>
+                      
+                        <option data-filter="f-comparative-analysis">Comparative Analysis</option>
+                      
+                        <option data-filter="f-surveys">Surveys</option>
+                      
+                        <option data-filter="f-survey">Survey</option>
+                      
+                        <option data-filter="f-statistical-modeling">Statistical Modeling</option>
+                      
+                        <option data-filter="f-qualitative-analysis">Qualitative Analysis</option>
+                      
+                        <option data-filter="f-user-studies">User Studies</option>
+                      
+                        <option data-filter="f-ethnography">Ethnography</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-filter-ui-container">
+                <div class="large-2 columns">
+                  <div class="e-select">
+                    <select name="" id="" class="b-filter js-change">
+                      <option data-filter="*****">Sector</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-development">Development</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-energy">Energy</option>
+                      
+                        <option data-filter="f-social-movements-activism">Social Movements & Activism</option>
+                      
+                        <option data-filter="f-geospatial-services">Geospatial Services</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-economy">Economy</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-environment">Environment</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-law">Law</option>
+                      
+                        <option data-filter="f-transportation">Transportation</option>
+                      
+                        <option data-filter="f-transportation">Transportation</option>
+                      
+                        <option data-filter="f-education">Education</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-criminal-justice">Criminal Justice</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-transportation">Transportation</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-economy">Economy</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-law">Law</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-transportation">Transportation</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-transportation">Transportation</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-energytransportationweather">Energy,Transportation,Weather</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-energy">Energy</option>
+                      
+                        <option data-filter="f-public-safety">Public Safety</option>
+                      
+                        <option data-filter="f-economy">Economy</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-transportation">Transportation</option>
+                      
+                        <option data-filter="f-transportation">Transportation</option>
+                      
+                        <option data-filter="f-education">Education</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-national-security">National Security</option>
+                      
+                        <option data-filter="f-public-safety">Public Safety</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-public-safety">Public Safety</option>
+                      
+                        <option data-filter="f-business">Business</option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-economy">Economy</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-education">Education</option>
+                      
+                        <option data-filter="f-public-safety">Public Safety</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-economy">Economy</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-energy">Energy</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-public-safety">Public Safety</option>
+                      
+                        <option data-filter="f-science">Science</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-politics">Politics</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-criminal-justice">Criminal Justice</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-criminal-justice">Criminal Justice</option>
+                      
+                        <option data-filter="f-national-security">National Security</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-science">Science</option>
+                      
+                        <option data-filter="f-economics">Economics</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-politics">Politics</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-law">Law</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-philanthropy-aid">Philanthropy & Aid</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-criminal-justice">Criminal Justice</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-development">Development</option>
+                      
+                        <option data-filter="f-development">Development</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-energyenvironment">Energy,Environment</option>
+                      
+                        <option data-filter="f-internet-governance">Internet Governance</option>
+                      
+                        <option data-filter="f-law">Law</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-public-safety">Public Safety</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-criminal-justice">Criminal Justice</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-environment">Environment</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-crisis-response">Crisis Response</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-public-safety">Public Safety</option>
+                      
+                        <option data-filter="f-energy">Energy</option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-politics">Politics</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-environment">Environment</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-politics">Politics</option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-politicshealthcriminal-justicescience">Politics,Health,Criminal Justice,Science</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-economics">Economics</option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-education">Education</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-environment">Environment</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-politics">Politics</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-healthtransportation">Health,Transportation</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-crisis-response">Crisis Response</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-social-movements-activism">Social Movements & Activism</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-politics">Politics</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-human-rights">Human Rights</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-health">Health</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-economy">Economy</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-policitcs">Policitcs</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-law">Law</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-filter-ui-container">
+                <div class="large-2 columns">
+                  <div class="e-select">
+                    <select name="" id="" class="b-filter js-change">
+                      <option data-filter="*****">Region</option>
+                      
+                        <option data-filter="f-amsterdam">Amsterdam</option>
+                      
+                        <option data-filter="f-asia">Asia</option>
+                      
+                        <option data-filter="f-australia">Australia</option>
+                      
+                        <option data-filter="f-australiaeurope">Australia,Europe</option>
+                      
+                        <option data-filter="f-azerbaijanliberia">Azerbaijan,Liberia</option>
+                      
+                        <option data-filter="f-brazil">Brazil</option>
+                      
+                        <option data-filter="f-china">China</option>
+                      
+                        <option data-filter="f-china">China</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-finland">Finland</option>
+                      
+                        <option data-filter="f-finland">Finland</option>
+                      
+                        <option data-filter="f-finland">Finland</option>
+                      
+                        <option data-filter="f-france">France</option>
+                      
+                        <option data-filter="f-france">France</option>
+                      
+                        <option data-filter="f-germany">Germany</option>
+                      
+                        <option data-filter="f-germany">Germany</option>
+                      
+                        <option data-filter="f-ghana">Ghana</option>
+                      
+                        <option data-filter="f-github">GitHub</option>
+                      
+                        <option data-filter="f-global">Global</option>
+                      
+                        <option data-filter="f-greece">Greece</option>
+                      
+                        <option data-filter="f-italy">Italy</option>
+                      
+                        <option data-filter="f-italy">Italy</option>
+                      
+                        <option data-filter="f-italyuktunisia">Italy,UK,Tunisia</option>
+                      
+                        <option data-filter="f-mali">Mali</option>
+                      
+                        <option data-filter="f-mexicocanadaaustraliaspainturkey">Mexico,Canada,Australia,Spain,Turkey</option>
+                      
+                        <option data-filter="f-middle-east">Middle East</option>
+                      
+                        <option data-filter="f-netherlands">Netherlands</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-america">North America</option>
+                      
+                        <option data-filter="f-north-americasouth-america">North America,South America</option>
+                      
+                        <option data-filter="f-norway">Norway</option>
+                      
+                        <option data-filter="f-russia">Russia</option>
+                      
+                        <option data-filter="f-russia">Russia</option>
+                      
+                        <option data-filter="f-south-africa">South Africa</option>
+                      
+                        <option data-filter="f-south-america">South America</option>
+                      
+                        <option data-filter="f-south-america">South America</option>
+                      
+                        <option data-filter="f-south-america">South America</option>
+                      
+                        <option data-filter="f-south-america">South America</option>
+                      
+                        <option data-filter="f-south-koreaportugal">South Korea,Portugal</option>
+                      
+                        <option data-filter="f-spain">Spain</option>
+                      
+                        <option data-filter="f-spain">Spain</option>
+                      
+                        <option data-filter="f-switzerland">Switzerland</option>
+                      
+                        <option data-filter="f-uganda">Uganda</option>
+                      
+                        <option data-filter="f-uganda">Uganda</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-uk">UK</option>
+                      
+                        <option data-filter="f-united-kingdom">United Kingdom</option>
+                      
+                        <option data-filter="f-united-kingdom">United Kingdom</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usa">USA</option>
+                      
+                        <option data-filter="f-usaswitzerlandtokyounited-kingdom">USA,Switzerland,Tokyo,United Kingdom</option>
+                      
+                        <option data-filter="f-usauk">USA,UK</option>
+                      
+                        <option data-filter="f-zambia">Zambia</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-europe">Europe</option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                        <option data-filter="f-"></option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-filter-ui-container">
+                <div class="large-2 columns">
+                  <div class="e-select">
+                    <select name="" id="" class="b-filter js-change">
+                      <option data-filter="******">Type</option>
+                      
+                        <option data-filter="f-journal-article">journal-article</option>
+                      
+                        <option data-filter="f-white-paper">white-paper</option>
+                      
+                        <option data-filter="f-conference-proceedings">conference-proceedings</option>
+                      
+                        <option data-filter="f-research-report">research-report</option>
+                      
+                        <option data-filter="f-working-paper">working-paper</option>
+                      
+                        <option data-filter="f-thesisdissertation">thesisdissertation</option>
+                      
+                        <option data-filter="f-book-chapter">book-chapter</option>
+                      
+                        <option data-filter="f-book">book</option>
+                      
+                        <option data-filter="f-article-draft">article-draft</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+
+  <div class="b-page-section b-results-section b-isotope">
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+  
+    </main>
+
+    <footer class='b-footer'>
+        <div class="row">
+            <div class="large-4 column">
+                <h3>Footer Info</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde dignissimos aperiam odit sed, suscipit voluptates pariatur enim rerum ipsa iusto, quis, veniam dolores quas nihil aut accusamus ea. Consequuntur, voluptatum.</p>
+            </div>
+            <div class="medium-4 column">
+                <h3>Footer Info</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde dignissimos aperiam odit sed, suscipit voluptates pariatur enim rerum ipsa iusto, quis, veniam dolores quas nihil aut accusamus ea. Consequuntur, voluptatum.</p>
+            </div>
+            <div class="medium-4 column">
+                <h3>Footer Info</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde dignissimos aperiam odit sed, suscipit voluptates pariatur enim rerum ipsa iusto, quis, veniam dolores quas nihil aut accusamus ea. Consequuntur, voluptatum.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="b-copyright">
+        <div class="row">
+            <div class="large-10 large-centered columns">
+                <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+                This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
+            </div>
+        </div>
+    </div>
+
+<div id="overlay"></div>
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+<script src="js/lib/scripts.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/lunr.js"></script>
+<script src="js/search.js"></script>
+<script src="js/underscore.js"></script>
+
+</body>
+</html>

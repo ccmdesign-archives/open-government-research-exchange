@@ -1,0 +1,134 @@
+{% extends '_base.html' %}
+
+{% block main %}
+<div class="b-all-categories-page">
+  <div class="b-top-section">
+    <div class="row">
+      <h1>All Categories</h1>
+      <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam harum dolorem tempore, minus vero reiciendis soluta vitae expedita odit repellat commodi nihil, in omnis explicabo, non obcaecati ea laudantium quo!</h3>
+      </div>
+    </div>
+
+  {# List of Articles - All Categories #}
+  <div class="b-divider">
+    <h1>All Categories</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in taxonomy_category %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# List of Articles - Methodologies #}
+  <div class="b-divider">
+    <h1>Methodologies</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in taxonomy_methodology %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# List of Articles - Objective #}
+  <div class="b-divider">
+    <h1>Objective</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in taxonomy_objective %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# List of Articles - Type #}
+  <div class="b-divider">
+    <h1>Type</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in type %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# List of Articles - Region #}
+  <div class="b-divider">
+    <h1>Region</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in region %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# List of Articles - Sector #}
+  <div class="b-divider">
+    <h1>Sector</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in sector %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# List of Articles - Tools #}
+  <div class="b-divider">
+    <h1>Tools</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in tools %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# List of Articles - Authors #}
+  <div class="b-divider">
+    <h1>Authors</h1>
+  </div>
+  <div class="b-page-section b-all-categories-list">
+    <div class="row expanded">
+
+      {% for a in authors %}
+      <div class="column large-4 e-list-item">
+        <h3><a href="{{a.id}}-{{a.title}}.html">{{a.title}}</a></h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}

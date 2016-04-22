@@ -1,0 +1,55 @@
+{% extends '_base.html' %}
+{% block main %}
+<!-- main content starts here -->
+
+<div class="b-top-section m-teal">
+  <div class="row">
+    <div class="large-12 column">
+      <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
+    </div>  
+  </div>
+</div>
+<div class="b-page-section">
+    
+<div class="row">
+    <div class="large-12 column">    
+        {% for d in papers %}
+        <p>{{d.organization}}</p>    
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row">
+  <div class="column large-12">
+    <h2>DEET</h2>
+    {% for d in papers %}
+    {% if d.organization == "world-bank-digital-engagement-evaluation-team" %}
+    <p><a href="{{d.id}}-{{d.title | slug}}.html">{{d.title}}</a></p>    
+    {% endif %}
+    {% endfor %}
+
+    <h2>MySociety</h2>
+    {% for d in papers %}
+    {% if d.organization == "mysociety" %}
+    <p><a href="{{d.id}}-{{d.title | slug}}.html">{{d.title}}</a></p>    
+    {% endif %}
+    {% endfor %}
+
+    <h2>Govlab</h2>
+    {% for d in papers %}
+    {% if d.organization == "the-govlab" %}
+    <p><a href="{{d.id}}-{{d.title | slug}}.html">{{d.title}}</a></p>    
+    {% endif %}
+    {% endfor %}
+
+    <h2>All</h2>
+
+    {% for d in papers %}
+    <p><a href="{{d.id}}-{{d.title | slug}}.html">{{d.title}}</a></p>    
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}
+</div>

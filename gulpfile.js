@@ -12,13 +12,16 @@ intercept       = require('gulp-intercept'),
 csv2json        = require('gulp-csv2json'),
 rename          = require('gulp-rename'),
 gulpFn          = require('gulp-fn'),
+gulpFile        = require('gulp-file'),
 colors          = require('colors'),
 bs              = require('browser-sync').create(),
+bs2             = require('browser-sync').create(), // why is this needed?
 minimist        = require('minimist'),
 File            = require('vinyl'),
 es              = require('event-stream'),
 fs              = require('fs'),
 md5             = require('md5'),
+lunr            = require('lunr'),
 packagejson     = require('./package.json')
 ;
 
@@ -44,10 +47,10 @@ var COL_NAME_MAP = {
   'Published On'          : 'paper_date',
   'Submitted On'          : 'submission_date',
   'Link to download'      : 'url',
-  'Sector'                : { value : 'sector', slugify : true },
-  'Region'                : { value : 'region', slugify : true },
+  'Sector'                : { value : 'sector', children : ['*'], delimiter : ',' },
+  'Region'                : { value : 'region', children : ['*'], delimiter : ',' },
   'Publication Type'      : { value : 'type', slugify : true },
-  'Tool/Project'          : 'tools',
+  'Tool/Project'          : { value : 'tools', children : ['*'], delimiter : ',' },
   'GitHub Repository'     : 'github',
   'Abstract'              : 'abstract',
   'Content URL'           : 'html_content',
@@ -66,6 +69,22 @@ var COL_NAME_MAP = {
   'ePub URL'              : { parent : 'direct_download', value : 'epub' },
   'Other URL'             : { parent : 'direct_download', value : 'other', children : ['url', 'name'], delimiter : ' ' }
 };
+
+// whitelist for generating subsets of json data
+// containing all possible values of each property in this list
+// this could be integrated into COL_NAME_MAP later
+var SUB_DATASETS = [
+'access',
+'organization',
+'authors',
+'sector',
+'region',
+'type',
+'tools',
+['taxonomy', 'category'],
+['taxonomy', 'methodology'],
+['taxonomy', 'objective']
+]
 
 // gulpfile options
 var options = {
@@ -88,6 +107,14 @@ gulp.task('bs', function() {
   }
 });
 
+// Compile sass into CSS & auto-inject into browsers
+// gulp.task('sass', function() {
+//     return gulp.src("app/scss/*.scss")
+//         .pipe(sass())
+//         .pipe(gulp.dest("app/css"))
+//         .pipe(browserSync.stream());
+// });
+
 // define custom functions ///////////////////////////////////
 
 // converts string t to a slug (eg 'Some Text Here' becomes 'some-text-here')
@@ -101,14 +128,143 @@ function slugify(t) {
   : false ;
 }
 
+function split(s, delim) {
+  return s ? s.toString().split(delim) : false;
+}
+
+function contains(arr, v) {
+  return arr.indexOf(v) > -1;
+}
+
+//check if an item an arr2 exists in arr1
+function containsAny(arr1, arr2) {
+  if (typeof arr2 === "string") {
+    arr2 = arr2.split();
+  } else if (arr2 === false ) {
+    return false;
+  }
+  return arr2.some(function(value) {
+    return arr1.indexOf(value) > -1;
+  });
+}
+
+// return a matched set of objects containing property (prop) with value (value)
+// if prop is an array, treat it as dot syntax
+function matchObjects(arr, prop, value) {
+  var matches = [], o;
+
+  for (var obj in arr) {
+    // default to assuming prop is not an array
+    o = arr[obj];
+    p = prop;
+
+    // if prop is an array, scope o[p] to be equivalent to the dot syntax of each element in the array
+    // e.g. o[p] == obj.prop[0].prop[1] ...
+    if (Array.isArray(prop)) {
+      var i;
+      for (i = 0; i < prop.length-1; i++) {
+        o = o[prop[i]];
+      }
+      p = prop[i];
+    }
+
+    // push anything that either is an array that contains value, or equals value to matches
+    if (o.hasOwnProperty(p)) {
+      if (Array.isArray(o[p])) {
+        o[p].indexOf(value) > -1 && matches.push(arr[obj]);
+      } else {
+        o[p] === value && matches.push(arr[obj]);
+      }
+    }
+  }
+
+  return matches;
+}
+
+// push v to array arr if it is not already present in arr
+//
+function pushIfNew(arr, v) {
+  if (arr.indexOf(v) === -1) {
+    arr.push(v);
+  }
+  return arr;
+}
+
+// push all unique values of a certain property (prop) to an array and return that array
+// in a particular category
+function pushAllValuesInCategory(arr, obj, prop, category, prefix) {
+  prefix = prefix === undefined ? false : prefix;
+
+  if (obj.taxonomy.category && obj.taxonomy.category.indexOf(category) > -1) {
+    var v = prefix ? obj[prefix][slugify(prop)] : obj[slugify(prop)] ;
+
+    if (v) {
+      if (Array.isArray(v)) {
+        for (i in v) {
+          pushIfNew(arr, v[i]);
+        }
+      } else {
+        pushIfNew(arr, v);
+      }
+    }
+  }
+
+  return arr;
+}
+
+// get all unique values of a certain property (prop) in all objects in array (arr)
+function getUniqueValues(arr, prop) {
+  var values = [], o, p, v;
+
+  for (var obj in arr) {
+    // default to assuming prop is not an array
+    o = arr[obj];
+    p = prop;
+
+    // if prop is an array, scope o[p] to be equivalent to the dot syntax of each element in the array
+    // e.g. o[p] == obj.prop[0].prop[1] ...
+    if (Array.isArray(prop)) {
+      var i;
+      for (i = 0; i < prop.length-1; i++) {
+        o = o[prop[i]];
+      }
+      p = prop[i];
+    }
+
+    v = o[p];
+
+    // push anything that either is an array that contains value, or equals value to matches
+    if (v) {
+      if (Array.isArray(v)) {
+        for (i in v) {
+          pushIfNew(values, v[i]);
+        }
+      } else {
+        pushIfNew(values, v);
+      }
+    }
+  }
+
+  return values;
+}
+
 // set up nunjucks environment
 function nunjucksEnv(env) {
   env.addFilter('slug', slugify);
+  env.addFilter('split', split);
+  env.addFilter('contains', contains);
+  env.addFilter('containsAny', containsAny);
+  env.addFilter('pushnew', pushIfNew);
+  env.addFilter('pushallnew', pushAllValuesInCategory);
 }
 
 // a subroutine to simplify processJson
 function populateChildren(out, content, val, index) {
   if ('children' in val) {
+    // convert boolean false to '' and anything else to a string
+    content === false && (content = '');
+    typeof content !== 'string' && (content = String(content));
+
     var _s = content.split(val.delimiter);
     if ('parent' in val) {
       out[index][val.parent][val.value] = val.children[0] === '*' ? [] : {};
@@ -204,6 +360,7 @@ function processJSON ( file ) {
 var generatedData = {};
 
 function compileData(dataPath, ext) {
+  dataPath = dataPath === undefined ? options.dataPath : dataPath;
   ext = ext === undefined ? options.dataExt : ext;
   var dataDir = fs.readdirSync(dataPath),
   baseName, r, _data;
@@ -295,7 +452,8 @@ gulp.task('sass', function() {
   return gulp.src('source/sass/styles.scss')
   .pipe(sass().on('error', sass.logError))
   .pipe(gulp.dest('public/css'))
-  .pipe(cliOptions.nosync ? bs.stream() : util.noop());
+  .pipe(bs2.stream());
+  // .pipe(cliOptions.nosync ? bs.stream() : util.noop());
 });
 
 gulp.task('libCss', function() {
@@ -361,12 +519,108 @@ gulp.task('json', ['yaml'], function () {
   .pipe(gulp.dest('source/data'));
 });
 
-gulp.task('generateTemplates', ['json'], function() {
+gulp.task('generateTemplates', ['json-subsets'], function() {
   return generateVinyl(options.path, options.dataPath)
   .pipe(gulp.dest(options.path))
 });
 
 gulp.task('nunjucks', ['generateTemplates'], function() {
+  var filters = {
+    all: {
+      organizations: [],
+      objectives: [],
+      methodologies: [],
+      sectors: [],
+      regions: [],
+      types: []
+    }
+  };
+
+  for (var i in generatedData.categories) {
+    var category = slugify(generatedData.categories[i].custom_filter)
+
+    if (category) {
+      filters[category] = {
+        organizations: [],
+        objectives: [],
+        methodologies: [],
+        sectors: [],
+        regions: [],
+        types: []
+      }
+    }
+  }
+
+  for (var i in generatedData.papers) {
+    var paper = generatedData.papers[i];
+
+    for (var j in paper.taxonomy.category) {
+      var category = slugify(paper.taxonomy.category[j]);
+
+      if (paper.organization) {
+        if (filters[category] && filters[category].organizations.indexOf(paper.organization) < 0) {
+          filters[category].organizations.push(paper.organization);
+        }
+        if (filters.all.organizations.indexOf(paper.organization) < 0) {
+          filters.all.organizations.push(paper.organization);
+        }
+      }
+
+      for (var k in paper.taxonomy.objective) {
+        var objective = paper.taxonomy.objective[k];
+
+        if (objective) {
+          if (filters[category] && filters[category].objectives.indexOf(objective) < 0) {
+            filters[category].objectives.push(objective);
+          }
+          if (filters.all.objectives.indexOf(objective) < 0) {
+            filters.all.objectives.push(objective);
+          }
+        }
+      }
+
+      for (var k in paper.taxonomy.methodology) {
+        var methodology = paper.taxonomy.methodology[k];
+
+        if (methodology) {
+          if (filters[category] && filters[category].methodologies.indexOf(methodology) < 0) {
+            filters[category].methodologies.push(methodology);
+          }
+          if (filters.all.methodologies.indexOf(methodology) < 0) {
+            filters.all.methodologies.push(methodology);
+          }
+        }
+      }
+
+      if (paper.sector) {
+        if (filters[category] && filters[category].sectors.indexOf(paper.sector) < 0) {
+          filters[category].sectors.push(paper.sector);
+        }
+        if (filters.all.sectors.indexOf(paper.sector) < 0) {
+          filters.all.sectors.push(paper.sector);
+        }
+      }
+
+      if (paper.region) {
+        if (filters[category] && filters[category].regions.indexOf(paper.region) < 0) {
+          filters[category].regions.push(paper.region);
+        }
+        if (filters.all.regions.indexOf(paper.region) < 0) {
+          filters.all.regions.push(paper.region);
+        }
+      }
+
+      if (paper.type) {
+        if (filters[category] && filters[category].types.indexOf(paper.type) < 0) {
+          filters[category].types.push(paper.type);
+        }
+        if (filters.all.types.indexOf(paper.type) < 0) {
+          filters.all.types.push(paper.type);
+        }
+      }
+    }
+  }
+
   return gulp.src( options.path + '**/*' + options.ext )
   .pipe(plumber())
   .pipe(data(function(file) {
@@ -383,6 +637,7 @@ gulp.task('nunjucks', ['generateTemplates'], function() {
           var d = generatedData[datasetName][i];
           // add all datasets as special prop $global
           d.$global = generatedData;
+          d.$global.filters = filters;
           return d;
         }
       }
@@ -396,7 +651,6 @@ gulp.task('nunjucks', ['generateTemplates'], function() {
   .pipe(gulp.dest('public'));
 });
 
-
 gulp.task('csv2json', function() {
   var options = {};
   return gulp.src('source/support/**.csv')
@@ -408,9 +662,122 @@ gulp.task('csv2json', function() {
   .pipe(gulp.dest('source/data'))
 });
 
-var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
+gulp.task('json-subsets', ['json'], function () {
+  compileData();
+
+  var _stream = gulpFile('noop.json', JSON.stringify({
+    foo: 'bar'
+  }), { src: true });
+
+  for (var subset in SUB_DATASETS) {
+    var a = getUniqueValues(generatedData.papers, SUB_DATASETS[subset]), objarr = [];
+    for (var i in a) {
+      objarr.push({
+        propertyName: SUB_DATASETS[subset],
+        title: slugify(a[i]),
+        value: a[i]
+      });
+    }
+
+    _stream = _stream.pipe(
+      gulpFile(
+        (Array.isArray(SUB_DATASETS[subset]) ? SUB_DATASETS[subset].join('_') : SUB_DATASETS[subset])
+        + '.json',
+        JSON.stringify(objarr)
+        ));
+  }
+
+  return _stream.pipe(gulp.dest('source/data'));
+});
+
+gulp.task('lunr', ['json'], function() {
+  compileData();
+
+  util.log(util.colors.magenta('****'), 'Generating search indices...', util.colors.magenta('****'));
+
+  var index = lunr(function() {
+    this.field('title', {
+      boost: 10
+    });
+    this.field('abstract');
+  });
+
+  var papers = generatedData.papers;
+
+  try {
+    papers.forEach(function(p) {
+      index.add(p);
+    });
+
+    var _stream = gulpFile('searchindex.json', JSON.stringify({
+      index: index.toJSON(),
+      papers: papers
+    }), {
+      src: true
+    });
+
+    util.log(util.colors.blue(':):)'),
+      util.colors.gray('Main Index'),
+      '(', papers.length, 'items', ')',
+      util.colors.blue('):):'));
+
+    // create a subset of papers, and corresponding search index for each category in the generated data
+    for (var c in generatedData.categories) {
+      if (generatedData.categories[c].custom_filter) {
+        var _data = matchObjects(generatedData.papers, ['taxonomy', 'category'], generatedData.categories[c].custom_filter);
+
+        util.log(util.colors.green('>>>>'),
+          generatedData.categories[c].custom_filter,
+          '(', _data.length, 'items', ')',
+          util.colors.green('>>>>'));
+
+        var _idx = lunr(function() {
+          this.field('title', {
+            boost: 10
+          });
+          this.field('abstract');
+        });
+        _data.forEach(function(p) {
+          _idx.add(p);
+        });
+
+        _stream = _stream.pipe(
+          gulpFile(
+            'searchindex-' + slugify(generatedData.categories[c].custom_filter) + '.json',
+            JSON.stringify({
+              index: _idx.toJSON(),
+              papers: _data
+            })
+            ));
+      }
+    }
+
+    // add a file enumerating all of the available scopes
+    // right now this is just generatedData.categories
+    _stream = _stream.pipe(
+      gulpFile(
+        'scopes.json',
+        JSON.stringify(generatedData.categories)
+        ));
+
+    return _stream.pipe(gulp.dest('source/js'));
+
+  } catch (e) {
+    if (!papers) {
+      util.log(util.colors.red('!!!!'), util.colors.red('generatedData.papers is falsey, which probably means papers.json does not exist'), util.colors.red('!!!!'));
+      util.log(util.colors.red('!!!!'), util.colors.red('try running "gulp csv2json" before you run this task'), util.colors.red('!!!!'));
+    }
+    util.log(util.colors.red('!!!!'), util.colors.red('error:'), util.colors.magenta(e.name), ':', util.colors.magenta(e.message), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.red('file:'), util.colors.magenta(e.fileName), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.red('line:'), util.colors.magenta(e.lineNumber), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.gray(e.stack), util.colors.red('!!!!'));
+  }
+});
+
+
+var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss', 'lunr'];
 gulp.task('build', buildTasks, function () {
-  util.log(util.colors.magenta('****'), 'Running build tasks:', buildTasks, util.colors.magenta('****'));
+  util.log(util.colors.magenta('****'), 'Finished running build tasks:', buildTasks, util.colors.magenta('****'));
 })
 
 gulp.task('deploy', ['build'], shell.task([
@@ -418,9 +785,11 @@ gulp.task('deploy', ['build'], shell.task([
   ])
 );
 
+gulp.task('html-watch', ['nunjucks'], function() { bs.reload(); });
+
 gulp.task('default', ['bs', 'build'], function (){
   gulp.watch('source/sass/**/*.scss', ['sass']);
-  gulp.watch('source/templates/**/!(__)*.html', ['nunjucks']);
+  gulp.watch('source/templates/*.html', ['html-watch']);
   gulp.watch('source/img/**/*', ['img']);
   gulp.watch('source/js/**/*', ['js']);
 });

@@ -1,0 +1,85 @@
+.b-social-media-icon {
+  width: 28px;
+  display: inline-block;
+  margin: 10px;
+
+  &.m-github {
+    fill: white;
+  }
+}
+
+.b-author-page,
+.b-organization-page {
+  .b-top-section {
+    padding-bottom: 0;
+
+    .e-image-column {
+      text-align: center;
+    }
+
+    .e-org-logo {
+      max-width: 80%;
+      padding: 10%;
+    }
+
+    .e-description { text-align: left; }
+
+    .e-name {
+      text-align: left;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+  .e-extras {
+    padding-top: 30px;
+    text-align: center;
+  }
+
+  }
+}
+
+.b-author-page {
+  .e-author-picture {
+    width: 300px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 150px;
+    margin: 0 auto 30px;
+  }
+
+  .e-name.e-name.e-name {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 0;
+  }
+
+  .e-job {
+    text-align: left;
+    text-transform: none;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+}
+
+.b-extra-info-panel {
+  padding: 50px 0;
+  margin-top: 30px;
+  padding: 0;
+  max-height: 0;
+  overflow: auto;
+  background-color: rgba($black, .2);
+  transition: max-height 0.5s ease, padding 0.5s ease;
+
+  &.visible {
+    max-height: 350px;
+    padding: 50px 0;
+  }
+
+  h2 {
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+}

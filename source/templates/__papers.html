@@ -1,14 +1,15 @@
 {% extends '_base.html' %}
+
 {% block main %}
 <!-- main content starts here -->
-<div class="b-paper-page">
-  <div class="b-top-section m-blue">
+<div class="b-paper-page m-{{organization}}">
+  <div class="b-top-section">
     <div class="row">
       <div class="large-10 column small-centered">
         {% if organization == "the-govlab" %}
-          <img class="e-organization-logo" src="img/organizations/govlab-logo.png" alt="">
+          <img class="e-organization-logo" src="img/organizations/govlab-logo-white.png" alt="">
         {% elif organization == "mysociety" %}
-          <img class="e-organization-logo" src="img/organizations/mysociety-logo.png" alt="">
+          <img class="e-organization-logo" src="img/organizations/mysociety-logo.svg" alt="">
         {% elif organization == "world-bank-digital-engagement-evaluation-team" %}
           <img class="e-organization-logo" src="img/organizations/deet-logo-white.png" alt="">
         {% endif %}
