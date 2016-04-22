@@ -6,14 +6,14 @@
       <div class="row">
         <div class="large-12 column">
           <h3 class="e-tagline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, praesentium, ipsa nam quam.</h3>
-        </div>  
+        </div>
       </div>
-      
+
       <div class="row">
           <div class="small-10 large-8 small-centered columns">
               <div class="row">
                   <form class="b-search m-main-search m-negative" action="">
-                      <input class="" type="text"><!--
+                      <input id="lunr-search" class="" type="text"><!--
                    --><input class="e-search-trigger material-icons" type="submit" value="search">
                   </form>
               </div>
@@ -23,13 +23,20 @@
   </div>
 
   <div class="b-divider">
+    <div class="row expanded">
+      <h2>Results</h2>
+      <div class="b-lunr-results"></div>
+    </div>
+  </div>
+
+  <div class="b-divider">
     <div class="row expanded m-black">
       <h1>Browse by Category</h1>
     </div>
   </div>
 
   <div class="b-page-section b-main-categories">
-    
+
     <div class="row expanded">
       <div class="medium-3 show-for-medium column m-{{categories[0].title | slug}}">
         <div class="e-category-item"><a href="{{categories[0].id}}-{{categories[0].title | slug}}.html">{{categories[0].title}}</a></div>
@@ -57,7 +64,7 @@
       <div class="medium-3 column m-{{categories[7].title | slug}}">
         <div class="e-category-item"><a href="{{categories[7].id}}-{{categories[7].title | slug}}.html">{{categories[7].title}}</a></div>
       </div>
-      
+
     </div>
   </div>
 </div>
