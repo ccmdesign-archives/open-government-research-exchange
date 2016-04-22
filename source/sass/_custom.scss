@@ -4,12 +4,12 @@
 
 
 body {
-  
-  
+
+
 }
 
 .b-search-page {
-  
+
 }
 
 .access-switch .switch { text-align: center; }
@@ -30,8 +30,8 @@ body {
   background-color: rgba($black, .2);
 
   .e-social-media img { width: 20px; } // Custom icon for twitter (maybe push this to styleguide)
-  
-  .e-logo { 
+
+  .e-logo {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -51,7 +51,7 @@ body {
   }
 }
 
-.b-main-search-section {
+.b-main-search-section{
   background-color: darken($main-color, 4);
 }
 
@@ -66,6 +66,11 @@ body {
 }
 
 
+.ogr-paragraph:hover{
+  color: $green;
+}
 
-
+#footer-text{
+  padding: 1% 0;
+}
 
