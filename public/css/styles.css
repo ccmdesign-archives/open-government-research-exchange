@@ -7541,6 +7541,8 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   background-color: #004f6f;
   margin-top: -66px;
   padding-top: 136px; }
+  .b-top-section.m-standalone {
+    padding-bottom: 80px; }
 
 .b-top-nav {
   background-color: rgba(51, 51, 51, 0.2); }
@@ -7563,3 +7565,11 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 
 .b-main-search-section {
   background-color: #00405b; }
+
+.b-all-categories-list {
+  padding: 0; }
+  .b-all-categories-list .e-list-item {
+    padding: 40px 0;
+    text-align: center; }
+    .b-all-categories-list .e-list-item:nth-child(even) {
+      background-color: rgba(51, 51, 51, 0.03); }
