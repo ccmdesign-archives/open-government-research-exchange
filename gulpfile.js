@@ -761,7 +761,7 @@ gulp.task('lunr', ['json'], function() {
       util.log(util.colors.red('!!!!'), util.colors.red('generatedData.papers is falsey, which probably means papers.json does not exist'), util.colors.red('!!!!'));
       util.log(util.colors.red('!!!!'), util.colors.red('try running "gulp csv2json" before you run this task'), util.colors.red('!!!!'));
     }
-    util.log(util.colors.red('!!!!'), util.colors.red('error:'), util.colors.magenta(e.name), util.colors.blue(e.message), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.red('error:'), util.colors.magenta(e.name), ':', util.colors.magenta(e.message), util.colors.red('!!!!'));
     util.log(util.colors.red('!!!!'), util.colors.red('file:'), util.colors.magenta(e.fileName), util.colors.red('!!!!'));
     util.log(util.colors.red('!!!!'), util.colors.red('line:'), util.colors.magenta(e.lineNumber), util.colors.red('!!!!'));
     util.log(util.colors.red('!!!!'), util.colors.gray(e.stack), util.colors.red('!!!!'));
