@@ -652,7 +652,7 @@ gulp.task('csv2json', function() {
   .pipe(gulp.dest('source/data'))
 });
 
-gulp.task('json-subsets', function () {
+gulp.task('json-subsets', ['json'], function () {
   compileData();
 
   var _stream = gulpFile('noop.json', JSON.stringify({
@@ -671,7 +671,7 @@ gulp.task('json-subsets', function () {
 
     _stream = _stream.pipe(
       gulpFile(
-        (Array.isArray(SUB_DATASETS[subset]) ? SUB_DATASETS[subset].join('-') : SUB_DATASETS[subset])
+        (Array.isArray(SUB_DATASETS[subset]) ? SUB_DATASETS[subset].join('_') : SUB_DATASETS[subset])
         + '.json',
         JSON.stringify(objarr)
         ));
@@ -680,7 +680,7 @@ gulp.task('json-subsets', function () {
   return _stream.pipe(gulp.dest('source/data'));
 });
 
-gulp.task('lunr', function() {
+gulp.task('lunr', ['json'], function() {
   compileData();
 
   util.log(util.colors.magenta('****'), 'Generating search indices...', util.colors.magenta('****'));
