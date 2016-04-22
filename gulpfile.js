@@ -513,7 +513,7 @@ gulp.task('json', ['yaml'], function () {
   .pipe(gulp.dest('source/data'));
 });
 
-gulp.task('generateTemplates', ['json-subsets', 'lunr'], function() {
+gulp.task('generateTemplates', ['json-subsets'], function() {
   return generateVinyl(options.path, options.dataPath)
   .pipe(gulp.dest(options.path))
 });
@@ -769,7 +769,7 @@ gulp.task('lunr', ['json'], function() {
 });
 
 
-var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
+var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss', 'lunr'];
 gulp.task('build', buildTasks, function () {
   util.log(util.colors.magenta('****'), 'Finished running build tasks:', buildTasks, util.colors.magenta('****'));
 })
