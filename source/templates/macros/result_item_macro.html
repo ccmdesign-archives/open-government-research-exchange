@@ -1,6 +1,6 @@
 {% macro createResult(paper) %}
 
-<div class="b-result-item m-access-{{paper.access | slug}} f-{{paper.organization | slug}} {% for obj in paper.taxonomy.objective %} f-{{obj | slug}} {% endfor %}f-{{paper.access | slug}}  {% for methodology in paper.taxonomy.methodology %} f-{{methodology | slug}} {% endfor %} f-{{paper.sector | slug}} f-{{paper.sector | slug}} f-{{paper.region | slug}} f-{{paper.sector | slug}} f-{{paper.type | slug}} f-search-{{paper.id}}{% for c in paper.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
+<div class="b-result-item m-access-{{paper.access | slug}} f-{{paper.organization | slug}} {% for obj in paper.taxonomy.objective %} {%if obj%} f-{{obj | slug}} {% endif %} {% endfor %}f-{{paper.access | slug}}  {% for methodology in paper.taxonomy.methodology %} {% if methodology %} f-{{methodology | slug}} {% endif %} {% endfor %} f-{{paper.sector | slug}} f-{{paper.sector | slug}} f-{{paper.region | slug}} f-{{paper.sector | slug}} f-{{paper.type | slug}} f-search-{{paper.id}}{% for c in paper.taxonomy.category %} m-{{ c | slug}}{% endfor %} ">
 
 
       <a href="{{paper.id}}-{{paper.title | slug}}.html" title="{{paper.title}}">
