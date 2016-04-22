@@ -7572,3 +7572,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     text-align: center; }
     .b-all-categories-list .e-list-item:nth-child(even) {
       background-color: rgba(51, 51, 51, 0.03); }
+
+.b-button-background {
+  background-color: #008895;
+  border: none; }

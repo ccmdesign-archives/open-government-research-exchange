@@ -4,12 +4,12 @@
 
 
 body {
-  
-  
+
+
 }
 
 .b-search-page {
-  
+
 }
 
 .access-switch .switch { text-align: center; }
@@ -30,8 +30,8 @@ body {
   background-color: rgba($black, .2);
 
   .e-social-media img { width: 20px; } // Custom icon for twitter (maybe push this to styleguide)
-  
-  .e-logo { 
+
+  .e-logo {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -64,8 +64,8 @@ body {
     &:nth-child(even) { background-color: rgba($black, .03); }
   }
 }
+.b-button-background{
+  background-color: $teal;
+  border: none;
 
-
-
-
-
+}
