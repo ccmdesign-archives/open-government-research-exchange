@@ -116,8 +116,12 @@
     </div>
   </div>
 
-  <div class="b-page-section b-results-section b-isotope">
+    <div class="b-page-section b-results-section b-isotope">
     {% for d in $global.papers %}
+
+    {% if custom_filter == "All" %}
+    {{resultItem.createResult(d)}}
+    {% else %}
 
     {%- set _match = false -%}
     {%- for i in d.taxonomy.category -%}
@@ -132,6 +136,7 @@
     {% if _match %}
         {{resultItem.createResult(d)}}
       {% endif %}
+    {%endif%}
       {% endfor %}
     </div>
   </div>
