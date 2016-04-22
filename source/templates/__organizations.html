@@ -48,9 +48,12 @@
     {# List of Articles #}
     <div class="b-page-section b-results-section b-isotope">
       {% for paper in $global.papers %}
-        {% if paper.organization == title|slug or paper.organization == custom_filter %}
+        {% if paper.organization == title|slug %}
+          {{resultItem.createResult(paper)}}
+        {% elif custom_filter and paper.organization == custom_filter %}
           {{resultItem.createResult(paper)}}
         {% endif %}
+{#         {% endif %} #}
       {% endfor %}
     </div>
   </div>
