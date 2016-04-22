@@ -47,10 +47,10 @@ var COL_NAME_MAP = {
   'Published On'          : 'paper_date',
   'Submitted On'          : 'submission_date',
   'Link to download'      : 'url',
-  'Sector'                : { value : 'sector', slugify : true, children : ['*'], delimiter : ',' },
-  'Region'                : { value : 'region', slugify : true, children : ['*'], delimiter : ',' },
+  'Sector'                : { value : 'sector', children : ['*'], delimiter : ',' },
+  'Region'                : { value : 'region', children : ['*'], delimiter : ',' },
   'Publication Type'      : { value : 'type', slugify : true },
-  'Tool/Project'          : { value : 'tools', slugify : true, children : ['*'], delimiter : ',' },
+  'Tool/Project'          : { value : 'tools', children : ['*'], delimiter : ',' },
   'GitHub Repository'     : 'github',
   'Abstract'              : 'abstract',
   'Content URL'           : 'html_content',
@@ -255,6 +255,10 @@ function nunjucksEnv(env) {
 // a subroutine to simplify processJson
 function populateChildren(out, content, val, index) {
   if ('children' in val) {
+    // convert boolean false to '' and anything else to a string
+    content === false && (content = '');
+    typeof content !== 'string' && (content = String(content));
+
     var _s = content.split(val.delimiter);
     if ('parent' in val) {
       out[index][val.parent][val.value] = val.children[0] === '*' ? [] : {};
@@ -509,7 +513,7 @@ gulp.task('json', ['yaml'], function () {
   .pipe(gulp.dest('source/data'));
 });
 
-gulp.task('generateTemplates', ['json'], function() {
+gulp.task('generateTemplates', ['json-subsets', 'lunr'], function() {
   return generateVinyl(options.path, options.dataPath)
   .pipe(gulp.dest(options.path))
 });
@@ -685,61 +689,85 @@ gulp.task('lunr', ['json'], function() {
 
   util.log(util.colors.magenta('****'), 'Generating search indices...', util.colors.magenta('****'));
 
-  var index = lunr(function () {
-    this.field('title', { boost: 10 });
+  var index = lunr(function() {
+    this.field('title', {
+      boost: 10
+    });
     this.field('abstract');
   });
 
   var papers = generatedData.papers;
-  papers.forEach(function(p) { index.add(p); });
 
-  var _stream = gulpFile('searchindex.json', JSON.stringify({
-    index: index.toJSON(),
-    papers: papers
-  }), { src: true });
+  try {
+    papers.forEach(function(p) {
+      index.add(p);
+    });
 
-  util.log(util.colors.blue(':):)'),
-    util.colors.gray('Main Index'),
-    '(', papers.length, 'items', ')',
-    util.colors.blue('):):'));
+    var _stream = gulpFile('searchindex.json', JSON.stringify({
+      index: index.toJSON(),
+      papers: papers
+    }), {
+      src: true
+    });
 
-  // create a subset of papers, and corresponding search index for each category in the generated data
-  for (var c in generatedData.categories) {
-    if (generatedData.categories[c].custom_filter) {
-      var _data = matchObjects(generatedData.papers, ['taxonomy', 'category'], generatedData.categories[c].custom_filter);
+    util.log(util.colors.blue(':):)'),
+      util.colors.gray('Main Index'),
+      '(', papers.length, 'items', ')',
+      util.colors.blue('):):'));
 
-      util.log(util.colors.green('>>>>'),
-        generatedData.categories[c].custom_filter,
-        '(', _data.length, 'items', ')',
-        util.colors.green('>>>>'));
+    // create a subset of papers, and corresponding search index for each category in the generated data
+    for (var c in generatedData.categories) {
+      if (generatedData.categories[c].custom_filter) {
+        var _data = matchObjects(generatedData.papers, ['taxonomy', 'category'], generatedData.categories[c].custom_filter);
 
-      var _idx = lunr(function () {
-        this.field('title', { boost: 10 });
-        this.field('abstract');
-      });
-      _data.forEach(function(p) { _idx.add(p); });
+        util.log(util.colors.green('>>>>'),
+          generatedData.categories[c].custom_filter,
+          '(', _data.length, 'items', ')',
+          util.colors.green('>>>>'));
 
-      _stream = _stream.pipe(
-        gulpFile(
-          'searchindex-' + slugify(generatedData.categories[c].custom_filter) + '.json',
-          JSON.stringify({
-            index: _idx.toJSON(),
-            papers: _data
-          })
-          ));
+        var _idx = lunr(function() {
+          this.field('title', {
+            boost: 10
+          });
+          this.field('abstract');
+        });
+        _data.forEach(function(p) {
+          _idx.add(p);
+        });
+
+        _stream = _stream.pipe(
+          gulpFile(
+            'searchindex-' + slugify(generatedData.categories[c].custom_filter) + '.json',
+            JSON.stringify({
+              index: _idx.toJSON(),
+              papers: _data
+            })
+            ));
+      }
     }
+
+    // add a file enumerating all of the available scopes
+    // right now this is just generatedData.categories
+    _stream = _stream.pipe(
+      gulpFile(
+        'scopes.json',
+        JSON.stringify(generatedData.categories)
+        ));
+
+    return _stream.pipe(gulp.dest('source/js'));
+
+  } catch (e) {
+    if (!papers) {
+      util.log(util.colors.red('!!!!'), util.colors.magenta('generatedData.papers is falsey, which probably means papers.json does not exist'), util.colors.red('!!!!'));
+      util.log(util.colors.red('!!!!'), util.colors.magenta('try running "gulp csv2json" before you run this task'), util.colors.red('!!!!'));
+    }
+    util.log(util.colors.red('!!!!'), util.colors.magenta('error:'), util.colors.blue(e.name), util.colors.blue(e.message), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.magenta('file:'), util.colors.blue(e.fileName), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.magenta('line:'), util.colors.blue(e.lineNumber), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.gray(e.stack), util.colors.red('!!!!'));
   }
-
-  // add a file enumerating all of the available scopes
-  // right now this is just generatedData.categories
-  _stream = _stream.pipe(
-    gulpFile(
-      'scopes.json',
-      JSON.stringify(generatedData.categories)
-      ));
-
-  return _stream.pipe(gulp.dest('source/js'));
 });
+
 
 var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
 gulp.task('build', buildTasks, function () {
