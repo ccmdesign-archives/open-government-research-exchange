@@ -16,8 +16,7 @@
       <div class="row">
         <div class="column large-12">
         {% for paper in $global.papers %}
-        YO {{value}}, {{paper.type}}
-          {% if paper.type == value %}
+          {% if paper[propertyName] == value %}
 
           {{resultItem.createResult(paper)}}
 
