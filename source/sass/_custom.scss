@@ -12,6 +12,15 @@ body {
 
 }
 
+
+.b-divider {
+  text-align: center;
+  &.m-main-color {
+    background-color: $main-color;
+
+  }
+}
+
 .access-switch .switch { text-align: center; }
 
 
@@ -68,9 +77,5 @@ body {
 
 .ogr-paragraph:hover{
   color: $green;
-}
-
-#footer-text{
-  padding: 1% 0;
 }
 
