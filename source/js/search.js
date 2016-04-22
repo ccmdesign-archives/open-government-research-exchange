@@ -57,7 +57,7 @@ $(function() {
 
         // after loading the index, grab the search string, if present
         // and inject into the search field and run the search
-        var s = getSearch('s');
+        var s = getSearch('s').replace('+', ' ');
         if (s) {
             $('#lunr-search').val(s);
             $('#lunr-search').trigger('search:execute');
