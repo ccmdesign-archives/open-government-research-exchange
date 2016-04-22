@@ -11,6 +11,25 @@ $(function() {
         : false ;
     }
 
+    // returns value of key param from location.search, or false
+    var getSearch = function(param) {
+        var q = location.search.substr(1),
+        result = false;
+
+        q.split('&').forEach(function(part) {
+            var item = part.split('=');
+
+            if (item[0] == param) {
+                result = decodeURIComponent(item[1]);
+
+                if (result.slice(-1) == '/') {
+                    result = result.slice(0, -1);
+                }
+            }
+        });
+        return result;
+    };
+
     var getx = function (arr, prop, needle) {
         console.log (prop, needle);
         for (var i in arr) {
@@ -30,14 +49,23 @@ $(function() {
         return results;
     }
 
+    // get data //////////////////////////////
+
     $.get( 'js/searchindex.json', function( d ) {
         index = lunr.Index.load(d.index);
+        papers = d.papers;
+
+        // after loading the index, grab the search string, if present
+        // and inject into the search field and run the search
+        var s = getSearch('s');
+        if (s) {
+            $('#lunr-search').val(s);
+            $('#lunr-search').trigger('search:execute');
+        }
     })
     .fail(function() {
         $( '.b-lunr-results' ).text( 'Could not get searchindex.json' );
     });
-
-    // get scoped indicies ///////////////////
 
     $.get( 'js/scopes.json', function( d ) {
         scopes = d;
@@ -60,21 +88,14 @@ $(function() {
         });
     }
 
-
     //////////////////////////////////////////
-
-    $.get( 'js/searchindex.json', function( d ) {
-        papers = d.papers;
-    })
-    .fail(function() {
-        $( '.b-lunr-results' ).text( 'Could not get papers.json' );
-    });
 
     var search = function (e) {
         var mapping = mapResults(index.search($(this).val()), papers, 'ref', 'id'), resultsHTML = '';
 
         for (var m in mapping) {
-            resultsHTML += '<div class="b-search-result">\n<h3>'
+            resultsHTML +=
+            '<div class="b-search-result">\n<h3>'
             + mapping[m].title
             + '</h3>\n<p></div>'
             + mapping[m].abstract.substring(0, 250)
@@ -115,6 +136,7 @@ $(function() {
     var debouncedFilter = _.debounce(filter, 1000, false);
 
     $('#lunr-search').keyup(debouncedSearch);
+    $('#lunr-search').on('search:execute', debouncedSearch);
     $('#lunr-filter').keyup(debouncedFilter);
 
 });
