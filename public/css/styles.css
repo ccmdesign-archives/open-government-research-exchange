@@ -4581,6 +4581,7 @@ Styleguide 1.2
   right: 0;
   z-index: 10;
   display: none;
+  background-color: red;
   opacity: .1; }
   #overlay.m-active {
     display: block; }
@@ -7532,6 +7533,9 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     text-align: left;
     font-weight: 600;
     font-size: 1.3rem; }
+
+.b-search-results {
+  padding: 0; }
 
 .b-divider {
   text-align: center; }
