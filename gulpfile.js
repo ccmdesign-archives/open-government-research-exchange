@@ -758,12 +758,12 @@ gulp.task('lunr', ['json'], function() {
 
   } catch (e) {
     if (!papers) {
-      util.log(util.colors.red('!!!!'), util.colors.magenta('generatedData.papers is falsey, which probably means papers.json does not exist'), util.colors.red('!!!!'));
-      util.log(util.colors.red('!!!!'), util.colors.magenta('try running "gulp csv2json" before you run this task'), util.colors.red('!!!!'));
+      util.log(util.colors.red('!!!!'), util.colors.red('generatedData.papers is falsey, which probably means papers.json does not exist'), util.colors.red('!!!!'));
+      util.log(util.colors.red('!!!!'), util.colors.red('try running "gulp csv2json" before you run this task'), util.colors.red('!!!!'));
     }
-    util.log(util.colors.red('!!!!'), util.colors.magenta('error:'), util.colors.blue(e.name), util.colors.blue(e.message), util.colors.red('!!!!'));
-    util.log(util.colors.red('!!!!'), util.colors.magenta('file:'), util.colors.blue(e.fileName), util.colors.red('!!!!'));
-    util.log(util.colors.red('!!!!'), util.colors.magenta('line:'), util.colors.blue(e.lineNumber), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.red('error:'), util.colors.magenta(e.name), util.colors.blue(e.message), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.red('file:'), util.colors.magenta(e.fileName), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.red('line:'), util.colors.magenta(e.lineNumber), util.colors.red('!!!!'));
     util.log(util.colors.red('!!!!'), util.colors.gray(e.stack), util.colors.red('!!!!'));
   }
 });
