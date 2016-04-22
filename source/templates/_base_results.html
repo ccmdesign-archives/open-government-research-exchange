@@ -16,7 +16,7 @@
       <div class="row">
         <div class="column large-12">
         {% for paper in $global.papers %}
-          {% if paper[propertyName] == value %}
+          {% if paper[propertyName] and paper[propertyName] | contains(value) %}
 
           {{resultItem.createResult(paper)}}
 
