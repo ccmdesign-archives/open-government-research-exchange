@@ -132,12 +132,9 @@ function split(s, delim) {
   return s ? s.toString().split(delim) : false;
 }
 
-function contains(arr, v) {
-  return arr.indexOf(v) > -1;
-}
-
 //check if an item an arr2 exists in arr1
 function containsAny(arr1, arr2) {
+
   if (typeof arr2 === "string") {
     arr2 = arr2.split();
   } else if (arr2 === false ) {
@@ -192,7 +189,7 @@ function pushIfNew(arr, v) {
 
 // push all unique values of a certain property (prop) to an array and return that array
 // in a particular category
-function pushAllValuesInCategory(arr, obj, prop, category, prefix) {
+function pushPossibleValues(arr, obj, prop, category, prefix) {
   prefix = prefix === undefined ? false : prefix;
 
   if (obj.taxonomy.category && obj.taxonomy.category.indexOf(category) > -1) {
@@ -252,18 +249,18 @@ function getUniqueValues(arr, prop) {
 function nunjucksEnv(env) {
   env.addFilter('slug', slugify);
   env.addFilter('split', split);
-  env.addFilter('contains', contains);
   env.addFilter('containsAny', containsAny);
-  env.addFilter('pushnew', pushIfNew);
-  env.addFilter('pushallnew', pushAllValuesInCategory);
 }
 
 // a subroutine to simplify processJson
 function populateChildren(out, content, val, index) {
   if ('children' in val) {
+<<<<<<< Updated upstream
     // convert boolean false to '' and anything else to a string
     content === false && (content = '');
     typeof content !== 'string' && (content = String(content));
+=======
+>>>>>>> Stashed changes
 
     var _s = content.split(val.delimiter);
     if ('parent' in val) {
@@ -519,7 +516,7 @@ gulp.task('json', ['yaml'], function () {
   .pipe(gulp.dest('source/data'));
 });
 
-gulp.task('generateTemplates', ['json-subsets'], function() {
+gulp.task('generateTemplates', ['json-subsets', 'lunr'], function() {
   return generateVinyl(options.path, options.dataPath)
   .pipe(gulp.dest(options.path))
 });
@@ -764,18 +761,18 @@ gulp.task('lunr', ['json'], function() {
 
   } catch (e) {
     if (!papers) {
-      util.log(util.colors.red('!!!!'), util.colors.red('generatedData.papers is falsey, which probably means papers.json does not exist'), util.colors.red('!!!!'));
-      util.log(util.colors.red('!!!!'), util.colors.red('try running "gulp csv2json" before you run this task'), util.colors.red('!!!!'));
+      util.log(util.colors.red('!!!!'), util.colors.magenta('generatedData.papers is falsey, which probably means papers.json does not exist'), util.colors.red('!!!!'));
+      util.log(util.colors.red('!!!!'), util.colors.magenta('try running "gulp csv2json" before you run this task'), util.colors.red('!!!!'));
     }
-    util.log(util.colors.red('!!!!'), util.colors.red('error:'), util.colors.magenta(e.name), ':', util.colors.magenta(e.message), util.colors.red('!!!!'));
-    util.log(util.colors.red('!!!!'), util.colors.red('file:'), util.colors.magenta(e.fileName), util.colors.red('!!!!'));
-    util.log(util.colors.red('!!!!'), util.colors.red('line:'), util.colors.magenta(e.lineNumber), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.magenta('error:'), util.colors.blue(e.name), util.colors.blue(e.message), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.magenta('file:'), util.colors.blue(e.fileName), util.colors.red('!!!!'));
+    util.log(util.colors.red('!!!!'), util.colors.magenta('line:'), util.colors.blue(e.lineNumber), util.colors.red('!!!!'));
     util.log(util.colors.red('!!!!'), util.colors.gray(e.stack), util.colors.red('!!!!'));
   }
 });
 
 
-var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss', 'lunr'];
+var buildTasks = ['sass', 'js', 'img', 'nunjucks', 'libCss'];
 gulp.task('build', buildTasks, function () {
   util.log(util.colors.magenta('****'), 'Finished running build tasks:', buildTasks, util.colors.magenta('****'));
 })

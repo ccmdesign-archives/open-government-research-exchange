@@ -2,40 +2,40 @@ $(function() {
     var index, papers, scopes, scopedIndices = {};
 
     var slug = function (t) {
-      return t ? t.toString().toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '')
-      : false ;
-  }
+        return t ? t.toString().toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '')
+        : false ;
+    }
 
-  var getx = function (arr, prop, needle) {
-    console.log (prop, needle);
-    for (var i in arr) {
-        if (arr[i][prop] === needle) {
-            console.log(arr[i]);
-            return arr[i];
+    var getx = function (arr, prop, needle) {
+        console.log (prop, needle);
+        for (var i in arr) {
+            if (arr[i][prop] === needle) {
+                console.log(arr[i]);
+                return arr[i];
+            }
         }
-    }
-};
+    };
 
-var mapResults = function (fromHaystack, toHaystack, mapFrom, mapTo) {
-    var results = [];
-    for (var i in fromHaystack) {
-        console.log (fromHaystack, mapFrom, fromHaystack[i][mapFrom]);
-        results.push(getx(toHaystack, mapTo, fromHaystack[i][mapFrom]));
+    var mapResults = function (fromHaystack, toHaystack, mapFrom, mapTo) {
+        var results = [];
+        for (var i in fromHaystack) {
+            console.log (fromHaystack, mapFrom, fromHaystack[i][mapFrom]);
+            results.push(getx(toHaystack, mapTo, fromHaystack[i][mapFrom]));
+        }
+        return results;
     }
-    return results;
-}
 
-$.get( 'js/searchindex.json', function( d ) {
-    index = lunr.Index.load(d.index);
-})
-.fail(function() {
-    $( '.b-lunr-results' ).text( 'Could not get searchindex.json' );
-});
+    $.get( 'js/searchindex.json', function( d ) {
+        index = lunr.Index.load(d.index);
+    })
+    .fail(function() {
+        $( '.b-lunr-results' ).text( 'Could not get searchindex.json' );
+    });
 
     // get scoped indicies ///////////////////
 
