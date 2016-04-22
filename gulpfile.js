@@ -132,9 +132,12 @@ function split(s, delim) {
   return s ? s.toString().split(delim) : false;
 }
 
+function contains(arr, v) {
+  return arr.indexOf(v) > -1;
+}
+
 //check if an item an arr2 exists in arr1
 function containsAny(arr1, arr2) {
-
   if (typeof arr2 === "string") {
     arr2 = arr2.split();
   } else if (arr2 === false ) {
@@ -189,7 +192,7 @@ function pushIfNew(arr, v) {
 
 // push all unique values of a certain property (prop) to an array and return that array
 // in a particular category
-function pushPossibleValues(arr, obj, prop, category, prefix) {
+function pushAllValuesInCategory(arr, obj, prop, category, prefix) {
   prefix = prefix === undefined ? false : prefix;
 
   if (obj.taxonomy.category && obj.taxonomy.category.indexOf(category) > -1) {
@@ -249,7 +252,10 @@ function getUniqueValues(arr, prop) {
 function nunjucksEnv(env) {
   env.addFilter('slug', slugify);
   env.addFilter('split', split);
+  env.addFilter('contains', contains);
   env.addFilter('containsAny', containsAny);
+  env.addFilter('pushnew', pushIfNew);
+  env.addFilter('pushallnew', pushAllValuesInCategory);
 }
 
 // a subroutine to simplify processJson
