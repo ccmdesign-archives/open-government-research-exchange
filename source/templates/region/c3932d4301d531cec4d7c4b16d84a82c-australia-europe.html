@@ -1,1 +1,36 @@
-{% extends '_base_results.html' %}
+{% import 'macros/result_item_macro.html' as resultItem %}
+{% extends '_base.html' %}
+
+{% block main %}
+  <div class="b-author-page">
+    {# Author's Info #}
+    <div class="b-top-section m-standalone">
+      <div class="row">
+        <h1>{{title}}</h1>
+        </div>
+      </div>
+    </div>
+
+    {# List of Articles #}
+    <div class="b-page-section b-results-section b-isotope">
+      <div class="row">
+        <div class="column large-12">
+        {% for paper in $global.papers %}
+        YO {{value}}, {{paper.type}}
+          {% if paper.type == value %}
+
+          {{resultItem.createResult(paper)}}
+
+
+        {% endif %}
+
+        {# {% if title in paper.authors %}
+          {{createResult(paper)}}
+        {% endif %} #}
+      {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
