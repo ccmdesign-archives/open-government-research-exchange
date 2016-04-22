@@ -19,17 +19,22 @@
     <div class="row">
         <div class="small-10 large-8 small-centered columns">
             <div class="row">
-                <form class="b-search m-main-search m-negative" action="">
+                {# <form class="b-search m-main-search m-negative" action="">
                     <input class="" type="text"><!--
                  --><input class="e-search-trigger material-icons" type="submit" value="search">
+                </form> #}
+                <form class="b-form">
+                    <input id="lunr-search" type="text" placeholder="Search" />
                 </form>
+
+    <h2>Results</h2>
+    <div class="b-lunr-results"></div>
             </div>
             <div class="row b-browsing-ways">
-              <div class="large-6 column">
+              <div class="large-12 column">
                 <a href="#categories" class="b-button e-way">Browse by Category</a>
-              </div>
-              <div class="large-6 column">
                 <a href="#organizations" class="b-button e-way">Browse by Organization</a>
+                <a href="all-categories.html" class="b-button e-way">All Categories</a>
               </div>
             </div>
         </div>

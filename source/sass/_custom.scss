@@ -54,3 +54,18 @@ body {
 .b-main-search-section {
   background-color: darken($main-color, 4);
 }
+
+.b-all-categories-list {
+  padding: 0;
+
+  .e-list-item {
+    padding: 40px 0;
+    text-align: center;
+    &:nth-child(even) { background-color: rgba($black, .03); }
+  }
+}
+
+
+
+
+
