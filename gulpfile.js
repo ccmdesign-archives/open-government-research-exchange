@@ -70,6 +70,22 @@ var COL_NAME_MAP = {
   'Other URL'             : { parent : 'direct_download', value : 'other', children : ['url', 'name'], delimiter : ' ' }
 };
 
+// whitelist for generating subsets of json data
+// containing all possible values of each property in this list
+// this could be integrated into COL_NAME_MAP later
+var SUB_DATASETS = [
+'access',
+'organization',
+'authors',
+'sector',
+'region',
+'type',
+'tools',
+['taxonomy', 'category'],
+['taxonomy', 'methodology'],
+['taxonomy', 'objective']
+]
+
 // gulpfile options
 var options = {
   path: './source/templates/', // base path to templates
@@ -160,6 +176,73 @@ function matchObjects(arr, prop, value) {
   }
 
   return matches;
+}
+
+// push v to array arr if it is not already present in arr
+//
+function pushIfNew(arr, v) {
+  if (arr.indexOf(v) === -1) {
+    arr.push(v);
+  }
+  return arr;
+}
+
+// push all unique values of a certain property (prop) to an array and return that array
+// in a particular category
+function pushPossibleValues(arr, obj, prop, category, prefix) {
+  prefix = prefix === undefined ? false : prefix;
+
+  if (obj.taxonomy.category && obj.taxonomy.category.indexOf(category) > -1) {
+    var v = prefix ? obj[prefix][slugify(prop)] : obj[slugify(prop)] ;
+
+    if (v) {
+      if (Array.isArray(v)) {
+        for (i in v) {
+          pushIfNew(arr, v[i]);
+        }
+      } else {
+        pushIfNew(arr, v);
+      }
+    }
+  }
+
+  return arr;
+}
+
+// get all unique values of a certain property (prop) in all objects in array (arr)
+function getUniqueValues(arr, prop) {
+  var values = [], o, p, v;
+
+  for (var obj in arr) {
+    // default to assuming prop is not an array
+    o = arr[obj];
+    p = prop;
+
+    // if prop is an array, scope o[p] to be equivalent to the dot syntax of each element in the array
+    // e.g. o[p] == obj.prop[0].prop[1] ...
+    if (Array.isArray(prop)) {
+      var i;
+      for (i = 0; i < prop.length-1; i++) {
+        o = o[prop[i]];
+      }
+      p = prop[i];
+    }
+
+    v = o[p];
+
+    // push anything that either is an array that contains value, or equals value to matches
+    if (v) {
+      if (Array.isArray(v)) {
+        for (i in v) {
+          pushIfNew(values, v[i]);
+        }
+      } else {
+        pushIfNew(values, v);
+      }
+    }
+  }
+
+  return values;
 }
 
 // set up nunjucks environment
@@ -558,7 +641,6 @@ gulp.task('nunjucks', ['generateTemplates'], function() {
   .pipe(gulp.dest('public'));
 });
 
-
 gulp.task('csv2json', function() {
   var options = {};
   return gulp.src('source/support/**.csv')
@@ -570,6 +652,33 @@ gulp.task('csv2json', function() {
   .pipe(gulp.dest('source/data'))
 });
 
+gulp.task('json-subsets', function () {
+  compileData();
+
+  var _stream = gulpFile('noop.json', JSON.stringify({
+    foo: 'bar'
+  }), { src: true });
+
+  for (var subset in SUB_DATASETS) {
+    var a = getUniqueValues(generatedData.papers, SUB_DATASETS[subset]), objarr = [];
+    for (var i in a) {
+      objarr.push({
+        propertyName: SUB_DATASETS[subset],
+        title: slugify(a[i]),
+        value: a[i]
+      });
+    }
+
+    _stream = _stream.pipe(
+      gulpFile(
+        (Array.isArray(SUB_DATASETS[subset]) ? SUB_DATASETS[subset].join('-') : SUB_DATASETS[subset])
+        + '.json',
+        JSON.stringify(objarr)
+        ));
+  }
+
+  return _stream.pipe(gulp.dest('source/data'));
+});
 
 gulp.task('lunr', function() {
   compileData();

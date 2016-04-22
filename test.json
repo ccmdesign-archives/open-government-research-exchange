@@ -1,0 +1,129 @@
+[22:26:57] Using gulpfile ~/www/ogre-fork/gulpfile.js
+[22:26:57] Starting 'csv2json'...
+[22:26:58] gulp-csv2json: ✔ papers.csv
+[22:26:58] Finished 'csv2json' after 171 ms
+[22:26:58] Starting 'json-subsets'...
+{ access: undefined,
+  authors: undefined,
+  categories: 
+   [ { title: 'All',
+       description: 'Across the world, science and technology are creating innovative ways for people to tackle society’s problems together.',
+       custom_filter: 'All',
+       cover_image: false,
+       id: 'b1c94ca2fbc3e78fc30069c8d0f01680' },
+     { title: 'Behavioral Research',
+       description: 'Based on an evolving understanding of behavioral tendencies, many public sector institutions are seeking to improve citizen’s decision-making ability without regulatory intervention.',
+       custom_filter: 'Behavioral Science and Nudges',
+       cover_image: false,
+       id: '8dc91f92aba4f74bc315de931d34dad0' },
+     { title: 'Citizen Engagement',
+       description: 'New network technologies and digital platforms give citizens more opportunity to make their voices heard by their governing institutions.',
+       custom_filter: 'Citizen Engagement and Crowdsourcing',
+       cover_image: false,
+       id: '51ff934cc13e027a5718f06418ad2626' },
+     { title: 'Civic Technology',
+       description: 'New digital platforms and collaboration tools are transforming government service delivery and engagement with citizens.',
+       custom_filter: 'Civic Technology',
+       cover_image: false,
+       id: '9cbba292b288c61301dd8b90133f154e' },
+     { title: 'Data Analysis',
+       description: 'The ability to analysis a growing array of data is allowing for more evidence-based decision-making and the development of new insights and knowledge.',
+       custom_filter: 'Data Analysis',
+       cover_image: false,
+       id: '323d6a1348df47d3174f578e1eff00eb' },
+     { title: 'Expert Networking',
+       description: 'Rather than crowdsourcing widely, expert networking can enable the targeting of opportunities to participate based on an individual’s skills and experiences.',
+       custom_filter: 'Expert Networking',
+       cover_image: false,
+       id: '69ef6c90056666a97d39365918bbea9a' },
+     { title: 'Open Data',
+       description: 'Open data is publicly available data that can be universally and readily accessed, used, and redistributed free of charge. It is structured for usability and computability.',
+       custom_filter: 'Open Data',
+       cover_image: false,
+       id: '10b4ea82dbdae1631ff5543a6979331c' },
+     { title: 'Labs and Experimentation',
+       description: 'Institutions are increasingly creating internal innovation labs and leveraging agile experimentation to gain a better sense of what works in practice.',
+       custom_filter: 'Labs and Experimentation',
+       cover_image: false,
+       id: '92ed4c4a4e3dbe0bd2fbe85055d0f7cc' } ],
+  'custom-authors': 
+   [ { title: 'Beth Noveck',
+       job: 'Co-Founder and Director',
+       image: 'beth-noveck.jpg',
+       short_description: 'Beth Simone Noveck is Co-Founder and Director of The GovLab and its MacArthur Research Network on Opening Governance. Funded by the John D. and Catherine T. MacArthur Foundation, the John S. and James L. Knight Foundation and Google.org, the GovLab strives to improve people’s lives by changing how we govern. The GovLab designs and tests technology, policy and strategies for fostering more open and collaborative approaches to strengthen the ability of people and institutions to work together to solve problems, make decisions, resolve conflict and govern themselves more effectively and legitimately.',
+       long_description: false,
+       custom_filter: [Object],
+       social_media: [Object],
+       id: '407cac3e5c7487d58a522b944773428c' },
+     { title: 'Stefaan Verhulst',
+       job: 'Co-founder and Chief Research and Development Officer',
+       image: 'stefaan-verhulst.jpg',
+       short_description: 'Stefaan G. Verhulst is Co-Founder and Chief Research and Development Officer of the Governance Laboratory @NYU (GovLab) where he is responsible for building a research foundation on how to transform governance using advances in science and technology. Verhulst’s latest scholarship centers on how technology can improve people’s lives and the creation of more effective and collaborative forms of governance. Specifically, he is interested in the perils and promise of collaborative technologies and how to harness the unprecedented volume of information to advance the public good.\n',
+       long_description: false,
+       custom_filter: false,
+       social_media: [Object],
+       id: '17c47cb9564f58303e847df786143521' },
+     { title: 'Andrew Young',
+       job: 'Associate Director of Research',
+       image: 'andrew-young.jpg',
+       short_description: 'Andrew Young is the Associate Director of Research at The GovLab, where he leads research efforts focusing on the impact of technology on public institutions. Among the grant-funded projects he has directed are a global assessment of the impact of open government data; comparative benchmarking of government innovation efforts against those of other countries; and crafting the experimental design for testing the adoption of technology innovations in federal agencies. He has written extended work on how public sector institutions use new technology to coordinate work and developed original public resources, including GovLab’s Twitter Lists of governance innovation areas and its Zotero bibliographies and Selected Readings on a variety of topics.',
+       long_description: false,
+       custom_filter: false,
+       social_media: [Object],
+       id: 'f0f4eb7a84d7156a13e93b7092b24743' } ],
+  noop: undefined,
+  organization: undefined,
+  organizations: 
+   [ { title: 'Digital Engagement Evaluation Team',
+       image: 'deet-logo.png',
+       image_white: 'deet-logo-white.png',
+       short_description: 'All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.',
+       long_description: 'All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.',
+       custom_filter: 'world-bank-digital-engagement-evaluation-team',
+       color: '008ab3',
+       social_media: [Object],
+       id: '0077e06101bef1030b626386df829446' },
+     { title: 'mySociety',
+       image: 'mysociety-logo.png',
+       image_white: 'mysociety-logo-white.png',
+       short_description: 'All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.',
+       long_description: 'All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.',
+       custom_filter: false,
+       color: 333333,
+       social_media: [Object],
+       id: 'e823acdae7f5cdc98f1510913e7684b9' },
+     { title: 'The Govlab',
+       image: 'govlab-logo.png',
+       image_white: 'govlab-logo-white.png',
+       short_description: 'All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.',
+       long_description: 'All Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque non dolor sapiente suscipit. Magni excepturi iusto, ducimus facere, iure ex quaerat id est corporis incidunt, doloribus odio voluptate totam pariatur.',
+       custom_filter: false,
+       color: 523080,
+       social_media: [Object],
+       id: '4dd384f0e5ef74f91ab26729dc34b95d' } ],
+  papers: undefined,
+  region: undefined,
+  sector: undefined,
+  tools: undefined,
+  type: undefined }
+HI undefined access
+access []
+HI undefined organization
+organization []
+HI undefined authors
+authors []
+HI undefined sector
+sector []
+HI undefined region
+region []
+HI undefined type
+type []
+HI undefined tools
+tools []
+HI undefined [ 'taxonomy', 'category' ]
+[ 'taxonomy', 'category' ] []
+HI undefined [ 'taxonomy', 'methodology' ]
+[ 'taxonomy', 'methodology' ] []
+HI undefined [ 'taxonomy', 'objective' ]
+[ 'taxonomy', 'objective' ] []
+[22:26:58] Finished 'json-subsets' after 45 ms
