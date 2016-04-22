@@ -20,6 +20,10 @@ body {
   background-color: $main-color;
   margin-top: -66px;
   padding-top: 136px;
+
+  &.m-standalone {
+    padding-bottom: 80px;
+  }
 }
 
 .b-top-nav {
