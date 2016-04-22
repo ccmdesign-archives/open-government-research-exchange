@@ -4581,7 +4581,6 @@ Styleguide 1.2
   right: 0;
   z-index: 10;
   display: none;
-  background-color: red;
   opacity: .1; }
   #overlay.m-active {
     display: block; }
@@ -7534,6 +7533,11 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     font-weight: 600;
     font-size: 1.3rem; }
 
+.b-divider {
+  text-align: center; }
+  .b-divider.m-main-color {
+    background-color: #004f6f; }
+
 .access-switch .switch {
   text-align: center; }
 
@@ -7576,6 +7580,3 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 
 .ogr-paragraph:hover {
   color: #197d32; }
-
-#footer-text {
-  padding: 1% 0; }
