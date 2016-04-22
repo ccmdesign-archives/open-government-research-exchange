@@ -106,16 +106,31 @@ $(function() {
             $snippet.find('.e-result-name').text(mapping[m].title);
             $snippet.find('.e-result-authors').text(mapping[m].authors);
 
-            console.log ($snippet.prop('outerHTML'));
+            $snippet.find('.e-result-taxonomy.m-category').html(
+                '<span>' +
+                mapping[m].taxonomy.category.join('</span> <span>')
+                + '</span>'
+                );
+
+            $snippet.find('.e-result-taxonomy.m-methodology').html(
+                '<span>' +
+                mapping[m].taxonomy.methodology.join('</span> <span>')
+                + '</span>'
+                );
+
+            $snippet.find('.e-result-taxonomy.m-objective').html(
+                '<span>' +
+                mapping[m].taxonomy.objective.join('</span> <span>')
+                + '</span>'
+                );
+
+            $snippet.find('.m-closed-access').remove();
+
+            if (mapping[m].access.toLowerCase() === 'closed') {
+               $snippet.find('.e-result-extras').append('<i class="material-icons m-closed-access" title="Closed Access">lock_outline</i>')
+            }
 
             resultsHTML += $snippet.prop('outerHTML');
-
-            // '<div class="b-search-result">\n<h3>'
-            // + mapping[m].title
-            // + '</h3>\n<p></div>'
-            // + mapping[m].abstract.substring(0, 250)
-            // + '... </p>'
-
         }
 
         $( '.b-lunr-results' ).html(resultsHTML);
