@@ -7576,3 +7576,6 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 .b-button-background {
   background-color: #008895;
   border: none; }
+
+.ss-q-title {
+  color: white; }
